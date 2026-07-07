@@ -23,6 +23,7 @@ const MODEL = "claude-sonnet-5";
 const CLINIC = "Meadow Vet Care";
 
 const ALLOW = [
+  "https://victordelrosal.com",
   "https://victordelrosal.github.io",
   "https://meadow-vet.pages.dev",
   "https://vet.kluxy.app",
