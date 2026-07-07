@@ -258,6 +258,7 @@ function fmt(t){
 function cardHTML(s){
   const price = s.price_eur!=null ? "€"+s.price_eur : "";
   const meta=[];
+  if(s.id) meta.push(s.id);
   if(s.duration_min) meta.push(s.duration_min+" min");
   if(s.availability) meta.push(s.availability);
   meta.push(s.by_appointment?"by appointment":"walk-in ok");

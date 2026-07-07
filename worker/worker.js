@@ -123,7 +123,7 @@ const SEARCH_TOOL = {
       },
       query: {
         type: "string",
-        description: "Free-text keyword to match against the service name, description and category, e.g. 'telehealth', 'microchip', 'neutering', 'passport'."
+        description: "Free-text keyword to match against the service id, service name, description and category, e.g. 'telehealth', 'microchip', 'neutering', 'passport', or an exact service id like 'MVC-001'."
       },
       offers_only: {
         type: "boolean",
@@ -147,13 +147,14 @@ function runSearch(args) {
       if (args.offers_only && !s.special_offer) return false;
       if (args.max_price != null && s.price_eur != null && s.price_eur > Number(args.max_price)) return false;
       if (q) {
-        const hay = `${s.service_name} ${s.description} ${s.category}`.toLowerCase();
+        const hay = `${s.service_id} ${s.service_name} ${s.description} ${s.category}`.toLowerCase();
         if (!hay.includes(q)) return false;
       }
       return true;
     });
     const total = out.length;
     out = out.slice(0, limit).map(s => ({
+      id: s.service_id,
       service: s.service_name,
       category: s.category,
       species: s.species,
@@ -237,9 +238,10 @@ const SYSTEM = `You are the friendly front-desk assistant for ${CLINIC}, a moder
 Your job: answer customer questions about the clinic's services, prices, current offers, durations and availability, using ONLY the search_services tool, which reads the clinic's live services list.
 
 Rules:
-- For ANY question about services, prices, offers, availability or which animals a service is for, call search_services first. Never invent or guess a service, price or discount. If the tool returns nothing, say the clinic doesn't appear to list that and offer to help find a related service.
-- Prices are in euro (write like "€55"). If a service has a special_offer, mention it. If slots_this_week is 0, gently note it's currently fully booked this week but they can still enquire.
-- Keep replies warm, concise and in plain conversational English. Short paragraphs or a short bulleted list. No markdown headings, no emoji spam.
+- For ANY question about services, prices, offers, availability, a service id (e.g. "MVC-001"), or which animals a service is for, call search_services first. Never invent or guess a service, price or discount. If the tool returns nothing, say the clinic doesn't appear to list that and offer to help find a related service.
+- Keep every reply SHORT: one warm paragraph of about 2 to 4 sentences. Do NOT list out many services or reproduce a long catalogue. When there are lots of matches, give a one-line overview (e.g. how many, the range, a highlight) and invite them to narrow down by animal, category or budget. Only name specific services when they ask about one or a few. The matching services are already shown to the customer as cards beneath your reply, so you do not need to repeat every detail in prose.
+- Prices are in euro (write like "€55"). Mention a special offer when it's relevant. If a service they asked about has 0 slots this week, gently note it's fully booked this week but they can still enquire.
+- Plain conversational English. No markdown headings, no long bulleted catalogues, no emoji spam.
 - You are not a vet and must not give medical or clinical advice or diagnoses. For anything about a pet's health or symptoms, kindly suggest booking the right consultation and, if it sounds urgent, point them to the emergency service.
 - Only discuss ${CLINIC}. If asked something unrelated, steer back to how the clinic can help.`;
 
