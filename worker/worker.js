@@ -1,4 +1,4 @@
-// Meadow Vet Care — live chatbot backend.
+// Meadow Vet Care: live chatbot backend.
 //
 // Two surfaces, one source of truth (the clinic's public Google Sheet):
 //

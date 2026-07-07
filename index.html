@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Meadow Vet Care — Ask the meadow</title>
+<title>Meadow Vet Care: Ask the meadow</title>
 <meta name="description" content="Ask Meadow Vet Care anything about our services, prices and current offers. Answers come live from the clinic's own list.">
 <meta name="theme-color" content="#12251b">
 
 <!-- Social preview -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Meadow Vet Care — Ask the meadow">
+<meta property="og:title" content="Meadow Vet Care: Ask the meadow">
 <meta property="og:description" content="A friendly clinic assistant that answers from our live list of 90+ services, prices and offers. Dogs, cats, rabbits, small mammals & birds.">
 <meta property="og:image" content="https://victordelrosal.com/meadow-vet-care/og.png">
 <meta property="og:url" content="https://victordelrosal.com/meadow-vet-care/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Meadow Vet Care — Ask the meadow">
+<meta name="twitter:title" content="Meadow Vet Care: Ask the meadow">
 <meta name="twitter:description" content="Ask about our 90+ services, prices and offers. Answers come live from the clinic's own list.">
 <meta name="twitter:image" content="https://victordelrosal.com/meadow-vet-care/og.png">
 
@@ -289,7 +289,7 @@ async function ask(q){
       t.innerHTML=`<div class="who">Meadow assistant</div><p>Sorry, I couldn't reach our services list just now. Please try again in a moment.</p>`;
     }
   }catch(e){
-    t.innerHTML=`<div class="who">Meadow assistant</div><p>Connection hiccup — please try again.</p>`;
+    t.innerHTML=`<div class="who">Meadow assistant</div><p>Connection hiccup, please try again.</p>`;
   }
   jump(); send.disabled=false; input.disabled=false; input.focus();
 }
@@ -311,7 +311,7 @@ STARTERS.forEach(s=>{
 fetch(API).then(r=>r.json()).then(d=>{ if(d.live_services) document.getElementById("livecount").textContent=d.live_services+" live services"; }).catch(()=>{});
 
 // greeting
-addBot(`<p>Hello, and welcome to <strong>Meadow Vet Care</strong> 🌿 I can tell you about any of our services, their prices and any current offers — all pulled live from the clinic's own list. What would you like to know?</p>`);
+addBot(`<p>Hello, and welcome to <strong>Meadow Vet Care</strong> 🌿 I can tell you about any of our services, their prices and any current offers, all pulled live from the clinic's own list. What would you like to know?</p>`);
 
 /* ---------- orchestrated load reveal (GSAP if present, else CSS fallback) ---------- */
 function reveal(){

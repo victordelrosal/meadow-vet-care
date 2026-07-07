@@ -1,4 +1,4 @@
-# Meadow Vet Care — live MCP chatbot
+# Meadow Vet Care: live MCP chatbot
 
 A customer chatbot for a fictional Irish vet clinic that answers questions from the clinic's
 **live** Google Sheet of 90+ services. It demonstrates the MCP idea: giving an LLM a live tool.
@@ -14,13 +14,13 @@ Browser (index.html)  ──POST messages──▶  Cloudflare Worker
                                              └─ search_services tool ──fetch CSV──▶ Google Sheet (live)
 ```
 
-- **Front end** — `index.html`, a single self-contained page (animated WebGL meadow, glass chat,
+- **Front end**: `index.html`, a single self-contained page (animated WebGL meadow, glass chat,
   service cards). Hosted on GitHub Pages.
-- **Brain + tool** — `worker/worker.js`, a Cloudflare Worker. Holds the Anthropic API key as a
+- **Brain + tool**: `worker/worker.js`, a Cloudflare Worker. Holds the Anthropic API key as a
   secret. On every message Claude decides to call `search_services`; the Worker fetches and
   filters the Google Sheet CSV **at that moment** and hands rows back to Claude to answer in
   natural language. Edit the sheet → answers change on the next message, no redeploy.
-- **Real MCP server** — the same tool is exposed as a stateless MCP (Model Context Protocol)
+- **Real MCP server**: the same tool is exposed as a stateless MCP (Model Context Protocol)
   JSON-RPC server at `/mcp`, so any MCP client (Claude Desktop, the API's `mcp` connector, the
   MCP inspector) can connect and query the live services too.
 
