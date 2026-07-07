@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meadow Vet Care — Ask the meadow</title>
+<meta name="description" content="Ask Meadow Vet Care anything about our services, prices and current offers. Answers come live from the clinic's own list.">
+<meta name="theme-color" content="#12251b">
+
+<!-- Social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Meadow Vet Care — Ask the meadow">
+<meta property="og:description" content="A friendly clinic assistant that answers from our live list of 90+ services, prices and offers. Dogs, cats, rabbits, small mammals & birds.">
+<meta property="og:image" content="https://victordelrosal.github.io/meadow-vet-care/og.png">
+<meta property="og:url" content="https://victordelrosal.github.io/meadow-vet-care/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meadow Vet Care — Ask the meadow">
+<meta name="twitter:description" content="Ask about our 90+ services, prices and offers. Answers come live from the clinic's own list.">
+<meta name="twitter:image" content="https://victordelrosal.github.io/meadow-vet-care/og.png">
+
+<!-- One brand mark: a golden leaf on meadow green, reused as favicon + home-screen icon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2312251b'/%3E%3Cpath d='M32 51c-1-13-1-24 12-33C43 31 41 44 32 51Z' fill='%23E8B04B'/%3E%3Cpath d='M32 51c1-12 1-23-11-31C22 30 24 43 32 51Z' fill='%237fae74'/%3E%3Cpath d='M32 52V33' stroke='%23f3ead6' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2312251b'/%3E%3Cpath d='M32 51c-1-13-1-24 12-33C43 31 41 44 32 51Z' fill='%23E8B04B'/%3E%3Cpath d='M32 51c1-12 1-23-11-31C22 30 24 43 32 51Z' fill='%237fae74'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Spline+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --deep:#12251b;        /* meadow shadow */
+    --green:#1b3226;
+    --moss:#3f6b4a;
+    --sage:#7fae74;
+    --cream:#f4ecd9;       /* golden-hour light */
+    --gold:#e8b04b;        /* the one sharp accent */
+    --glass:rgba(20,38,28,.52);
+    --glass-line:rgba(244,236,217,.16);
+    --ink:#f4ecd9;
+    --ink-soft:rgba(244,236,217,.72);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family:"Spline Sans",sans-serif; color:var(--ink);
+    background:var(--deep); overflow:hidden;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  #field{position:fixed; inset:0; width:100%; height:100%; display:block; z-index:0}
+  /* readability veil so the shader never fights the text */
+  .veil{position:fixed; inset:0; z-index:1; pointer-events:none;
+    background:
+      radial-gradient(120% 80% at 50% -10%, transparent 40%, rgba(9,18,13,.55) 100%),
+      linear-gradient(180deg, rgba(9,18,13,.30), rgba(9,18,13,.10) 30%, rgba(9,18,13,.55));}
+
+  .stage{position:relative; z-index:2; height:100dvh; display:flex; flex-direction:column;
+    align-items:center; padding:clamp(14px,3vw,30px); gap:clamp(10px,2vh,18px)}
+
+  header.top{width:min(760px,100%); display:flex; align-items:center; gap:14px; opacity:0}
+  .mark{width:42px;height:42px;flex:0 0 auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))}
+  .brand h1{font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.35rem,3.4vw,2rem);
+    margin:0; line-height:1; letter-spacing:-.01em; font-variation-settings:"opsz" 40,"wght" 560}
+  .brand p{margin:.28rem 0 0; font-size:.82rem; color:var(--ink-soft); letter-spacing:.01em}
+  .live{margin-left:auto; display:flex; align-items:center; gap:7px; font-size:.72rem;
+    color:var(--ink-soft); background:rgba(20,38,28,.5); border:1px solid var(--glass-line);
+    padding:6px 11px; border-radius:999px; backdrop-filter:blur(8px); white-space:nowrap}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 0 rgba(232,176,75,.7); animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,176,75,.6)}70%{box-shadow:0 0 0 8px rgba(232,176,75,0)}100%{box-shadow:0 0 0 0 rgba(232,176,75,0)}}
+
+  .panel{width:min(760px,100%); flex:1 1 auto; min-height:0; display:flex; flex-direction:column;
+    background:var(--glass); border:1px solid var(--glass-line); border-radius:22px;
+    backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.7), inset 0 1px 0 rgba(244,236,217,.08);
+    overflow:hidden; opacity:0; transform:translateY(18px)}
+
+  .scroll{flex:1 1 auto; min-height:0; overflow-y:auto; padding:clamp(16px,2.4vw,26px); scroll-behavior:smooth}
+  .scroll::-webkit-scrollbar{width:9px}
+  .scroll::-webkit-scrollbar-thumb{background:rgba(244,236,217,.16); border-radius:99px}
+
+  .msg{max-width:88%; margin:0 0 16px; line-height:1.5; font-size:.95rem; animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+  .msg.user{margin-left:auto; background:linear-gradient(180deg,var(--moss),#345c3d);
+    color:var(--cream); padding:11px 15px; border-radius:16px 16px 4px 16px;
+    box-shadow:0 6px 18px -8px rgba(0,0,0,.6)}
+  .msg.bot{color:var(--ink)}
+  .msg.bot .who{font-family:"Fraunces",serif; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:5px; font-variation-settings:"wght" 600}
+  .msg.bot p{margin:.1rem 0 .55rem}
+  .msg.bot strong{color:var(--cream); font-weight:600}
+  .msg.bot ul{margin:.2rem 0 .6rem; padding-left:1.1rem}
+  .msg.bot li{margin:.15rem 0}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* service cards "grow from the field" */
+  .cards{display:grid; gap:9px; margin:.4rem 0 .2rem}
+  .card{position:relative; background:rgba(9,18,13,.34); border:1px solid var(--glass-line);
+    border-left:3px solid var(--sage); border-radius:12px; padding:11px 13px;
+    transform-origin:bottom center; animation:grow .55s cubic-bezier(.2,.9,.2,1) both}
+  .card.offer{border-left-color:var(--gold)}
+  @keyframes grow{from{opacity:0; transform:translateY(10px) scaleY(.86)}to{opacity:1; transform:none}}
+  .card .name{font-family:"Fraunces",serif; font-weight:600; font-size:.98rem; color:var(--cream);
+    display:flex; justify-content:space-between; gap:10px; align-items:baseline}
+  .card .price{color:var(--gold); font-weight:600; white-space:nowrap; font-family:"Spline Sans"}
+  .card .meta{font-size:.78rem; color:var(--ink-soft); margin-top:3px; display:flex; flex-wrap:wrap; gap:4px 12px}
+  .card .tag{display:inline-block; margin-top:7px; font-size:.72rem; color:var(--deep);
+    background:var(--gold); padding:2px 9px; border-radius:99px; font-weight:600}
+  .card .booked{color:#e8a48b}
+
+  .typing{display:inline-flex; gap:5px; align-items:center; color:var(--ink-soft); font-size:.9rem}
+  .typing i{width:6px;height:6px;border-radius:50%;background:var(--sage);display:inline-block;animation:bob 1s infinite}
+  .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+  @keyframes bob{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+
+  .chips{display:flex; gap:8px; flex-wrap:wrap; padding:0 clamp(16px,2.4vw,26px) 4px}
+  .chip{font:inherit; font-size:.82rem; color:var(--ink); background:rgba(9,18,13,.3);
+    border:1px solid var(--glass-line); padding:8px 13px; border-radius:99px; cursor:pointer;
+    transition:transform .18s ease, background .18s ease, border-color .18s; white-space:nowrap}
+  .chip:hover{background:rgba(232,176,75,.14); border-color:rgba(232,176,75,.5)}
+  .chip:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+
+  form.bar{display:flex; gap:10px; padding:clamp(12px,2vw,18px) clamp(16px,2.4vw,26px);
+    border-top:1px solid var(--glass-line); background:rgba(9,18,13,.22)}
+  .bar input{flex:1; font:inherit; font-size:.95rem; color:var(--ink); background:rgba(9,18,13,.4);
+    border:1px solid var(--glass-line); border-radius:13px; padding:12px 15px; outline:none;
+    transition:border-color .2s, box-shadow .2s}
+  .bar input::placeholder{color:rgba(244,236,217,.4)}
+  .bar input:focus{border-color:var(--gold); box-shadow:0 0 0 3px rgba(232,176,75,.18)}
+  .bar button{font:inherit; font-weight:600; color:var(--deep); background:var(--gold); border:none;
+    border-radius:13px; padding:0 18px; cursor:pointer; transition:transform .15s, filter .2s;
+    display:flex; align-items:center; gap:7px}
+  .bar button:hover{filter:brightness(1.06)} .bar button:active{transform:scale(.96)}
+  .bar button:disabled{opacity:.5; cursor:default}
+
+  footer.note{width:min(760px,100%); text-align:center; font-size:.72rem; color:rgba(244,236,217,.5); opacity:0}
+  footer.note b{color:var(--sage); font-weight:600}
+  a.mcp{color:var(--gold); text-decoration:none; border-bottom:1px dotted rgba(232,176,75,.5)}
+
+  @media (max-width:520px){ .msg{max-width:94%} .brand p{display:none} }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001s !important; animation-iteration-count:1 !important}
+  }
+</style>
+</head>
+<body>
+<canvas id="field"></canvas>
+<div class="veil"></div>
+
+<div class="stage">
+  <header class="top">
+    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="15" fill="#12251b"/>
+      <path d="M32 51c-1-13-1-24 12-33C43 31 41 44 32 51Z" fill="#E8B04B"/>
+      <path d="M32 51c1-12 1-23-11-31C22 30 24 43 32 51Z" fill="#7fae74"/>
+      <path d="M32 52V33" stroke="#f3ead6" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div class="brand">
+      <h1 id="wordmark">Meadow Vet Care</h1>
+      <p>Dogs · cats · rabbits · small mammals · birds</p>
+    </div>
+    <div class="live" title="Every answer is fetched live from the clinic's own services list">
+      <span class="dot"></span><span id="livecount">live services</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-label="Chat with the clinic assistant">
+    <div class="scroll" id="scroll"></div>
+    <div class="chips" id="chips"></div>
+    <form class="bar" id="form" autocomplete="off">
+      <input id="input" placeholder="Ask about a service, price or offer…" aria-label="Your question" maxlength="300">
+      <button id="send" type="submit">Ask<span aria-hidden="true">→</span></button>
+    </form>
+  </section>
+
+  <footer class="note">
+    Answers pulled <b>live</b> from our services sheet via a
+    <a class="mcp" href="https://meadow-vet-bot.victordelrosal.workers.dev/mcp" target="_blank" rel="noopener">Model Context Protocol tool</a>.
+    Not a substitute for veterinary advice.
+  </footer>
+</div>
+
+<script>
+const API = "https://meadow-vet-bot.victordelrosal.workers.dev/";
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+/* ---------- the meadow: a golden-hour field shader (raw WebGL, one quad) ---------- */
+(function meadow(){
+  const cv = document.getElementById("field");
+  const gl = cv.getContext("webgl", {antialias:false, powerPreference:"low-power"});
+  if(!gl){ document.body.style.background="linear-gradient(180deg,#2b3d22,#12251b)"; return; }
+  const vs = `attribute vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }`;
+  const fs = `
+  precision highp float;
+  uniform vec2 R; uniform float T;
+  // hash + value noise + fbm
+  float h(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+  float n(vec2 p){ vec2 i=floor(p),f=fract(p); f=f*f*(3.-2.*f);
+    return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y); }
+  float fbm(vec2 p){ float v=0.,a=.5; for(int i=0;i<5;i++){ v+=a*n(p); p*=2.02; a*=.5; } return v; }
+  void main(){
+    vec2 uv = gl_FragCoord.xy / R.xy;
+    float y = uv.y;
+    // sky: warm golden-hour cream fading to soft green horizon
+    vec3 sky = mix(vec3(.55,.62,.42), vec3(.95,.86,.62), pow(y,1.3));
+    // low sun glow, upper-left
+    float sun = exp(-6.0*length((uv-vec2(.34,.86))*vec2(1.0,1.3)));
+    sky += vec3(1.0,.82,.5)*sun*.6;
+    // grass: layered wind bands with fbm, deep meadow greens
+    float wind = fbm(vec2(uv.x*3.0 - T*0.06, uv.y*7.0 + fbm(vec2(uv.x*4.0, T*0.05))));
+    float blades = fbm(vec2(uv.x*22.0 - T*0.03, uv.y*3.0))*0.5;
+    vec3 grass = mix(vec3(.10,.20,.13), vec3(.30,.48,.28), wind);
+    grass = mix(grass, vec3(.42,.56,.30), blades*smoothstep(.0,.5,1.0-y));
+    // gold light catching the tips
+    grass += vec3(.55,.42,.14)*pow(wind,3.0)*smoothstep(.55,.0,y)*.5;
+    // horizon blend: grass rises to ~62% of screen
+    float horizon = smoothstep(.66,.40, y + (fbm(vec2(uv.x*3.0,9.0))-.5)*.05 );
+    vec3 col = mix(sky, grass, horizon);
+    // drifting haze
+    col += vec3(.9,.8,.6)*fbm(vec2(uv.x*2.0+T*0.02, uv.y*2.0))*.05*(1.0-horizon);
+    // grain + vignette
+    col -= h(gl_FragCoord.xy+T)*.03;
+    col *= 1.0 - .25*pow(length(uv-.5),2.0);
+    gl_FragColor = vec4(col,1.0);
+  }`;
+  function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+  const pr=gl.createProgram();
+  gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(pr);gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const lp=gl.getAttribLocation(pr,"p");gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
+  const uR=gl.getUniformLocation(pr,"R"),uT=gl.getUniformLocation(pr,"T");
+  const dpr=Math.min(devicePixelRatio||1,1.5);
+  function size(){ cv.width=innerWidth*dpr; cv.height=innerHeight*dpr; gl.viewport(0,0,cv.width,cv.height); gl.uniform2f(uR,cv.width,cv.height); }
+  addEventListener("resize",size); size();
+  function frame(t){ gl.uniform1f(uT,t*0.001); gl.drawArrays(gl.TRIANGLES,0,3); if(!reduce && !document.hidden) raf=requestAnimationFrame(frame); }
+  let raf=requestAnimationFrame(frame);
+  document.addEventListener("visibilitychange",()=>{ if(!document.hidden && !reduce){ cancelAnimationFrame(raf); raf=requestAnimationFrame(frame);} });
+})();
+
+/* ---------- chat ---------- */
+const scroll=document.getElementById("scroll"), form=document.getElementById("form"),
+      input=document.getElementById("input"), send=document.getElementById("send"),
+      chipsEl=document.getElementById("chips");
+const history=[];
+const STARTERS=["What dog services do you offer?","Are there any offers on microchipping?","Do you have telehealth services?","How much is neutering for a cat?"];
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+// tiny safe markdown: **bold**, "- " bullets, blank-line paragraphs
+function fmt(t){
+  const blocks=esc(t).trim().split(/\n{2,}/).map(b=>{
+    const lines=b.split("\n");
+    if(lines.every(l=>/^\s*[-*]\s+/.test(l)))
+      return "<ul>"+lines.map(l=>"<li>"+l.replace(/^\s*[-*]\s+/,"")+"</li>").join("")+"</ul>";
+    return "<p>"+b.replace(/\n/g,"<br>")+"</p>";
+  }).join("");
+  return blocks.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+}
+function cardHTML(s){
+  const price = s.price_eur!=null ? "€"+s.price_eur : "";
+  const meta=[];
+  if(s.duration_min) meta.push(s.duration_min+" min");
+  if(s.availability) meta.push(s.availability);
+  meta.push(s.by_appointment?"by appointment":"walk-in ok");
+  const booked = s.slots_this_week===0 ? `<span class="booked">· fully booked this week</span>` : `· ${s.slots_this_week} slots this week`;
+  return `<div class="card ${s.special_offer?'offer':''}">
+    <div class="name"><span>${esc(s.service)} <span style="color:var(--ink-soft);font-weight:400;font-size:.8rem">(${esc(s.species)})</span></span><span class="price">${price}</span></div>
+    <div class="meta">${meta.map(esc).join(" · ")} ${booked}</div>
+    ${s.special_offer?`<span class="tag">${esc(s.special_offer)}</span>`:""}
+  </div>`;
+}
+function addUser(t){ const d=document.createElement("div"); d.className="msg user"; d.textContent=t; scroll.appendChild(d); jump(); }
+function addBot(html){ const d=document.createElement("div"); d.className="msg bot";
+  d.innerHTML=`<div class="who">Meadow assistant</div>${html}`; scroll.appendChild(d); jump(); return d; }
+function jump(){ scroll.scrollTop=scroll.scrollHeight; }
+
+async function ask(q){
+  if(!q.trim()) return;
+  addUser(q); history.push({role:"user",content:q});
+  input.value=""; send.disabled=true; input.disabled=true;
+  const t=addBot(`<div class="typing"><i></i><i></i><i></i></div>`);
+  try{
+    const r=await fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history})});
+    const d=await r.json();
+    if(d.reply){
+      const cards = (d.services&&d.services.length)? `<div class="cards">${d.services.map(cardHTML).join("")}</div>` : "";
+      t.innerHTML=`<div class="who">Meadow assistant</div>${fmt(d.reply)}${cards}`;
+      history.push({role:"assistant",content:d.reply});
+    } else {
+      t.innerHTML=`<div class="who">Meadow assistant</div><p>Sorry, I couldn't reach our services list just now. Please try again in a moment.</p>`;
+    }
+  }catch(e){
+    t.innerHTML=`<div class="who">Meadow assistant</div><p>Connection hiccup — please try again.</p>`;
+  }
+  jump(); send.disabled=false; input.disabled=false; input.focus();
+}
+form.addEventListener("submit",e=>{e.preventDefault(); ask(input.value);});
+
+// suggestion chips + magnetic hover
+STARTERS.forEach(s=>{
+  const c=document.createElement("button"); c.className="chip"; c.type="button"; c.textContent=s;
+  c.addEventListener("click",()=>ask(s));
+  if(!reduce){
+    c.addEventListener("pointermove",ev=>{const r=c.getBoundingClientRect();
+      c.style.transform=`translate(${(ev.clientX-r.left-r.width/2)*.18}px,${(ev.clientY-r.top-r.height/2)*.28}px)`;});
+    c.addEventListener("pointerleave",()=>c.style.transform="");
+  }
+  chipsEl.appendChild(c);
+});
+
+// live count in the pill
+fetch(API).then(r=>r.json()).then(d=>{ if(d.live_services) document.getElementById("livecount").textContent=d.live_services+" live services"; }).catch(()=>{});
+
+// greeting
+addBot(`<p>Hello, and welcome to <strong>Meadow Vet Care</strong> 🌿 I can tell you about any of our services, their prices and any current offers — all pulled live from the clinic's own list. What would you like to know?</p>`);
+
+/* ---------- orchestrated load reveal (GSAP if present, else CSS fallback) ---------- */
+function reveal(){
+  const els=[document.querySelector("header.top"),document.querySelector(".panel"),document.querySelector("footer.note")];
+  if(window.gsap && !reduce){
+    gsap.to(els,{opacity:1,y:0,duration:.9,stagger:.14,ease:"power3.out",delay:.15});
+    gsap.fromTo("#wordmark",{"font-variation-settings":'"opsz" 40,"wght" 300'},
+      {"font-variation-settings":'"opsz" 40,"wght" 560',duration:1.4,ease:"power2.out",delay:.3});
+  } else {
+    els.forEach(e=>{e.style.transition="opacity .8s ease, transform .8s ease"; e.style.opacity=1; e.style.transform="none";});
+  }
+}
+const g=document.createElement("script");
+g.src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js";
+g.onload=reveal; g.onerror=reveal; document.head.appendChild(g);
+setTimeout(()=>{ if(!window.gsap) reveal(); },1200);
+</script>
+</body>
+</html>
