@@ -130,7 +130,12 @@ const SEARCH_TOOL = {
         description: "If true, only return services that currently have a special offer or discount."
       },
       max_price: { type: "number", description: "Only services at or below this price in EUR." },
-      limit: { type: "number", description: "Max results to return (default 15, max 40)." }
+      sort: {
+        type: "string",
+        enum: ["price_desc", "price_asc"],
+        description: "Sort the results. Use 'price_desc' with limit 1 to find the single MOST expensive service, or 'price_asc' with limit 1 for the CHEAPEST."
+      },
+      limit: { type: "number", description: "Max results to return (default 15, max 40). Use a small limit like 1 to 3 for superlative or specific questions." }
     }
   }
 };
@@ -153,6 +158,8 @@ function runSearch(args) {
       return true;
     });
     const total = out.length;
+    if (args.sort === "price_desc") out.sort((a, b) => (b.price_eur || 0) - (a.price_eur || 0));
+    else if (args.sort === "price_asc") out.sort((a, b) => (a.price_eur || 0) - (b.price_eur || 0));
     out = out.slice(0, limit).map(s => ({
       id: s.service_id,
       service: s.service_name,
@@ -239,9 +246,10 @@ Your job: answer customer questions about the clinic's services, prices, current
 
 Rules:
 - For ANY question about services, prices, offers, availability, a service id (e.g. "MVC-001"), or which animals a service is for, call search_services first. Never invent or guess a service, price or discount. If the tool returns nothing, say the clinic doesn't appear to list that and offer to help find a related service.
-- Keep every reply SHORT: one warm paragraph of about 2 to 4 sentences. Do NOT list out many services or reproduce a long catalogue. When there are lots of matches, give a one-line overview (e.g. how many, the range, a highlight) and invite them to narrow down by animal, category or budget. Only name specific services when they ask about one or a few. The matching services are already shown to the customer as cards beneath your reply, so you do not need to repeat every detail in prose.
-- Prices are in euro (write like "€55"). Mention a special offer when it's relevant. If a service they asked about has 0 slots this week, gently note it's fully booked this week but they can still enquire.
-- Plain conversational English. No markdown headings, no long bulleted catalogues, no emoji spam.
+- Query the tool TIGHTLY so it returns only what's needed: use specific filters and a small limit. For superlative questions ("most expensive", "cheapest", "priciest"), call it with sort=price_desc or price_asc and limit=1 so you get the single answer, not a big list.
+- Keep every reply VERY SHORT: 1 to 2 sentences, one warm paragraph. Do NOT list many services or reproduce a catalogue. When there are lots of matches, say how many and the price range in a single sentence and invite them to narrow down by animal, category or budget. The matching services already appear as cards beneath your reply, so never repeat their details in prose.
+- Prices are in euro (write like "€55"). Mention a special offer only if it's directly relevant. Don't hedge or add caveats about surprising prices; just state what the live list says.
+- Plain conversational English. No markdown headings, no bulleted catalogues, no emoji spam.
 - You are not a vet and must not give medical or clinical advice or diagnoses. For anything about a pet's health or symptoms, kindly suggest booking the right consultation and, if it sounds urgent, point them to the emergency service.
 - Only discuss ${CLINIC}. If asked something unrelated, steer back to how the clinic can help.`;
 
@@ -315,7 +323,7 @@ async function chat(messages, env, origin) {
     seen.add(k);
     services.push(s);
   }
-  return json({ reply: finalText, services: services.slice(0, 12) }, 200, origin);
+  return json({ reply: finalText, services: services.slice(0, 5) }, 200, origin);
 }
 
 export default {
