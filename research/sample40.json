@@ -1,0 +1,1179 @@
+[
+ {
+  "client_id": "MVC-C235",
+  "segment": "budget_stretched",
+  "neighbourhood": "Donnybrook",
+  "age_band": "30-44",
+  "household": "shared_house",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Rescue crossbreed",
+    "age_years": 10.2,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Rabies vaccine (travel)",
+   "Core annual vaccination",
+   "Home visit (routine)",
+   "General consultation",
+   "Out-of-hours emergency consult",
+   "Puppy/kitten primary course"
+  ],
+  "visits_last_2y": 6,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C079",
+  "segment": "time_poor_professional",
+  "neighbourhood": "Rathgar",
+  "age_band": "60+",
+  "household": "shared_house",
+  "tech_comfort": "high",
+  "budget_sensitivity": "medium",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Cat",
+    "breed": "Domestic shorthair",
+    "age_years": 9.5,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "General consultation",
+   "Dental extraction",
+   "Nail clipping",
+   "Telehealth video consult",
+   "Annual wellness check",
+   "Core annual vaccination"
+  ],
+  "visits_last_2y": 8,
+  "last_visit": "2026-04",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C315",
+  "segment": "new_pet",
+  "neighbourhood": "Ranelagh",
+  "age_band": "45-59",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Labrador",
+    "age_years": 1.1,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Kennel cough vaccine",
+   "Microchipping",
+   "Puppy/kitten primary course"
+  ],
+  "visits_last_2y": 4,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C287",
+  "segment": "brachy_highrisk",
+  "neighbourhood": "Clonskeagh",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Cavalier King Charles Spaniel",
+    "age_years": 9.3,
+    "brachycephalic": true,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Home visit (routine)",
+   "Ultrasound scan",
+   "Second-opinion consult",
+   "Emergency stabilisation"
+  ],
+  "visits_last_2y": 12,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C317",
+  "segment": "senior_pet",
+  "neighbourhood": "Ranelagh",
+  "age_band": "30-44",
+  "household": "couple",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "walk-in",
+  "pets": [
+   {
+    "species": "Cat",
+    "breed": "British Shorthair",
+    "age_years": 12.5,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Home visit (routine)",
+   "Telehealth video consult",
+   "Dental extraction"
+  ],
+  "visits_last_2y": 10,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C299",
+  "segment": "anxious_first_timer",
+  "neighbourhood": "Harold's Cross",
+  "age_band": "45-59",
+  "household": "family_with_kids",
+  "tech_comfort": "low",
+  "budget_sensitivity": "low",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Golden Retriever",
+    "age_years": 2.1,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Home visit (routine)",
+   "Puppy/kitten primary course",
+   "General consultation",
+   "Senior wellness screen"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2026-04",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C341",
+  "segment": "lapsed",
+  "neighbourhood": "Dartry",
+  "age_band": "45-59",
+  "household": "couple",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Border Collie",
+    "age_years": 1.1,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Home visit (routine)",
+   "Puppy/kitten primary course"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2025-04",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C029",
+  "segment": "senior_pet",
+  "neighbourhood": "Harold's Cross",
+  "age_band": "30-44",
+  "household": "family_with_kids",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "walk-in",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Springer Spaniel",
+    "age_years": 12.6,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "General consultation",
+   "Weight & nutrition clinic"
+  ],
+  "visits_last_2y": 8,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 5
+ },
+ {
+  "client_id": "MVC-C163",
+  "segment": "budget_stretched",
+  "neighbourhood": "Harold's Cross",
+  "age_band": "45-59",
+  "household": "single",
+  "tech_comfort": "low",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Cat",
+    "breed": "British Shorthair",
+    "age_years": 8.3,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Senior wellness screen",
+   "Rabies vaccine (travel)",
+   "Second-opinion consult",
+   "Emergency stabilisation",
+   "General consultation",
+   "Core annual vaccination"
+  ],
+  "visits_last_2y": 4,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C245",
+  "segment": "budget_stretched",
+  "neighbourhood": "Ranelagh",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Labrador",
+    "age_years": 2.8,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Annual wellness check",
+   "Out-of-hours emergency consult"
+  ],
+  "visits_last_2y": 4,
+  "last_visit": "2026-06",
+  "satisfaction_prior": 2
+ },
+ {
+  "client_id": "MVC-C116",
+  "segment": "senior_pet",
+  "neighbourhood": "Ranelagh",
+  "age_band": "60+",
+  "household": "couple",
+  "tech_comfort": "high",
+  "budget_sensitivity": "low",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Rabbit",
+    "breed": "Lionhead",
+    "age_years": 9.9,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Rabbit RVHD & myxomatosis vaccine",
+   "Telehealth video consult",
+   "New pet registration check"
+  ],
+  "visits_last_2y": 12,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C048",
+  "segment": "senior_pet",
+  "neighbourhood": "Harold's Cross",
+  "age_band": "45-59",
+  "household": "shared_house",
+  "tech_comfort": "low",
+  "budget_sensitivity": "low",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Cavapoo",
+    "age_years": 11.5,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Weight & nutrition clinic",
+   "Blood panel",
+   "Senior wellness screen",
+   "New pet registration check",
+   "General consultation",
+   "Ultrasound scan"
+  ],
+  "visits_last_2y": 8,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C292",
+  "segment": "lapsed",
+  "neighbourhood": "Clonskeagh",
+  "age_band": "45-59",
+  "household": "couple",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Bird",
+    "breed": "Cockatiel",
+    "age_years": 7.7,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Telehealth video consult",
+   "Avian health check"
+  ],
+  "visits_last_2y": 1,
+  "last_visit": "2025-06",
+  "satisfaction_prior": 2
+ },
+ {
+  "client_id": "MVC-C039",
+  "segment": "lapsed",
+  "neighbourhood": "Milltown",
+  "age_band": "30-44",
+  "household": "couple",
+  "tech_comfort": "low",
+  "budget_sensitivity": "high",
+  "channel_preference": "walk-in",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Cavapoo",
+    "age_years": 7.7,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Rabies vaccine (travel)",
+   "Home visit (routine)",
+   "Annual wellness check",
+   "Flea, tick & worm plan",
+   "Telehealth video consult"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2025-01",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C055",
+  "segment": "brachy_highrisk",
+  "neighbourhood": "Clonskeagh",
+  "age_band": "45-59",
+  "household": "shared_house",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Pug",
+    "age_years": 9.7,
+    "brachycephalic": true,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Scale & polish (dental) (small dog)",
+   "Flea, tick & worm plan",
+   "New pet registration check",
+   "Annual wellness check",
+   "Neutering (spay/castrate) (large dog)",
+   "Blood panel"
+  ],
+  "visits_last_2y": 11,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C319",
+  "segment": "budget_stretched",
+  "neighbourhood": "Rathmines",
+  "age_band": "18-29",
+  "household": "couple",
+  "tech_comfort": "low",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Rabbit",
+    "breed": "Lionhead",
+    "age_years": 5.4,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Out-of-hours emergency consult",
+   "Rabbit RVHD & myxomatosis vaccine",
+   "Flea, tick & worm plan"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C052",
+  "segment": "multi_pet",
+  "neighbourhood": "Rathgar",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "medium",
+  "channel_preference": "walk-in",
+  "pets": [
+   {
+    "species": "Rabbit",
+    "breed": "Mini Lop",
+    "age_years": 9.6,
+    "brachycephalic": false,
+    "senior": true
+   },
+   {
+    "species": "Cat",
+    "breed": "Ragdoll",
+    "age_years": 4.5,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Flea, tick & worm plan",
+   "New pet registration check",
+   "Nail clipping",
+   "De-shedding treatment"
+  ],
+  "visits_last_2y": 8,
+  "last_visit": "2026-03",
+  "satisfaction_prior": 5
+ },
+ {
+  "client_id": "MVC-C373",
+  "segment": "time_poor_professional",
+  "neighbourhood": "Donnybrook",
+  "age_band": "45-59",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Cavapoo",
+    "age_years": 6.7,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Flea, tick & worm plan",
+   "Scale & polish (dental) (small dog)",
+   "New pet registration check",
+   "Scale & polish (dental) (large dog)",
+   "Dental extraction (medium dog)"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C387",
+  "segment": "multi_pet",
+  "neighbourhood": "Terenure",
+  "age_band": "18-29",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "low",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Cat",
+    "breed": "Rescue moggy",
+    "age_years": 4.3,
+    "brachycephalic": false,
+    "senior": false
+   },
+   {
+    "species": "Rabbit",
+    "breed": "Lionhead",
+    "age_years": 9.9,
+    "brachycephalic": false,
+    "senior": true
+   },
+   {
+    "species": "Rabbit",
+    "breed": "Lionhead",
+    "age_years": 2.7,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Flea, tick & worm plan",
+   "De-shedding treatment",
+   "Dental check",
+   "Nail clipping"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2026-03",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C225",
+  "segment": "lapsed",
+  "neighbourhood": "Ranelagh",
+  "age_band": "30-44",
+  "household": "family_with_kids",
+  "tech_comfort": "low",
+  "budget_sensitivity": "medium",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Small mammal",
+    "breed": "Hamster",
+    "age_years": 8.6,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Small-mammal health check",
+   "New pet registration check"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2025-02",
+  "satisfaction_prior": 2
+ },
+ {
+  "client_id": "MVC-C087",
+  "segment": "time_poor_professional",
+  "neighbourhood": "Clonskeagh",
+  "age_band": "18-29",
+  "household": "couple",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Rescue crossbreed",
+    "age_years": 4.8,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "New pet registration check",
+   "Telehealth video consult"
+  ],
+  "visits_last_2y": 5,
+  "last_visit": "2026-06",
+  "satisfaction_prior": 5
+ },
+ {
+  "client_id": "MVC-C140",
+  "segment": "anxious_first_timer",
+  "neighbourhood": "Ranelagh",
+  "age_band": "18-29",
+  "household": "couple",
+  "tech_comfort": "high",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Cocker Spaniel",
+    "age_years": 8.8,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Puppy/kitten primary course",
+   "Behaviour consult",
+   "Kennel cough vaccine"
+  ],
+  "visits_last_2y": 7,
+  "last_visit": "2026-06",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C100",
+  "segment": "new_pet",
+  "neighbourhood": "Harold's Cross",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "low",
+  "channel_preference": "walk-in",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Greyhound (retired)",
+    "age_years": 1.4,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Home visit (routine)",
+   "Prescription diet plan",
+   "Neutering (spay/castrate) (large dog)",
+   "Senior wellness screen",
+   "Puppy/kitten primary course",
+   "Neutering (spay/castrate) (small dog)"
+  ],
+  "visits_last_2y": 6,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C305",
+  "segment": "senior_pet",
+  "neighbourhood": "Milltown",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Rescue crossbreed",
+    "age_years": 15.1,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Ultrasound scan",
+   "Flea, tick & worm plan",
+   "Weight & nutrition clinic",
+   "Home visit (routine)",
+   "Quality-of-life consult"
+  ],
+  "visits_last_2y": 6,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C196",
+  "segment": "new_pet",
+  "neighbourhood": "Ranelagh",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Cat",
+    "breed": "Rescue moggy",
+    "age_years": 1.1,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Microchipping",
+   "Home visit (routine)",
+   "Telehealth video consult",
+   "Neutering (spay/castrate)",
+   "Puppy/kitten primary course",
+   "General consultation"
+  ],
+  "visits_last_2y": 5,
+  "last_visit": "2026-06",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C282",
+  "segment": "time_poor_professional",
+  "neighbourhood": "Ranelagh",
+  "age_band": "30-44",
+  "household": "family_with_kids",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "low",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Labrador",
+    "age_years": 3.6,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Full groom (large dog)",
+   "Bath & brush (medium dog)",
+   "Home visit (routine)",
+   "Core annual vaccination",
+   "Flea, tick & worm plan"
+  ],
+  "visits_last_2y": 7,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C198",
+  "segment": "multi_pet",
+  "neighbourhood": "Rathgar",
+  "age_band": "30-44",
+  "household": "family_with_kids",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Cat",
+    "breed": "British Shorthair",
+    "age_years": 1.1,
+    "brachycephalic": false,
+    "senior": false
+   },
+   {
+    "species": "Rabbit",
+    "breed": "Rescue rabbit",
+    "age_years": 8.8,
+    "brachycephalic": false,
+    "senior": true
+   },
+   {
+    "species": "Cat",
+    "breed": "Domestic longhair",
+    "age_years": 1.4,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Rabbit RVHD & myxomatosis vaccine",
+   "Home visit (routine)",
+   "Nail clipping",
+   "Flea, tick & worm plan"
+  ],
+  "visits_last_2y": 3,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C107",
+  "segment": "senior_pet",
+  "neighbourhood": "Rathmines",
+  "age_band": "45-59",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "medium",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Golden Retriever",
+    "age_years": 10.4,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Home visit (routine)",
+   "Blood panel",
+   "New pet registration check"
+  ],
+  "visits_last_2y": 7,
+  "last_visit": "2026-06",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C166",
+  "segment": "time_poor_professional",
+  "neighbourhood": "Rathmines",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "low",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Golden Retriever",
+    "age_years": 5.2,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Flea, tick & worm plan",
+   "Home visit (routine)",
+   "Nail clipping",
+   "Senior wellness screen",
+   "Annual wellness check"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2026-03",
+  "satisfaction_prior": 5
+ },
+ {
+  "client_id": "MVC-C308",
+  "segment": "multi_pet",
+  "neighbourhood": "Terenure",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Golden Retriever",
+    "age_years": 8.3,
+    "brachycephalic": false,
+    "senior": false
+   },
+   {
+    "species": "Rabbit",
+    "breed": "Mini Lop",
+    "age_years": 9.0,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Puppy/kitten primary course",
+   "Bath & brush (large dog)"
+  ],
+  "visits_last_2y": 8,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 5
+ },
+ {
+  "client_id": "MVC-C358",
+  "segment": "brachy_highrisk",
+  "neighbourhood": "Rathgar",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Cavalier King Charles Spaniel",
+    "age_years": 3.9,
+    "brachycephalic": true,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "X-ray imaging",
+   "Home visit (routine)",
+   "General consultation",
+   "New pet registration check",
+   "Scale & polish (dental) (small dog)"
+  ],
+  "visits_last_2y": 4,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 5
+ },
+ {
+  "client_id": "MVC-C127",
+  "segment": "new_pet",
+  "neighbourhood": "Ranelagh",
+  "age_band": "45-59",
+  "household": "single",
+  "tech_comfort": "low",
+  "budget_sensitivity": "low",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Rabbit",
+    "breed": "Mini Lop",
+    "age_years": 1.0,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Blood panel",
+   "Rabbit RVHD & myxomatosis vaccine",
+   "General consultation",
+   "Home visit (routine)"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C102",
+  "segment": "budget_stretched",
+  "neighbourhood": "Rathgar",
+  "age_band": "30-44",
+  "household": "family_with_kids",
+  "tech_comfort": "low",
+  "budget_sensitivity": "high",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Beagle",
+    "age_years": 7.9,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Rabies vaccine (travel)",
+   "Core annual vaccination",
+   "Telehealth video consult"
+  ],
+  "visits_last_2y": 2,
+  "last_visit": "2026-05",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C357",
+  "segment": "brachy_highrisk",
+  "neighbourhood": "Ranelagh",
+  "age_band": "30-44",
+  "household": "family_with_kids",
+  "tech_comfort": "high",
+  "budget_sensitivity": "low",
+  "channel_preference": "walk-in",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Shih Tzu",
+    "age_years": 3.7,
+    "brachycephalic": true,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Second-opinion consult",
+   "Flea, tick & worm plan",
+   "Neutering (spay/castrate) (small dog)",
+   "Telehealth video consult",
+   "Home visit (routine)",
+   "New pet registration check"
+  ],
+  "visits_last_2y": 5,
+  "last_visit": "2026-06",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C367",
+  "segment": "time_poor_professional",
+  "neighbourhood": "Clonskeagh",
+  "age_band": "30-44",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Beagle",
+    "age_years": 9.1,
+    "brachycephalic": false,
+    "senior": true
+   }
+  ],
+  "services_used": [
+   "Core annual vaccination",
+   "Telehealth video consult",
+   "Home visit (routine)",
+   "Puppy/kitten primary course",
+   "Flea, tick & worm plan"
+  ],
+  "visits_last_2y": 4,
+  "last_visit": "2026-03",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C202",
+  "segment": "new_pet",
+  "neighbourhood": "Ranelagh",
+  "age_band": "45-59",
+  "household": "single",
+  "tech_comfort": "high",
+  "budget_sensitivity": "low",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Cocker Spaniel",
+    "age_years": 1.2,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "New pet registration check",
+   "Core annual vaccination",
+   "Weight & nutrition clinic",
+   "Senior wellness screen",
+   "Pet passport & travel cert",
+   "Prescription diet plan"
+  ],
+  "visits_last_2y": 5,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 3
+ },
+ {
+  "client_id": "MVC-C224",
+  "segment": "anxious_first_timer",
+  "neighbourhood": "Ranelagh",
+  "age_band": "30-44",
+  "household": "shared_house",
+  "tech_comfort": "high",
+  "budget_sensitivity": "medium",
+  "channel_preference": "web",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Terrier cross",
+    "age_years": 2.8,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Kennel cough vaccine",
+   "Behaviour consult",
+   "Puppy/kitten primary course",
+   "Puppy socialisation class",
+   "General consultation",
+   "Telehealth video consult"
+  ],
+  "visits_last_2y": 8,
+  "last_visit": "2026-03",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C243",
+  "segment": "multi_pet",
+  "neighbourhood": "Terenure",
+  "age_band": "45-59",
+  "household": "couple",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Terrier cross",
+    "age_years": 8.1,
+    "brachycephalic": false,
+    "senior": false
+   },
+   {
+    "species": "Rabbit",
+    "breed": "Netherland Dwarf",
+    "age_years": 5.0,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Annual wellness check",
+   "New pet registration check",
+   "Rabbit RVHD & myxomatosis vaccine",
+   "Puppy/kitten primary course",
+   "Senior wellness screen",
+   "Flea, tick & worm plan"
+  ],
+  "visits_last_2y": 3,
+  "last_visit": "2026-04",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C114",
+  "segment": "new_pet",
+  "neighbourhood": "Clonskeagh",
+  "age_band": "60+",
+  "household": "single",
+  "tech_comfort": "medium",
+  "budget_sensitivity": "medium",
+  "channel_preference": "walk-in",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Border Collie",
+    "age_years": 0.9,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Puppy socialisation class",
+   "Neutering (spay/castrate) (medium dog)",
+   "Core annual vaccination",
+   "Annual wellness check",
+   "Microchipping",
+   "Telehealth video consult"
+  ],
+  "visits_last_2y": 5,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 4
+ },
+ {
+  "client_id": "MVC-C366",
+  "segment": "budget_stretched",
+  "neighbourhood": "Ranelagh",
+  "age_band": "45-59",
+  "household": "couple",
+  "tech_comfort": "low",
+  "budget_sensitivity": "high",
+  "channel_preference": "phone",
+  "pets": [
+   {
+    "species": "Dog",
+    "breed": "Jack Russell",
+    "age_years": 7.7,
+    "brachycephalic": false,
+    "senior": false
+   }
+  ],
+  "services_used": [
+   "Puppy/kitten primary course",
+   "New pet registration check"
+  ],
+  "visits_last_2y": 7,
+  "last_visit": "2026-07",
+  "satisfaction_prior": 3
+ }
+]
