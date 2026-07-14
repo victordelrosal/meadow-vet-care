@@ -117,6 +117,9 @@
     transition:transform .18s ease, background .18s ease, border-color .18s; white-space:nowrap}
   .chip:hover{background:rgba(232,176,75,.14); border-color:rgba(232,176,75,.5)}
   .chip:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+  .chip.geo{border-color:rgba(232,176,75,.35)}
+  .chip.geo.on{background:rgba(122,168,116,.22); border-color:rgba(122,168,116,.6)}
+  .geohint{font-size:.68rem; color:rgba(244,236,217,.45); align-self:center; max-width:46ch; line-height:1.35}
 
   form.bar{display:flex; gap:10px; padding:clamp(12px,2vw,18px) clamp(16px,2.4vw,26px);
     border-top:1px solid var(--glass-line); background:rgba(9,18,13,.22)}
@@ -166,15 +169,22 @@
     <div class="scroll" id="scroll"></div>
     <div class="chips" id="chips"></div>
     <form class="bar" id="form" autocomplete="off">
-      <input id="input" placeholder="Ask about a service, price or offer…" aria-label="Your question" maxlength="300">
+      <input id="input" placeholder="Ask about a service, price, or whether it's safe to walk your dog…" aria-label="Your question" maxlength="300">
       <button id="send" type="submit">Ask<span aria-hidden="true">→</span></button>
     </form>
+    <div class="chips">
+      <button class="chip geo" id="geo" type="button" title="Shared only for this answer, rounded to about 1km, never stored">📍 Use my location</button>
+      <span class="geohint">Optional. Used only to check your local weather for this answer, rounded to about 1&nbsp;km, never stored. Or just name your town.</span>
+    </div>
   </section>
 
   <footer class="note">
-    Answers pulled <b>live</b> from our services sheet via a
-    <a class="mcp" href="https://meadow-vet-bot.victordelrosal.workers.dev/mcp" target="_blank" rel="noopener">Model Context Protocol tool</a>.
-    Not a substitute for veterinary advice.
+    You are chatting with an <b>AI assistant</b>, not a person. Answers are pulled <b>live</b> from our services sheet via a
+    <a class="mcp" href="https://meadow-vet-bot.victordelrosal.workers.dev/mcp" target="_blank" rel="noopener">Model Context Protocol tool</a>,
+    with Irish public holidays and weather from third-party feeds.
+    General information only, <b>not veterinary advice</b>, and never a substitute for seeing a vet.
+    If your pet is unwell or you suspect heatstroke, contact a vet immediately.
+    <br><a class="mcp" href="legal.html">Disclaimer, privacy &amp; terms</a> · A fictional clinic, built as a teaching demo.
   </footer>
 </div>
 
@@ -242,7 +252,24 @@ const scroll=document.getElementById("scroll"), form=document.getElementById("fo
       input=document.getElementById("input"), send=document.getElementById("send"),
       chipsEl=document.getElementById("chips");
 const history=[];
-const STARTERS=["What dog services do you offer?","Are there any offers on microchipping?","Do you have telehealth services?","How much is neutering for a cat?"];
+const STARTERS=["Is it too hot to walk my dog right now?","Are you open next Monday?","Are there any offers on microchipping?","How much is neutering for a cat?"];
+
+/* ---------- location: opt-in, used for one answer, never stored ----------
+   Consent is explicit (the customer taps the button, then the browser asks too).
+   Coordinates are rounded to ~1km by the Worker so we never handle a home address. */
+let GEO=null;
+const geoBtn=document.getElementById("geo");
+geoBtn.addEventListener("click",()=>{
+  if(GEO){ GEO=null; geoBtn.classList.remove("on"); geoBtn.textContent="📍 Use my location"; return; }
+  if(!navigator.geolocation){ geoBtn.textContent="📍 Location unavailable"; return; }
+  geoBtn.textContent="📍 Asking…";
+  navigator.geolocation.getCurrentPosition(
+    p=>{ GEO={latitude:p.coords.latitude,longitude:p.coords.longitude};
+         geoBtn.classList.add("on"); geoBtn.textContent="📍 Location shared · tap to stop"; },
+    ()=>{ geoBtn.textContent="📍 Use my location"; alert("No problem, just tell me your town instead."); },
+    {timeout:8000, maximumAge:600000}
+  );
+});
 
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 // tiny safe markdown: **bold**, "- " bullets, blank-line paragraphs
@@ -280,7 +307,9 @@ async function ask(q){
   input.value=""; send.disabled=true; input.disabled=true;
   const t=addBot(`<div class="typing"><i></i><i></i><i></i></div>`);
   try{
-    const r=await fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history})});
+    const payload={messages:history};
+    if(GEO) payload.geo=GEO;
+    const r=await fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});
     const d=await r.json();
     if(d.reply){
       const cards = (d.services&&d.services.length)? `<div class="cards">${d.services.map(cardHTML).join("")}</div>` : "";
@@ -312,7 +341,7 @@ STARTERS.forEach(s=>{
 fetch(API).then(r=>r.json()).then(d=>{ if(d.live_services) document.getElementById("livecount").textContent=d.live_services+" live services"; }).catch(()=>{});
 
 // greeting
-addBot(`<p>Hello, and welcome to <strong>Meadow Vet Care</strong> 🌿 I can tell you about any of our services, their prices and any current offers, all pulled live from the clinic's own list. What would you like to know?</p>`);
+addBot(`<p>Hello, and welcome to <strong>Meadow Vet Care</strong> 🌿 I can tell you about our services, prices and current offers (pulled live from the clinic's own list), whether we're <strong>open</strong> on a given day (I check the Irish public holidays), and whether it's <strong>safe to walk your dog</strong> in the weather right now. What would you like to know?</p>`);
 
 /* ---------- orchestrated load reveal (GSAP if present, else CSS fallback) ---------- */
 function reveal(){
