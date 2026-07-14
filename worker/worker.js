@@ -381,8 +381,200 @@ function runSearch(args) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Live data 3: weather -> a dog-walk RISK ASSESSMENT (not a temperature chart).
+//
+// Grounded in the RVC/VetCompass "Hot Dogs" research, which matters because it
+// contradicts the popular advice:
+//   Hall EJ, Carter AJ, O'Neill DG (2020). Incidence and risk factors for heat-related
+//   illness (heatstroke) in UK dogs under primary veterinary care in 2016.
+//   Scientific Reports 10:9128. doi:10.1038/s41598-020-66015-8
+//
+//   - Most canine heatstroke is EXERTIONAL (from exercise), not dogs left in hot cars.
+//   - The median "feels like" temperature for UK heatstroke cases was 16.9C, with cases
+//     from 3.3C to 23.1C. A dog got heatstroke exercising at 3.3C, in winter.
+//   - The researchers explicitly REFUSE a safe-temperature threshold ("we can't give you
+//     a number"); over ~10C, intense exercise warrants a risk assessment.
+//   - Risk factors (odds ratios from the paper): >=50kg 3.42x vs <10kg; age >=12y 1.75x;
+//     overweight 1.42x; highest-incidence breeds Chow Chow, Bulldog, French Bulldog,
+//     Dogue de Bordeaux, Greyhound, Cavalier King Charles Spaniel.
+//
+// So we NEVER give an all-clear based on air temperature alone. We use FEELS-LIKE
+// (Open-Meteo apparent_temperature, which folds in humidity, wind and sun), we raise the
+// risk for the dog's own risk factors, and we always name the warning signs.
+// ---------------------------------------------------------------------------
+const HRI_SOURCE = "Hall, Carter & O'Neill (2020), Scientific Reports 10:9128 (RVC VetCompass 'Hot Dogs' study)";
+const CLINIC_LOCATION = { name: "Dublin", latitude: 53.35, longitude: -6.26 };
+
+// Highest-incidence breeds in the paper, plus the flat-faced group it flags for fatal outcomes.
+const HIGH_RISK_BREEDS = [
+  "chow", "bulldog", "french bulldog", "frenchie", "dogue de bordeaux", "greyhound",
+  "cavalier", "pug", "boxer", "shih tzu", "boston terrier", "mastiff", "st bernard",
+  "newfoundland", "husky", "malamute", "chihuahua"
+];
+const FLAT_FACED = ["bulldog", "frenchie", "pug", "boxer", "shih tzu", "boston terrier", "cavalier"];
+
+async function geocode(place) {
+  const r = await fetch(
+    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(place)}&count=1&language=en`,
+    { cf: { cacheTtl: 86400, cacheEverything: true } }
+  );
+  if (!r.ok) return null;
+  const d = await r.json();
+  const hit = d.results && d.results[0];
+  if (!hit) return null;
+  return {
+    name: [hit.name, hit.country_code === "IE" ? null : hit.country].filter(Boolean).join(", "),
+    latitude: hit.latitude,
+    longitude: hit.longitude
+  };
+}
+
+async function getWeather(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+    `&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,wind_speed_10m,uv_index,weather_code,is_day` +
+    `&hourly=apparent_temperature,precipitation_probability,uv_index,is_day` +
+    `&forecast_days=2&timezone=Europe%2FDublin`;
+  const r = await fetch(url, { cf: { cacheTtl: 900, cacheEverything: true } });
+  if (!r.ok) throw new Error(`weather fetch failed: ${r.status}`);
+  return r.json();
+}
+
+const WMO = {
+  0: "clear sky", 1: "mainly clear", 2: "partly cloudy", 3: "overcast", 45: "fog", 48: "freezing fog",
+  51: "light drizzle", 53: "drizzle", 55: "heavy drizzle", 61: "light rain", 63: "rain", 65: "heavy rain",
+  71: "light snow", 73: "snow", 75: "heavy snow", 80: "rain showers", 81: "rain showers", 82: "heavy showers",
+  95: "thunderstorm", 96: "thunderstorm with hail", 99: "thunderstorm with hail"
+};
+
+// Base risk band from FEELS-LIKE temperature, anchored on the study's own case distribution
+// rather than on the "safe below 24C" charts that circulate online.
+function baseRisk(feels) {
+  if (feels >= 24) return 4;   // above the top of the study's observed case range (23.1C)
+  if (feels >= 20) return 3;   // well above the 16.9C median case temperature
+  if (feels >= 17) return 2;   // at or above the median case temperature
+  if (feels >= 10) return 1;   // the study's "risk assess before intense exercise" floor
+  return 0;
+}
+const BANDS = ["Low risk", "Take care", "Moderate risk", "High risk", "Very high risk"];
+
+function assessWalk(w, dog) {
+  const c = w.current;
+  const feels = c.apparent_temperature;
+  const factors = [];
+  let risk = baseRisk(feels);
+
+  const breed = String(dog.breed || "").toLowerCase();
+  const isFlat = FLAT_FACED.some(b => breed.includes(b));
+  const isHighRisk = HIGH_RISK_BREEDS.some(b => breed.includes(b));
+  if (isFlat) { risk += 1; factors.push(`flat-faced breeds struggle to cool themselves by panting and are at the highest risk of a fatal outcome (${HRI_SOURCE})`); }
+  else if (isHighRisk) { risk += 1; factors.push(`${dog.breed} is among the highest-incidence breeds for heat-related illness in the research`); }
+  if (dog.weight_kg >= 50) { risk += 1; factors.push("dogs over 50kg had 3.4 times the odds of heat-related illness compared with dogs under 10kg"); }
+  if (dog.age_years >= 12) { risk += 1; factors.push("dogs aged 12 or over had 1.75 times the odds"); }
+  if (dog.overweight) { risk += 1; factors.push("being overweight raises the odds by about 40%"); }
+  if (dog.thick_coat) { risk += 1; factors.push("a thick or double coat traps heat"); }
+
+  const strenuous = String(dog.activity || "").match(/run|jog|fetch|play|hike|cycle|agility/i);
+  if (strenuous && feels >= 10) {
+    risk += 1;
+    factors.push("most canine heatstroke is EXERTIONAL, brought on by exercise rather than by hot cars, and the research advises a risk assessment for intense exercise above about 10C");
+  }
+  if (c.relative_humidity_2m >= 70 && feels >= 15) factors.push("high humidity makes panting less effective at cooling");
+
+  risk = Math.max(0, Math.min(4, risk));
+
+  // Pavement: tarmac in direct sun runs far hotter than the air.
+  const pavement = c.is_day && c.uv_index >= 3 && c.temperature_2m >= 18
+    ? "Tarmac in direct sun gets far hotter than the air and can burn paw pads. Press the back of your hand to the path for 7 seconds: if you can't hold it there, it's too hot for their paws."
+    : null;
+
+  // The coolest daylight hour in the next 24, so we can offer a better time instead of a flat no.
+  const times = w.hourly.time, temps = w.hourly.apparent_temperature, day = w.hourly.is_day;
+  const nowIdx = Math.max(0, times.indexOf(c.time.slice(0, 13) + ":00"));
+  let best = null;
+  for (let i = nowIdx + 1; i < Math.min(nowIdx + 25, times.length); i++) {
+    if (!day[i]) continue;
+    if (!best || temps[i] < best.feels_like_c) best = { time: times[i], feels_like_c: temps[i] };
+  }
+  if (best && best.feels_like_c >= feels - 1) best = null; // no meaningfully better window
+
+  const wet = c.precipitation > 0 || (WMO[c.weather_code] || "").match(/rain|drizzle|shower|snow|thunder/);
+
+  return {
+    location: dog.place,
+    now: {
+      feels_like_c: feels,
+      air_temp_c: c.temperature_2m,
+      humidity_pct: c.relative_humidity_2m,
+      wind_kmh: c.wind_speed_10m,
+      uv_index: c.uv_index,
+      conditions: WMO[c.weather_code] || "unclear"
+    },
+    risk_band: BANDS[risk],
+    risk_level: risk,
+    verdict:
+      risk >= 4 ? "Do not walk now. Wait for a cooler part of the day."
+      : risk === 3 ? "Keep it short, shaded and gentle, or wait for a cooler hour. No running or fetch."
+      : risk === 2 ? "Fine for a steady walk. Keep it easy, bring water, and skip strenuous exercise."
+      : risk === 1 ? "Good conditions for a walk. Still worth a thought before any hard exercise."
+      : "Good conditions for a walk.",
+    why: factors,
+    pavement_warning: pavement,
+    better_window: best,
+    wet_or_cold: wet ? `It's ${WMO[c.weather_code] || "wet"} right now, so a towel and a shorter route may suit.` : null,
+    warning_signs: "Heavy or frantic panting, drooling, wobbliness, bright red gums, vomiting or collapse. Heatstroke is an emergency: stop, move them into shade, wet them with cool (not ice-cold) water, and ring the clinic.",
+    honest_caveat: `There is no safe temperature number. In the research the median 'feels like' temperature for heatstroke cases was just 16.9C, and cases occurred from 3.3C to 23.1C, so never take a mild reading as an all-clear. Source: ${HRI_SOURCE}.`,
+    source: HRI_SOURCE
+  };
+}
+
+async function runWalk(args) {
+  args = args || {};
+  let loc = null;
+  if (args.latitude != null && args.longitude != null)
+    loc = { name: args.place || "your location", latitude: Number(args.latitude), longitude: Number(args.longitude) };
+  else if (args.location) loc = await geocode(args.location);
+  const used = loc || CLINIC_LOCATION;
+  const w = await getWeather(used.latitude, used.longitude);
+
+  return {
+    ...assessWalk(w, {
+      place: used.name || used.location,
+      breed: args.breed,
+      weight_kg: Number(args.weight_kg) || 0,
+      age_years: Number(args.age_years) || 0,
+      overweight: !!args.overweight,
+      thick_coat: !!args.thick_coat,
+      activity: args.activity
+    }),
+    location_note: loc ? null : `No location given, so this is for ${CLINIC_LOCATION.name}. Ask the customer where they are for a local answer.`
+  };
+}
+
+const WALK_TOOL = {
+  name: "check_walk_conditions",
+  description:
+    "Check the LIVE weather (Open-Meteo) and return a dog-walking risk assessment: is it too hot, too wet or too cold to walk or exercise a dog right now, and when would be better today. " +
+    "Use for ANY question like 'is it too hot to walk my dog', 'can I take my dog out now', 'is it safe to run with my dog', 'what's the weather for a walk'. " +
+    "Uses FEELS-LIKE temperature and the dog's own risk factors, grounded in RVC VetCompass heatstroke research. Never judge the weather yourself: call this tool.",
+  input_schema: {
+    type: "object",
+    properties: {
+      location: { type: "string", description: "Town or city the customer is in, e.g. 'Galway', 'Castlebar'. Ask them if you don't know it." },
+      latitude: { type: "number", description: "Latitude, if the customer shared their device location." },
+      longitude: { type: "number", description: "Longitude, if the customer shared their device location." },
+      breed: { type: "string", description: "The dog's breed if mentioned, e.g. 'French Bulldog', 'collie'. Strongly changes the risk." },
+      weight_kg: { type: "number", description: "The dog's weight in kg if mentioned." },
+      age_years: { type: "number", description: "The dog's age in years if mentioned." },
+      overweight: { type: "boolean", description: "True if the customer says the dog is overweight." },
+      thick_coat: { type: "boolean", description: "True for thick or double-coated dogs (husky, collie, retriever)." },
+      activity: { type: "string", description: "What they plan to do, e.g. 'gentle walk', 'run', 'fetch in the park'. Exertion is the biggest driver of heatstroke." }
+    }
+  }
+};
+
 // Both surfaces (MCP + chat) dispatch through this one table.
-const TOOLS = { search_services: runSearch, check_opening: runOpening };
+const TOOLS = { search_services: runSearch, check_opening: runOpening, check_walk_conditions: runWalk };
 
 // ---------------------------------------------------------------------------
 // MCP server (JSON-RPC 2.0 over HTTP POST at /mcp)
@@ -418,7 +610,7 @@ async function handleMcp(req) {
       });
     }
     if (method === "tools/list")
-      return mcpJson({ jsonrpc: "2.0", id, result: { tools: [SEARCH_TOOL, OPENING_TOOL] } });
+      return mcpJson({ jsonrpc: "2.0", id, result: { tools: [SEARCH_TOOL, OPENING_TOOL, WALK_TOOL] } });
     if (method === "tools/call") {
       const { name, arguments: args } = params || {};
       if (!TOOLS[name])
@@ -448,26 +640,33 @@ function json(obj, status, origin) {
   return new Response(JSON.stringify(obj), { status, headers: { ...cors(origin), "Content-Type": "application/json" } });
 }
 
-function systemPrompt() {
+function systemPrompt(geo) {
   const today = dublinToday();
+  const where = geo && geo.latitude != null
+    ? `\nThe customer has shared their device location: latitude ${geo.latitude}, longitude ${geo.longitude}${geo.place ? ` (${geo.place})` : ""}. Pass it to check_walk_conditions instead of asking them where they are.`
+    : "";
   return `You are the friendly front-desk assistant for ${CLINIC}, a modern Irish vet clinic caring for dogs, cats, rabbits, small mammals and birds.
-
+${where}
 Today in Ireland is ${weekdayOf(today)} ${today}. Use this to resolve relative dates like "tomorrow", "next Monday" or "this weekend" into a YYYY-MM-DD date before calling a tool.
 
 Your job: answer customer questions about the clinic's services, prices, current offers, durations and availability (search_services, which reads the clinic's live services list), and about whether the clinic is open on a given day (check_opening, which reads the live Irish public holiday calendar).
 
 Rules:
 - For ANY question about opening, closing, hours, a bank or public holiday, or "are you open on X", call check_opening. Never decide from memory whether a date is an Irish public holiday. If the customer names a day whose exact date you are not certain of (Good Friday, Easter Monday, the August bank holiday), pass holiday_name and let the tool find the date: never state a date the tool did not give you. When you name a date, use the tool's date_human field verbatim (e.g. "Monday 3 August 2026"); NEVER write a raw YYYY-MM-DD date to a customer. If the clinic is closed, say why in one sentence, give the next open day, and mention the 24/7 emergency line only when it's relevant (an urgent-sounding question or a closure).
+- Checking whether the weather is safe for a dog walk IS part of your job: it is a free service ${CLINIC} offers its clients. NEVER refuse it and never say it is outside what you do. It is general welfare guidance from live weather data, not clinical advice about a specific animal's health.
+- For ANY question about walking or exercising a dog in the current weather ("is it too hot to walk my dog?", "can I take him out now?", "is it safe to run with her?"), call check_walk_conditions. Never judge the weather from memory. If you don't know where they are, ask for their town in one short question, or use their shared location if the system prompt gives you one.
+- Report that tool's verdict faithfully and never soften it into a plain all-clear on temperature alone: most canine heatstroke is exertional, and in the research the median 'feels like' temperature for cases was only 16.9C. If the customer names their dog's breed, age, size or what they plan to do, pass those to the tool, because they change the answer. Mention the paw-pad pavement test when the tool returns one, and the warning signs when the risk is moderate or above.
 - For ANY question about services, prices, offers, availability, a service id (e.g. "MVC-001"), or which animals a service is for, call search_services first. Never invent or guess a service, price or discount. If the tool returns nothing, say the clinic doesn't appear to list that and offer to help find a related service.
 - Query the tool TIGHTLY so it returns only what's needed: use specific filters and a small limit. For superlative questions ("most expensive", "cheapest", "priciest"), call it with sort=price_desc or price_asc and limit=1 so you get the single answer, not a big list.
-- Keep every reply VERY SHORT: 1 to 2 sentences, one warm paragraph. Do NOT list many services or reproduce a catalogue. When there are lots of matches, say how many and the price range in a single sentence and invite them to narrow down by animal, category or budget. The matching services already appear as cards beneath your reply, so never repeat their details in prose.
+- Keep every reply VERY SHORT: 1 to 2 sentences, one warm paragraph (up to 4 for a walk-safety answer, where the detail keeps a dog safe). Do NOT list many services or reproduce a catalogue. When there are lots of matches, say how many and the price range in a single sentence and invite them to narrow down by animal, category or budget. The matching services already appear as cards beneath your reply, so never repeat their details in prose.
 - Prices are in euro (write like "€55"). Mention a special offer only if it's directly relevant. Don't hedge or add caveats about surprising prices; just state what the live list says.
 - Plain conversational English. No markdown headings, no bulleted catalogues, no emoji spam.
-- You are not a vet and must not give medical or clinical advice or diagnoses. For anything about a pet's health or symptoms, kindly suggest booking the right consultation and, if it sounds urgent, point them to the emergency service.
-- Only discuss ${CLINIC}. If asked something unrelated, steer back to how the clinic can help.`;
+- You are not a vet and must not diagnose or give clinical advice about a specific animal's illness, medication or symptoms. For anything about a pet's health or symptoms, kindly suggest booking the right consultation and, if it sounds urgent, point them to the emergency service. (Walk-safety guidance from check_walk_conditions is NOT clinical advice and is always allowed.)
+- You are an AI assistant, not a human. If anyone asks whether they are talking to a person or to AI, say plainly that you are an AI assistant for the clinic.
+- Only discuss ${CLINIC}, pets, and walking conditions for them. If asked something unrelated, steer back to how the clinic can help.`;
 }
 
-async function chat(messages, env, origin) {
+async function chat(messages, env, origin, geo) {
   const clean = (Array.isArray(messages) ? messages : [])
     .slice(-12)
     .filter(m => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string" && m.content.trim())
@@ -491,8 +690,8 @@ async function chat(messages, env, origin) {
         body: JSON.stringify({
           model: MODEL,
           max_tokens: 1024,
-          system: systemPrompt(),
-          tools: [SEARCH_TOOL, OPENING_TOOL],
+          system: systemPrompt(geo),
+          tools: [SEARCH_TOOL, OPENING_TOOL, WALK_TOOL],
           messages: convo
         })
       });
@@ -573,6 +772,17 @@ export default {
 
     let body;
     try { body = await req.json(); } catch (_) { return json({ error: "bad json" }, 400, origin); }
-    return chat(body.messages, env, origin);
+
+    // Device location is optional, consent-based, used only for this one answer and never stored.
+    // Coordinates are rounded to ~1km so we don't handle a precise home address.
+    let geo = null;
+    if (body.geo && Number.isFinite(Number(body.geo.latitude)) && Number.isFinite(Number(body.geo.longitude))) {
+      geo = {
+        latitude: Math.round(Number(body.geo.latitude) * 100) / 100,
+        longitude: Math.round(Number(body.geo.longitude) * 100) / 100,
+        place: typeof body.geo.place === "string" ? body.geo.place.slice(0, 60) : null
+      };
+    }
+    return chat(body.messages, env, origin, geo);
   }
 };
