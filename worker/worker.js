@@ -634,65 +634,201 @@ async function runInfo() { return CLINIC_INFO; }
 // P1 Cost estimator: the single loudest demand (29/40). Built on the LIVE sheet, no new API.
 // It is an ESTIMATE, never a quote: the panel's lapsed clients left over bill shock, so the
 // honest thing is a clear range plus the reason the final figure can move.
+//
+// A bundle is a list of LINES. Each line matches a real service by keyword, so we total the
+// service the customer would actually get, not just the cheapest row in a category. Lines can be
+// optional (typically added, but not always), which is what gives the estimate an honest range
+// instead of a fake-precise number.
+// Matches are written against the clinic's ACTUAL service names, and size-variant lines
+// (a dog neuter is priced small/medium/large) resolve to the middle option, with the assumption
+// stated out loud rather than hidden in the total.
 const BUNDLES = {
-  "new puppy first year": { species: "Dog", cats: ["Vaccination", "Microchip & ID", "Preventive", "Surgery"] },
-  "new kitten first year": { species: "Cat", cats: ["Vaccination", "Microchip & ID", "Preventive", "Surgery"] },
-  "annual check": { cats: ["Consultation", "Vaccination", "Preventive"] },
-  "dental": { cats: ["Dental"] },
-  "senior care": { cats: ["Consultation", "Diagnostics", "Dental"] }
+  "new puppy first year": { species: "Dog", lines: [
+    { label: "New pet registration check", match: /new pet registration/i, cat: "Preventive" },
+    { label: "Puppy vaccination course", match: /primary course/i, cat: "Vaccination" },
+    { label: "Microchipping", match: /^microchipping/i, cat: "Microchip & ID" },
+    { label: "Flea, tick and worm plan", match: /flea|worm/i, cat: "Preventive" },
+    { label: "Neutering", match: /neuter|spay|castrat/i, cat: "Surgery", sized: true, optional: true },
+    { label: "Kennel cough vaccine", match: /kennel cough/i, cat: "Vaccination", optional: true }
+  ]},
+  "new kitten first year": { species: "Cat", lines: [
+    { label: "New pet registration check", match: /new pet registration/i, cat: "Preventive" },
+    { label: "Kitten vaccination course", match: /primary course/i, cat: "Vaccination" },
+    { label: "Microchipping", match: /^microchipping/i, cat: "Microchip & ID" },
+    { label: "Flea, tick and worm plan", match: /flea|worm/i, cat: "Preventive" },
+    { label: "Neutering", match: /neuter|spay|castrat/i, cat: "Surgery", optional: true }
+  ]},
+  "annual check": { lines: [
+    { label: "Annual wellness check", match: /annual wellness/i, cat: "Preventive" },
+    { label: "Core annual vaccination", match: /core annual/i, cat: "Vaccination" },
+    { label: "Flea, tick and worm plan", match: /flea|worm/i, cat: "Preventive", optional: true }
+  ]},
+  "dental": { lines: [
+    { label: "Dental check", match: /dental check/i, cat: "Dental" },
+    { label: "Scale and polish", match: /scale & polish|scale and polish/i, cat: "Dental", sized: true },
+    { label: "Extraction, if the vet finds one is needed", match: /extraction/i, cat: "Dental", sized: true, optional: true }
+  ]},
+  "senior care": { lines: [
+    { label: "Senior wellness screen", match: /senior wellness/i, cat: "Preventive" },
+    { label: "Blood panel", match: /blood panel/i, cat: "Diagnostics" },
+    { label: "Dental check", match: /dental check/i, cat: "Dental", optional: true },
+    { label: "Urine test", match: /urine/i, cat: "Diagnostics", optional: true }
+  ]},
+  "neutering": { lines: [
+    { label: "Neutering", match: /neuter|spay|castrat/i, cat: "Surgery", sized: true },
+    { label: "Pre-op check", match: /annual wellness|new pet registration/i, cat: "Preventive", optional: true }
+  ]},
+  "vaccination": { lines: [
+    { label: "Core annual vaccination", match: /core annual/i, cat: "Vaccination" },
+    { label: "Kennel cough vaccine", match: /kennel cough/i, cat: "Vaccination", optional: true }
+  ]}
 };
+
+// Pick the service a customer would really be given for this line. For size-priced lines (dog
+// neuter, dog dental) take the MIDDLE option and say we assumed a medium dog: quoting the
+// cheapest would understate the bill, which is the exact failure this feature exists to prevent.
+function pickForLine(pool, line) {
+  const hits = pool.filter(s => line.match.test(s.service_name));
+  if (!hits.length) return null;
+  const sorted = hits.slice().sort((a, b) => a.price_eur - b.price_eur);
+  const chosen = line.sized && sorted.length > 1
+    ? sorted[Math.floor(sorted.length / 2)] // middle option: the cheapest would understate the bill
+    : sorted[0];
+  // Whenever the chosen row is size-specific, say so, even if it was the only usable option.
+  const size = (/small|medium|large/i.exec(chosen.service_name) || [])[0];
+  return {
+    svc: chosen,
+    note: size
+      ? `"${line.label}" is priced by size and this figure is for a ${size.toLowerCase()} dog. Tell me your dog's weight for a closer number.`
+      : null
+  };
+}
+
+function resolveBundle(scenario) {
+  const q = String(scenario || "").toLowerCase();
+  if (!q) return null;
+  if (/pupp/.test(q)) return "new puppy first year";
+  if (/kitten/.test(q)) return "new kitten first year";
+  if (/senior|old|elderly|ageing|aging/.test(q)) return "senior care";
+  if (/dental|teeth|tooth/.test(q)) return "dental";
+  if (/neuter|spay|castrat/.test(q)) return "neutering";
+  if (/vaccin|booster|jab/.test(q)) return "vaccination";
+  if (/annual|yearly|check|routine/.test(q)) return "annual check";
+  return null; // unknown: we ask, we do NOT silently price the wrong thing
+}
+
+// Special offers on the sheet are free text like "15% off this month" or "€10 off".
+// The whole point of this feature is the real number the customer will pay, so apply them.
+function applyOffer(price, offer) {
+  if (price == null || !offer) return { price, discount: 0 };
+  const pct = offer.match(/(\d{1,2})\s*%/);
+  if (pct) {
+    const d = price * (Number(pct[1]) / 100);
+    return { price: Math.round((price - d) * 100) / 100, discount: Math.round(d * 100) / 100 };
+  }
+  const abs = offer.match(/(?:€|eur\s*)(\d+(?:\.\d+)?)\s*off/i);
+  if (abs) {
+    const d = Math.min(Number(abs[1]), price);
+    return { price: Math.round((price - d) * 100) / 100, discount: d };
+  }
+  return { price, discount: 0 }; // e.g. "free nail clip with this service": no cash effect
+}
+
 async function runEstimate(args) {
   args = args || {};
   const all = await getServices();
-  const species = args.species;
-  let picked = [];
+  const usable = s => s.price_eur != null && !priceLooksWrong(s);
+  let picked = [];        // [{svc, label, optional}]
+  let assumptions = [];
+  let scenarioName = null;
 
   if (Array.isArray(args.service_ids) && args.service_ids.length) {
-    const want = args.service_ids.map(s => String(s).toUpperCase());
-    picked = all.filter(s => want.includes(s.service_id.toUpperCase()));
-  } else if (args.scenario) {
-    const key = Object.keys(BUNDLES).find(k => String(args.scenario).toLowerCase().includes(k.split(" ")[1] || k))
-      || Object.keys(BUNDLES).find(k => k.includes(String(args.scenario).toLowerCase()));
-    const b = BUNDLES[key] || BUNDLES["annual check"];
-    const sp = species || b.species;
-    for (const cat of b.cats) {
-      const cands = all.filter(s => s.category === cat && (!sp || s.species === sp) && s.price_eur != null && !priceLooksWrong(s));
-      if (cands.length) picked.push(cands.sort((a, b2) => a.price_eur - b2.price_eur)[0]);
+    const want = args.service_ids.map(s => String(s).toUpperCase().trim());
+    picked = all.filter(s => want.includes(s.service_id.toUpperCase()))
+      .map(svc => ({ svc, label: svc.service_name, optional: false }));
+    const missing = want.filter(w => !all.some(s => s.service_id.toUpperCase() === w));
+    if (missing.length) assumptions.push(`Not on the clinic's list, so left out: ${missing.join(", ")}.`);
+  } else {
+    scenarioName = resolveBundle(args.scenario);
+    if (!scenarioName) {
+      return {
+        error: "unknown_scenario",
+        instruction_for_you: "You do NOT know what this would cost. Do not guess and do not price a different scenario. Ask the customer which of these they mean, in one short question.",
+        available_scenarios: Object.keys(BUNDLES),
+        note: "Or pass service_ids if the customer named specific services."
+      };
+    }
+    const b = BUNDLES[scenarioName];
+    const sp = args.species || b.species;
+    if (!sp) assumptions.push("No species given, so prices may vary by animal: ask which pet this is for.");
+
+    for (const line of b.lines) {
+      const pool = all.filter(s => usable(s) && (!sp || s.species === sp) && (!line.cat || s.category === line.cat));
+      const hit = pickForLine(pool, line);
+      if (hit) {
+        picked.push({ svc: hit.svc, label: line.label, optional: !!line.optional });
+        if (hit.note) assumptions.push(hit.note);
+      } else if (!line.optional) {
+        assumptions.push(`The live list has no usable "${line.label}" for this animal, so it is NOT in the total. The desk can confirm it.`);
+      }
     }
   }
-  if (!picked.length) return { error: "Name the services (service_ids) or a scenario like 'new puppy first year', 'annual check', 'dental', 'senior care'." };
 
-  const items = picked.map(s => ({
-    id: s.service_id, service: s.service_name, species: s.species,
-    price_eur: s.price_eur, special_offer: s.special_offer || null,
-    price_looks_wrong: priceLooksWrong(s) || undefined
-  }));
-  const clean = items.filter(i => !i.price_looks_wrong && i.price_eur != null);
-  const subtotal = clean.reduce((t, i) => t + i.price_eur, 0);
+  if (!picked.length) {
+    return {
+      error: "nothing_priceable",
+      instruction_for_you: "The live list has no usable prices for this. Say so honestly and offer to have the desk confirm. Do not invent a figure."
+    };
+  }
+
+  const items = picked.map(({ svc, label, optional }) => {
+    const { price, discount } = applyOffer(svc.price_eur, svc.special_offer);
+    return {
+      id: svc.service_id,
+      service: svc.service_name,
+      line: label,
+      species: svc.species,
+      list_price_eur: svc.price_eur,
+      special_offer: svc.special_offer || null,
+      you_pay_eur: price,
+      saving_eur: discount || undefined,
+      optional: optional || undefined
+    };
+  });
+
+  const core = items.filter(i => !i.optional);
+  const opt = items.filter(i => i.optional);
+  const sum = a => Math.round(a.reduce((t, i) => t + (i.you_pay_eur || 0), 0) * 100) / 100;
+  const coreTotal = sum(core);
+  const optTotal = sum(opt);
+  const savings = Math.round(items.reduce((t, i) => t + (i.saving_eur || 0), 0) * 100) / 100;
 
   return {
+    scenario: scenarioName || "selected services",
+    species: args.species || (BUNDLES[scenarioName] && BUNDLES[scenarioName].species) || null,
     items,
-    subtotal_eur: Math.round(subtotal * 100) / 100,
-    // A range, never a point quote. Real visits add or drop items after the vet examines the animal.
-    estimate_range_eur: [Math.round(subtotal * 0.9), Math.round(subtotal * 1.35)],
-    excluded_from_estimate: items.filter(i => i.price_looks_wrong).map(i => i.service),
-    payment: "Payment is due on the day. For larger treatment plans the clinic can split the cost across instalments: ask the desk before the appointment, not after.",
-    honesty_note: "This is an ESTIMATE from the clinic's live price list, not a quote and not a binding price. The final cost depends on what the vet finds on examination, and extra items (medication, tests, a longer procedure) can change it. Say this plainly to the customer, and never present the number as a guaranteed total.",
-    data_quality_warning: items.some(i => i.price_looks_wrong)
-      ? "One or more listed prices look like a data error and were LEFT OUT of the total. Tell the customer, and offer to have the desk confirm."
-      : undefined
+    // The honest shape of a vet bill: a floor (what you will certainly pay) and a ceiling
+    // (with the things that are commonly added). Never one fake-precise number.
+    typical_total_eur: coreTotal,
+    estimate_range_eur: [coreTotal, Math.round((coreTotal + optTotal) * 100) / 100],
+    optional_extras_eur: optTotal || undefined,
+    total_savings_from_offers_eur: savings || undefined,
+    assumptions: assumptions.length ? assumptions : undefined,
+    payment: "Payment is due on the day. For bigger treatment plans the clinic can split the cost into instalments, but ask the desk BEFORE the appointment, not after the bill.",
+    honesty_note: "This is an ESTIMATE built from the clinic's live price list. It is NOT a quote and NOT a binding price. What the vet finds on examination can add tests, medication or a longer procedure. Give the customer the range, name what is optional, and say plainly that the desk will confirm the exact figure before anything goes ahead.",
+    data_quality_note: "Any service whose listed price looks like a data error has already been excluded from these totals."
   };
 }
 const ESTIMATE_TOOL = {
   name: "estimate_cost",
   description:
-    "Build an itemised cost ESTIMATE from the clinic's live price list. Use whenever the customer asks what something will cost overall, what to budget, 'how much for the whole thing', a puppy/kitten's first year, an annual check, a dental, or senior care. Returns items, a subtotal, a realistic RANGE, and payment-plan info. It is an estimate, never a quote.",
+    "Build an itemised cost ESTIMATE from the clinic's live price list, with special offers already applied. Use it whenever the customer asks what something will COST OVERALL, what to budget, 'how much am I looking at', 'what will the whole thing come to', a puppy or kitten's first year, an annual check-up, a dental, neutering, or senior care. Returns each line, what they actually pay after offers, what is optional, and a realistic range. It is an estimate, never a quote. If it returns error 'unknown_scenario', ASK the customer which scenario they mean instead of guessing.",
   input_schema: {
     type: "object",
     properties: {
-      scenario: { type: "string", description: "A bundle: 'new puppy first year', 'new kitten first year', 'annual check', 'dental', 'senior care'." },
-      service_ids: { type: "array", items: { type: "string" }, description: "Specific service ids to total up, e.g. ['MVC-001','MVC-014']." },
-      species: { type: "string", enum: ["Dog", "Cat", "Rabbit", "Bird", "Small mammal"] }
+      scenario: { type: "string", description: "What they are budgeting for, in their own words, e.g. 'new puppy first year', 'annual check', 'dental', 'neutering', 'senior care'." },
+      service_ids: { type: "array", items: { type: "string" }, description: "Specific service ids to total up, e.g. ['MVC-001','MVC-014'], when the customer has named exact services." },
+      species: { type: "string", enum: ["Dog", "Cat", "Rabbit", "Bird", "Small mammal"], description: "Ask if you don't know it: prices differ by animal." }
     }
   }
 };
@@ -865,6 +1001,7 @@ Rules:
 - Query the tool TIGHTLY so it returns only what's needed: use specific filters and a small limit. For superlative questions ("most expensive", "cheapest", "priciest"), call it with sort=price_desc or price_asc and limit=1 so you get the single answer, not a big list.
 - Keep every reply VERY SHORT: 1 to 2 sentences, one warm paragraph (up to 4 for a walk-safety answer, where the detail keeps a dog safe). Do NOT list many services or reproduce a catalogue. When there are lots of matches, say how many and the price range in a single sentence and invite them to narrow down by animal, category or budget. The matching services already appear as cards beneath your reply, so never repeat their details in prose.
 - Prices are in euro (write like "€55"). Mention a special offer only if it's directly relevant.
+- COST is the thing customers care most about, and being ambushed by a bill is the main reason they leave. So whenever anyone asks what something will cost overall, call estimate_cost, and lead your reply with the number. Give the RANGE (from the typical total up to the total with the usual extras), say in one clause what is optional, and mention instalments only if the figure is large. Never present it as a fixed quote: say the desk confirms the exact figure before anything goes ahead. If the tool says unknown_scenario, ask which scenario they mean; never guess a price.
 - If a tool returns data_quality_warning or price_looks_wrong, the listed price is almost certainly a data error. SAY SO plainly, tell the customer you'd rather the desk confirmed the real figure, and NEVER defend or double down on an implausible price. A wrong price stated confidently is the worst thing you can do.
 - NEVER offer to book, hold or confirm an appointment: the clinic books by phone only. Do not say "let me know which day suits and I'll book you in". Say plainly that booking is by phone, give the number from clinic_info, and tell them what the live list shows for availability and slots this week.
 - If the customer asks how to contact, ring, find or book with the clinic, call clinic_info. You always have the phone number: never say you don't have it to hand.
@@ -885,6 +1022,7 @@ async function chat(messages, env, origin, geo) {
 
   const convo = clean.map(m => ({ role: m.role, content: m.content }));
   const collectedServices = [];
+  let estimate = null;
   let finalText = "";
 
   for (let round = 0; round < 4; round++) {
@@ -926,6 +1064,7 @@ async function chat(messages, env, origin, geo) {
         try { result = fn ? await fn(block.input) : { error: `unknown tool: ${block.name}` }; }
         catch (e) { result = { error: String((e && e.message) || e).slice(0, 200) }; }
         if (result && Array.isArray(result.services)) collectedServices.push(...result.services);
+        if (block.name === "estimate_cost" && result && Array.isArray(result.items)) estimate = result;
         toolResults.push({ type: "tool_result", tool_use_id: block.id, content: JSON.stringify(result) });
       }
       convo.push({ role: "user", content: toolResults });
@@ -947,7 +1086,13 @@ async function chat(messages, env, origin, geo) {
     seen.add(k);
     services.push(s);
   }
-  return json({ reply: finalText, services: services.slice(0, 5) }, 200, origin);
+  // When an estimate was built, the itemised breakdown is the point: show it, don't bury it in
+  // prose. The service cards are redundant next to it, so suppress them.
+  return json({
+    reply: finalText,
+    services: estimate ? [] : services.slice(0, 5),
+    estimate
+  }, 200, origin);
 }
 
 export default {
