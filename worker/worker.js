@@ -180,6 +180,14 @@ function dublinToday() {
 }
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 function weekdayOf(iso) { return WEEKDAYS[new Date(`${iso}T12:00:00Z`).getUTCDay()]; }
+
+// Pre-formatted, human-readable date ("Monday 3 August 2026"). Returned alongside every ISO
+// date so the model never has to reformat one, and so it can never read a raw ISO date aloud.
+function human(iso) {
+  return new Intl.DateTimeFormat("en-IE", {
+    timeZone: "UTC", weekday: "long", day: "numeric", month: "long", year: "numeric"
+  }).format(new Date(`${iso}T12:00:00Z`));
+}
 function addDays(iso, n) {
   const d = new Date(`${iso}T12:00:00Z`);
   d.setUTCDate(d.getUTCDate() + n);
@@ -202,6 +210,7 @@ async function describeDay(iso) {
   const open = !holiday && !!hours;
   return {
     date: iso,
+    date_human: human(iso), // say this to the customer, never the ISO date
     weekday,
     is_public_holiday: !!holiday,
     holiday_name: holiday ? holiday.name : null,
@@ -253,17 +262,18 @@ async function runOpening(args) {
   let next_open = null;
   for (let i = 1; i <= 14; i++) {
     const d = await describeDay(addDays(iso, i));
-    if (d.open) { next_open = { date: d.date, weekday: d.weekday, hours: d.hours }; break; }
+    if (d.open) { next_open = { date: d.date, date_human: d.date_human, weekday: d.weekday, hours: d.hours }; break; }
   }
 
   // Upcoming public holidays (this year and next), so "when are you next closed?" works.
   const thisYear = Number(today.slice(0, 4));
   const all = [...await getHolidays(thisYear), ...await getHolidays(thisYear + 1)];
   const upcoming = all.filter(h => h.date >= today).slice(0, 5)
-    .map(h => ({ date: h.date, weekday: weekdayOf(h.date), name: h.name }));
+    .map(h => ({ date: h.date, date_human: human(h.date), name: h.name }));
 
   return {
     today,
+    today_human: human(today),
     asked_about: iso,
     ...day,
     next_open_day: next_open,
@@ -447,7 +457,7 @@ Today in Ireland is ${weekdayOf(today)} ${today}. Use this to resolve relative d
 Your job: answer customer questions about the clinic's services, prices, current offers, durations and availability (search_services, which reads the clinic's live services list), and about whether the clinic is open on a given day (check_opening, which reads the live Irish public holiday calendar).
 
 Rules:
-- For ANY question about opening, closing, hours, a bank or public holiday, or "are you open on X", call check_opening. Never decide from memory whether a date is an Irish public holiday. If the customer names a day whose exact date you are not certain of (Good Friday, Easter Monday, the August bank holiday), pass holiday_name and let the tool find the date: never state a date the tool did not give you. Keep the weekday and date the tool returns, but write them the human way ("Monday 3 August"), never as a raw YYYY-MM-DD string. If the clinic is closed, say why in one sentence, give the next open day, and mention the 24/7 emergency line only when it's relevant (an urgent-sounding question or a closure).
+- For ANY question about opening, closing, hours, a bank or public holiday, or "are you open on X", call check_opening. Never decide from memory whether a date is an Irish public holiday. If the customer names a day whose exact date you are not certain of (Good Friday, Easter Monday, the August bank holiday), pass holiday_name and let the tool find the date: never state a date the tool did not give you. When you name a date, use the tool's date_human field verbatim (e.g. "Monday 3 August 2026"); NEVER write a raw YYYY-MM-DD date to a customer. If the clinic is closed, say why in one sentence, give the next open day, and mention the 24/7 emergency line only when it's relevant (an urgent-sounding question or a closure).
 - For ANY question about services, prices, offers, availability, a service id (e.g. "MVC-001"), or which animals a service is for, call search_services first. Never invent or guess a service, price or discount. If the tool returns nothing, say the clinic doesn't appear to list that and offer to help find a related service.
 - Query the tool TIGHTLY so it returns only what's needed: use specific filters and a small limit. For superlative questions ("most expensive", "cheapest", "priciest"), call it with sort=price_desc or price_asc and limit=1 so you get the single answer, not a big list.
 - Keep every reply VERY SHORT: 1 to 2 sentences, one warm paragraph. Do NOT list many services or reproduce a catalogue. When there are lots of matches, say how many and the price range in a single sentence and invite them to narrow down by animal, category or budget. The matching services already appear as cards beneath your reply, so never repeat their details in prose.
