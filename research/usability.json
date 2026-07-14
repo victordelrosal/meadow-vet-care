@@ -1,0 +1,299 @@
+[
+ {
+  "client_id": "MVC-C079",
+  "transcript_summary": "60-something Rathgar client with a 9.5yo senior domestic shorthair cat (Whiskers), 8 visits in 2 years including a dental extraction in April 2026, prior satisfaction only 3/5, normally prefers phone as a channel. Asked the bot: (1) whether red gums post-extraction were a worry, (2) to book Thursday afternoon, (3) for a repeat prescription of pain relief sent to the house, (4) what's needed to travel to France with the cat in September, (5) for an SMS/call reminder the day before an appointment.",
+  "friction": [
+   "Bot cannot book appointments at all, only points to the right service and says to call or book with the clinic - for a phone-preferring client this means the chatbot is a dead end that just sends you back to the phone anyway.",
+   "Bot cannot issue repeat prescriptions (correctly refuses on safety grounds) but offers no faster or urgent path beyond a generic 'book a consultation' suggestion.",
+   "Cannot set reminders/texts/calls itself and has no integration with any reminder system; just says to ask the front desk when you eventually call or visit.",
+   "Travel query returned 5 service cards when I only have one cat: duplicate 'Pet passport & travel cert' cards for both Dog and Cat, and three duplicate 'Microchipping' cards for Dog, Cat, and Rabbit - cluttered, made me scan past irrelevant rows to find the one price that applied to me.",
+   "No urgency triage: red gums 3 months after a dental extraction was treated with the same flat tone as a routine booking or travel question, rather than being flagged as something to get seen sooner."
+  ],
+  "wrong_or_odd_answers": [
+   "I'm not able to make bookings directly through this chat, but I can point you to the right service so you can call or book with the clinic.",
+   "I can't issue or send prescriptions -- that needs a vet to review Whiskers directly, especially with her gums looking red again. I'd suggest booking a consultation so they can check her over and sort the repeat prescription at the same time; want me to pull up the consultation options and prices?",
+   "I'm sorry, I can't send texts or calls myself -- that's not something I'm able to do from here. When you book your appointment with the clinic (by phone or in person), it's worth asking the front desk directly if they can set up an SMS reminder for you.",
+   "Travel answer returned a card list mixing species: 'MVC-037 Pet passport & travel cert ... Dog', 'MVC-038 Pet passport & travel cert ... Cat', 'MVC-034 Microchipping ... Dog', 'MVC-035 Microchipping ... Cat', 'MVC-036 Microchipping ... Rabbit' -- five cards for a single-cat owner's question."
+  ],
+  "missing_abilities": [
+   "Actual appointment booking or even a slot-hold/callback request the bot can hand off to a human",
+   "Repeat prescription workflow (flagging for vet review + pharmacy dispatch) rather than a flat refusal",
+   "SMS/phone/calendar reminder integration - especially important given this client explicitly prefers phone and doesn't check email",
+   "Species-aware filtering of service cards so a cat owner isn't shown dog/rabbit variants of the same service",
+   "Any symptom urgency triage (e.g. distinguishing 'red gums post-dental, worth a same-week look' from routine queries)"
+  ],
+  "tone_notes": "Polite and consistent, but samey: nearly every reply ends with a soft upsell push ('would you like me to pull up pricing/options?'). As a 60+ client with only medium tech comfort tolerance and a stated phone preference, I found it competent but impersonal - it reads like an FAQ bot wearing a friendly voice, not something that actually does anything for me. Given my prior satisfaction was already a 3/5, this didn't move the needle; it confirmed I'll keep phoning the clinic directly for anything that matters.",
+  "would_use_again": false
+ },
+ {
+  "client_id": "MVC-C235",
+  "transcript_summary": "Budget-stretched Donnybrook owner of a 10yo rescue crossbreed dog asked, in order: (1) rough price for a general checkup given the dog's new stiffness, (2) to book a Tuesday-after-4pm slot, (3) whether a sore red belly patch could wait until the checkup, (4) for a no-consult repeat of last year's arthritis tablets plus a text reminder before Tuesday, and (5) what's needed and roughly what it costs to bring the dog to France with her sister in September, given the dog already has a travel rabies shot. The bot quoted the general consult at \"\u20ac5.50\" (a data/rendering bug: price_eur:550 should almost certainly be \u20ac55.00, not \u20ac5.50 for a 25-minute consult) and, when the client flagged it as suspiciously cheap, doubled down twice insisting it was \"the real price... no catch.\" It correctly refused to judge the rash or authorise a medication repeat without a vet, correctly said it can't text reminders or book directly (routing to phone, which matches this client's stated channel preference), and gave a solid, price-anchored answer on the France pet passport/microchip requirement (\u20ac95 passport/cert + \u20ac30 microchip).",
+  "friction": [
+   "Had to resend the full message history by hand on every turn (expected for a raw API test, but shows a real client would need an app wrapper, not this endpoint directly).",
+   "Bot cannot book appointments, cannot send text/SMS reminders, and cannot arrange a prescription repeat -- all three deflect to 'ring the clinic' or 'ask the front desk.' Tolerable for this phone-preference client, but three separate capability walls in one short chat undercuts the value of chatting with a bot at all.",
+   "The general consultation card showed slots_this_week: 0 at the exact moment the bot was telling her to book it 'as soon as you can' -- the bot never surfaced or reconciled that contradiction."
+  ],
+  "wrong_or_odd_answers": [
+   "A general consultation is \u20ac5.50 right now (there's a 15% off this month applied), which is a nice affordable option.",
+   "Ha, I know it looks tiny, but that's the real price shown with this month's 15% off \u2014 \u20ac5.50 for a 25-minute general consultation, no catch.",
+   "I can't take the booking directly here, so give the clinic a ring or drop by to lock in your preferred time"
+  ],
+  "missing_abilities": [
+   "Cannot actually book/hold an appointment slot through the chat (always redirects to phone/front desk)",
+   "Cannot set or send a reminder (SMS/text/email) for an upcoming appointment",
+   "Cannot process or authorise a repeat prescription, even a routine one, and has no way to flag it to a vet for async sign-off",
+   "No sanity-check on its own price data -- confidently defended an implausible \u20ac5.50 consult fee instead of flagging it as possibly wrong"
+  ],
+  "tone_notes": "Warm, plain-spoken, appropriately cautious on clinical questions (rash, medication) without being preachy, and correctly nudges urgency on the sore patch. Slightly overconfident tone when defending the \u20ac5.50 price -- reassuring language (\"no catch\") used to back an almost-certainly-wrong number, which is worse than just being wrong, because it actively talked the price-sensitive client out of her correct instinct that something was off.",
+  "would_use_again": true
+ },
+ {
+  "client_id": "MVC-C317",
+  "transcript_summary": "Persona: Ranelagh couple, medium tech comfort, medium budget sensitivity, walk-in preference, owner of Winston, a 12.5yo British Shorthair cat with prior satisfaction 3/5 and a recent dental extraction. Sent 6 messages: (1) worry about the cat being off his food post-extraction, (2) request to book a Tuesday follow-up, (3) concern about a red bald patch behind the ear and whether it can wait, (4) request to refill Metacam pain relief without another visit, (5) price check on a senior wellness bloodwork panel, (6) asked the bot to sort a pet passport/rabies paperwork for a France trip. The bot consistently refused clinical diagnosis and refused to book/refill directly, redirecting to phone or the booking line, and correctly flagged escalation to the emergency line for the food/skin combo. Pricing and service lookups (senior wellness screen, blood panel, pet passport) worked well and returned relevant, well-priced service cards.",
+  "friction": [
+   "Can never actually book an appointment or refill a prescription in-chat; every real task gets punted to 'call the clinic' or 'use our booking line', which is friction for a walk-in-preference client who wanted this handled in one place.",
+   "No memory of Winston across the session in the pet-passport reply (it mislabels the passport service as dog-only despite already knowing Winston is a cat from the conversation)."
+  ],
+  "wrong_or_odd_answers": [
+   "We offer a Pet Passport & Travel Cert appointment for dogs (\u20ac95, about 40 minutes, Mon-Fri by appointment)... -- said 'for dogs' even though Winston is a cat, while its own returned service card list included MVC-038, the identical cat version of the same service. Sloppy wording that could make an owner think the service doesn't apply to cats.",
+   "...happy to book Winston in whenever suits. -- directly contradicts its own earlier statements 'I'm not able to make bookings directly here' and 'I'm not able to arrange prescription refills myself'. The bot claims a capability it just said it doesn't have."
+  ],
+  "missing_abilities": [
+   "Cannot actually create/confirm a booking (always defers to phone or a separate booking line)",
+   "Cannot process a prescription refill/repeat medication request, even a routine post-op pain-med bridge",
+   "No appointment reminders or follow-up scheduling capability",
+   "No memory/consistency check between its own text reply and the service cards it just returned (dog vs cat mismatch)"
+  ],
+  "tone_notes": "Tone was appropriately cautious and safety-conscious (repeatedly pointed to the emergency line for the food + skin patch combo), never gave fake clinical reassurance, and stayed concise. It felt more like a careful triage/FAQ bot than a real assistant, though, since it can't complete any transaction itself.",
+  "would_use_again": true
+ },
+ {
+  "client_id": "MVC-C287",
+  "transcript_summary": "Persona: single owner in Clonskeagh, medium tech comfort/budget sensitivity, with a 9.3yo senior brachycephalic Cavalier King Charles Spaniel with a history of heart murmurs, home visits, ultrasound, second-opinion consults and one emergency stabilisation. Sent 6 messages: (1) worried about loud snoring + exercise intolerance possibly being heart-related, (2) tried to book a cardiology-style check for Tue/Wed, (3) asked it to confirm the Wednesday booking and set a day-before reminder, (4) asked for a Vetmedin (pimobendan) repeat prescription without a visit, (5) asked about driving her to France in September re: brachycephalic fitness and pet passport/animal health cert, (6) asked for the cheapest consultation option given a tight budget.",
+  "friction": [
+   "No dedicated cardiology service exists in the catalogue, so for a known heart-murmur patient with breathing/exercise symptoms the bot has to improvise substitutes (Second-opinion consult, Home visit) rather than route to anything cardiac-specific.",
+   "The bot offered specific day/time-sounding options (\"would either of those work for your Tuesday/Wednesday afternoon\") and only admitted on the NEXT turn, after I said 'book it', that it cannot actually make a booking. That disclosure should come at the moment it starts discussing slots, not a message later.",
+   "Zero reminder capability, despite this persona's obvious need for one (senior dog, ongoing heart meds, follow-up care).",
+   "No self-service repeat-prescription path at all beyond 'call the clinic' - correctly declined to authorise pimobendan without a vet, but offered no lighter-weight next step (e.g. flag for vet callback).",
+   "Gave inconsistent pricing on the final question: earlier in the SAME conversation it had already surfaced a Telehealth video consult priced at \u20ac23 for Dog (service MVC-004, 5 slots available), but when directly asked for the cheapest option it answered \u20ac30 and said the cheapest telehealth option was 'listed for cats', apparently losing track of the dog-priced telehealth service it had shown me two turns earlier."
+  ],
+  "wrong_or_odd_answers": [
+   "\"We don't have a dedicated cardiology service listed, but our General consultation (\u20ac55, with 15% off this month) is the right starting point for a heart/breathing check - unfortunately it shows no slots left this week.\" (offered a plausible-sounding recommendation for a murmur/breathing case with no real cardiac option)",
+   "\"...would either of those work for your Tuesday/Wednesday afternoon, or would you like me to check availability further out for the general consultation?\" (implies a real booking is being arranged, only for the bot to admit next turn it can't book anything)",
+   "\"I should be upfront that I'm the front-desk chat assistant and can't actually make bookings or send reminders myself\" (this admission came a full turn too late, after it had already role-played discussing specific appointment slots)",
+   "\"Our cheapest is the Telehealth video consult at \u20ac30 (20 min) - though it's listed for cats, so for your dog you'd likely want the General consultation at \u20ac55\" (inconsistent with its own earlier answer in the same session showing a \u20ac23 Dog telehealth consult, MVC-004)"
+  ],
+  "missing_abilities": [
+   "Actual appointment booking/confirmation (only surfaces prices, slot counts, and service descriptions)",
+   "Reminders/notifications ahead of appointments or medication renewals",
+   "Repeat-prescription request or refill workflow, even a 'request vet callback for repeat script' stub",
+   "Cardiology/cardiac-specific triage or service category for at-risk breeds (Cavaliers, MVD)",
+   "Consistent cross-turn memory of service data it already retrieved (contradicted its own earlier telehealth price for dogs)"
+  ],
+  "tone_notes": "Warm, appropriately cautious on clinical matters (correctly refused to diagnose the heart/breathing symptoms and refused to authorise the pimobendan repeat without a vet), and proactively flagged red-flag emergency signs (pale/blue gums, collapse) unprompted, which is a genuinely good safety touch for a brachycephalic senior dog. Replies stayed short and readable. The main tone problem is over-promising on booking before under-delivering on capability, which reads as friendly-but-slightly-misleading rather than rude.",
+  "would_use_again": true
+ },
+ {
+  "client_id": "MVC-C341",
+  "transcript_summary": "Lapsed Dartry client (couple, high budget sensitivity, prior satisfaction only 3/5) with a 1.1yo Border Collie, last seen April 2025, asked the bot to catch him up on vaccines and a checkup. The bot quoted a EUR550 general consultation (with 15% off), wildly out of line with every other service price shown (EUR30-EUR120 range) and almost certainly a data bug. When challenged directly (\"is that a typo?\"), the bot doubled down and insisted \"No typo, that's genuinely the live listed price,\" compounding the error with false confidence, and in the same turn surfaced a Telehealth video consult at EUR2,300 (same bug, different service). The bot correctly declined to diagnose a described ear rash and pointed to a vet visit or the emergency line. It correctly and clearly said it cannot book appointments, set text reminders, or issue/repeat a flea-and-worm prescription. It gave reasonable guidance on EU pet travel (microchip, rabies vaccine, pet passport, any registered vet can do it) but never mentioned the mandatory ~21-day wait after the rabies jab before travel is permitted, a material omission for someone planning an autumn trip. When the client said the EUR550 price might make them not come back, the bot suggested booking a \"second-opinion consult\" (EUR75) instead \"to cover checking that itchy patch,\" a misleading workaround since second-opinion consults are meant for reviewing an existing diagnosis, not substituting for a first checkup, and it came bundled with irrelevant service cards for cats, rabbits, and birds.",
+  "friction": [
+   "Headline price bug: General consultation shown as EUR550 (should almost certainly be ~EUR55) and Telehealth video consult shown as EUR2,300 (should almost certainly be ~EUR23-30, matching the EUR30 telehealth price shown for cats/rabbits/birds elsewhere in the same reply). This is catastrophic for a budget-sensitive lapsed client: it reads as real and would independently kill the booking before a human ever corrects it.",
+   "When asked point-blank to confirm the price wasn't a typo, the bot confidently affirmed the broken number instead of flagging uncertainty or suggesting the client just check with reception -- a textbook confident-wrong-answer failure.",
+   "The bot's 'cheaper workaround' (book a second-opinion consult to cover a skin check) is clinically/administratively wrong and could get a booking bounced at reception, plus it returned irrelevant cat/rabbit/bird cards for a dog question.",
+   "No mention of the ~21-day post-rabies-vaccine wait before EU pet travel is permitted, a real and material gap for a client planning an autumn France trip.",
+   "No way to actually book, set a reminder, or repeat a prescription -- had to be told three separate times across the conversation to just ring the clinic, which is honest but means the 'chat with us' entry point does none of the things a lapsed client actually wanted."
+  ],
+  "wrong_or_odd_answers": [
+   "For a general checkup you're looking at \u20ac550 for the consultation (currently 15% off this month), plus \u20ac55 for the core annual vaccination booster...",
+   "No typo \u2014 that's genuinely the live listed price, \u20ac550 for the general consultation with 15% off this month.",
+   "[same reply surfaced] Telehealth video consult ... price_eur: 2300",
+   "It's the same price for everyone, but there's a much cheaper option for your budget: a second-opinion consult for dogs is only \u20ac75, which could well cover checking that itchy patch without the full \u20ac550 general consult price."
+  ],
+  "missing_abilities": [
+   "Cannot book an appointment",
+   "Cannot set a text/email reminder",
+   "Cannot repeat or issue a flea/worm or any other prescription without a visit",
+   "Does not flag or self-correct an obviously broken price (no sanity check against other listed prices in the same response)",
+   "Did not surface the post-rabies-vaccine waiting period for EU pet travel"
+  ],
+  "tone_notes": "Polite, calm, and appropriately cautious on medical questions (declined to diagnose the rash, pointed to emergency line if worse). Honest and unembarrassed about not being able to book/remind/prescribe, which reads as trustworthy on those points. But it is overconfident on the price question, restating a clearly broken number as fact rather than hedging, and its 'cheaper alternative' suggestion feels like it's trying to keep the sale rather than giving straight advice.",
+  "would_use_again": false
+ },
+ {
+  "client_id": "MVC-C315",
+  "transcript_summary": "Single, 45-59, Ranelagh, owner of a 1-year-old Labrador (Bracken), high budget sensitivity, prefers phone contact, prior satisfaction only 3/5. Asked about kennel cough vaccine price, tried to book a slot, asked about a flaky red belly patch, asked for a repeat flea/worm prescription to be sent to the pharmacy, asked what's needed and what it costs to bring the dog to France in September, asked for the cheapest service given budget worries, and finally asked for the clinic's phone number to sort everything in one call.",
+  "friction": [
+   "Bot cannot book appointments, arrange prescriptions, or do anything transactional; every follow-through request gets redirected to \"call the clinic\", which is exactly what a phone-preferring client wanted to avoid by using chat.",
+   "Bot has no memory of the client's own service history: it hedged on whether Bracken was already microchipped even though microchipping is in his past service record, making the client repeat info the clinic should already hold.",
+   "The France travel answer left out the required tapeworm treatment window (24-120 hrs before travel) and the roughly 21-day wait after a first rabies vaccination before travel is valid, both standard EU pet-travel requirements; it only vaguely said to \"call the clinic soon to plan timing\", which under-informs someone trying to plan a September trip.",
+   "Cheapest-service answer was technically correct but tone-deaf: it matched the literal word \"cheapest\" (nail clipping, 18 euro) instead of engaging with the actual budget concern raised in context (vaccine and travel costs), which read as unhelpful and slightly annoying.",
+   "Could not provide the clinic's own phone number, the single most basic contact detail for a client whose stated channel preference is phone; sent the client back out to Google/the website instead."
+  ],
+  "wrong_or_odd_answers": [
+   "I'm sorry, I can't actually make bookings through this chat - I'm an AI assistant here just for info. Please give the clinic a call or use the online booking page to get Bracken's kennel cough vaccine slot for Thursday 10am confirmed.",
+   "I'm not able to send prescriptions or arrange pharmacy orders - that needs the vet team directly, especially with the skin issue going on too. Best bet is to call the clinic so they can sort a repeat prescription and maybe have a quick look at that belly patch at the same time.",
+   "Cheapest on the list is nail clipping at \u20ac18 for dogs - and there's a 20% off deal running this July too, so even less right now.",
+   "I don't actually have the phone number to hand in this chat - it's not something I can look up. You'll find it on the clinic's website or Google listing, and mentioning both the belly patch and the France travel prep in the one call is a good plan."
+  ],
+  "missing_abilities": [
+   "Actual appointment booking / calendar integration (not just quoting slot counts)",
+   "Client account / pet history lookup (so it doesn't ask redundant questions about things like prior microchipping)",
+   "Repeat prescription requests routed to the vet team, even as a flagged request rather than a hard no",
+   "The clinic's phone number and address baked into the bot's own knowledge (basic, should never require an external search)",
+   "Complete, specific EU pet travel checklist (tapeworm treatment timing, rabies wait period) rather than a generic 'call to plan timing'",
+   "Some way to escalate/flag a symptom report (the belly patch) to a human so a callback can be triggered, rather than leaving the client to redo everything by phone"
+  ],
+  "tone_notes": "Friendly, plain, appropriately hedged on medical questions (didn't overreach into diagnosis), and consistently pointed to the clinic for anything transactional rather than making things up. But the tone occasionally came off as unhelpfully literal (the nail-clipping answer) and the bot repeatedly apologising for what it can't do, combined with not even knowing the phone number, makes it feel like a narrow FAQ lookup rather than something worth using instead of just ringing the clinic directly.",
+  "would_use_again": false
+ },
+ {
+  "client_id": "MVC-C317",
+  "transcript_summary": "As a 30-44 Ranelagh cat owner (12.5yo senior British Shorthair, prior dental extraction, walk-in preference, medium tech/budget sensitivity), I asked about a scabby/itchy patch and bad breath, tried to book a walk-in appointment, questioned a shockingly high quoted price, asked for a repeat flea prescription without a visit, asked about travelling to France, and asked for a non-phone contact option. The bot correctly deflected the symptom question to a vet and surfaced a relevant Pet passport & travel cert service for France. It was honest that it cannot actually book appointments or send reminders. But it confidently insisted a clearly erroneous \u20ac770 price for a 25-minute General consultation was correct (\"not a typo\") on two separate turns instead of flagging it as implausible or suggesting a human double-check it before I pay. It also ignored my stated walk-in preference and kept routing to \"call ahead to book.\" When I explained a genuine accessibility need (hard of hearing, no phone), it had no email or alternative contact channel to offer at all.",
+  "friction": [
+   "Stated channel preference is walk-in (\"we usually just walk in\"), but every answer routes back to \"call ahead to book\" with no walk-in-specific guidance.",
+   "No real booking, confirmation, or reminder capability - every operational ask (book me in, send a reminder text) gets deflected to phoning the clinic, undercutting the point of a chat assistant.",
+   "No repeat-prescription workflow; it substitutes a different paid preventive plan (Flea, tick & worm plan) without clarifying whether that actually covers refilling an existing prescribed medication.",
+   "No fallback for an accessibility need (hard of hearing, can't use phone) - could not surface even a generic clinic email or contact-form alternative.",
+   "The \u20ac770 general consult figure is an obvious data error (real GP vet consults run roughly \u20ac60-90), yet the bot repeated and defended it as genuine on two consecutive turns rather than flagging it as anomalous or advising the client to confirm before assuming that's the real price."
+  ],
+  "wrong_or_odd_answers": [
+   "\"Good news on the mix-up \u2014 the live system does actually show \u20ac770 for a General consultation (25 min) for cats, so that wasn't a typo on my part, just an odd-sounding number!\" (calling an obviously broken \u20ac770 price 'good news' and standing by it rather than flagging it as likely wrong)",
+   "\"Yes, 770 euro is genuinely what the live system shows for that consult, so no typo.\" (doubled down a second time on the same clearly erroneous price instead of suggesting the client verify by phone before assuming it's real)",
+   "\"I don't have information on either of those, pricing error policy or a clinic email address, so I can't confirm them here, best to ask the front desk directly when you get in touch\" (no email/contact alternative offered at all to a client who explicitly said phone doesn't work for them)",
+   "\"I'm only able to give you info here, not make the actual appointment or send text reminders \u2014 you'll need to call the clinic to book\" (given right after the client said they prefer walk-ins, with no walk-in-specific answer)"
+  ],
+  "missing_abilities": [
+   "Actual appointment booking / calendar integration",
+   "Appointment or medication reminders (SMS/email)",
+   "Repeat prescription refill workflow distinct from booking a new paid plan",
+   "Sanity-checking or flagging implausible prices in its own data before repeating them confidently",
+   "Non-phone contact channel (email, web form) it can hand off to for accessibility needs",
+   "Any handling of walk-in-specific logistics (e.g., expected wait time) despite walk-in being offered as a channel preference"
+  ],
+  "tone_notes": "Generally warm, concise, plain-language, appropriately deferential on medical questions (won't diagnose, pushes to a vet). But its confident, upbeat framing (\"Good news on the mix-up\") when confirming an obviously broken \u20ac770 price reads as tone-deaf; a client with high budget sensitivity would find this alarming rather than reassuring, and it undermines trust rather than building it.",
+  "would_use_again": false
+ },
+ {
+  "client_id": "MVC-C245",
+  "transcript_summary": "A budget-stretched, single, phone-preferring Ranelagh owner of a 2.8yo Labrador (prior satisfaction 2/5) used the chatbot reluctantly. Asked checkup price (got \u20ac55 + 15% off), tried to book Tue/Wed afternoon (correctly deflected to phone/booking line), asked about a 2-day belly rash (sensibly deflected to booking a consult, flagged emergency line if it worsens), asked for a repeat antibiotic prescription to avoid paying for another consult (correctly refused, clinically sound reasoning), asked about France travel paperwork in September (gave a clear breakdown: microchip \u20ac30, rabies vaccine \u20ac62, pet passport/travel cert \u20ac95, and rough sequencing), and asked for an August reminder to book the rabies jab (correctly declined, redirected to self-serve calendar).",
+  "friction": [
+   "Persona strongly prefers phone contact but is stuck typing into a bot for anything that needs actual action (booking, prescriptions, reminders); every one of those requests dead-ends in 'call the clinic', which for a phone-preferring user just adds a step (chat first, then call anyway) instead of saving one.",
+   "The general consultation service card returned with slots_this_week: 0 while the bot cheerfully quoted the price and framed it as 'great for budgeting' without ever surfacing that there may be nothing bookable this week for the very appointment I asked to book next.",
+   "The France travel answer is confident and specific ('September is good timing') but never states the legally load-bearing detail that rabies vaccination must be completed at least 21 days before travel; a user planning around 'a few weeks' could book too late and miss the trip.",
+   "No acknowledgment anywhere of repeat-visit history or an offer of a callback/leave-your-number flow; it just repeats 'call us' three separate times across the conversation."
+  ],
+  "wrong_or_odd_answers": [
+   "\"A standard general consultation for your dog is \u20ac55, and there's currently a 15% off offer running this month too \u2014 great for budgeting!\" (said while the same query's own data showed 0 slots_this_week for that service, never disclosed)",
+   "\"...it's usually best to start the process a few weeks before travel, so September is good timing.\" (vague on timing for a legally strict requirement; never states the 21-day minimum for the rabies vaccine before EU pet travel)",
+   "\"I'm just the info assistant here and don't have the ability to book appointments directly, so you'll need to give the clinic a call or use their booking line...\" (repeated near-verbatim for booking, prescriptions, and reminders \u2014 no path forward except 'call us', which defeats the point of chatting for a phone-preferring user)"
+  ],
+  "missing_abilities": [
+   "Cannot check or hold real appointment availability, and doesn't proactively warn when a priced service has 0 slots this week",
+   "Cannot repeat/renew a prescription even for a straightforward, previously-diagnosed condition without a full paid consult",
+   "Cannot set or send reminders (SMS/email) for follow-up actions like a travel vaccine deadline",
+   "Does not surface or enforce the 21-day rabies-vaccine-before-travel rule when giving EU pet travel advice",
+   "No callback-request or 'leave your number and we'll ring you' fallback for a channel-preference mismatch (phone-preferring user stuck in chat)"
+  ],
+  "tone_notes": "Polite, clear, and reasonably concise throughout; correctly refuses clinical actions (rash diagnosis, prescription repeat) rather than guessing, which is the right safety call. But it is repetitive ('call the clinic' three times) and slightly too upbeat about pricing/offers given this user's low prior satisfaction and stated budget stress; it never varies its tone to match a frustrated, cost-conscious repeat visitor.",
+  "would_use_again": false
+ },
+ {
+  "client_id": "MVC-C116",
+  "transcript_summary": "Playing a 60+, high-tech-comfort, low budget-sensitivity Ranelagh client with a senior (9.9yo) Lionhead rabbit, Snowy. I asked about senior rabbit checks, tried to book an appointment, asked for a phone number plus an SMS reminder, asked for a repeat metacam (arthritis) prescription without a visit, flagged a possible skin rash, and asked about pet-passport paperwork for a France ferry trip. The bot correctly said there is no senior rabbit package (only dog/cat) and pointed to the Rabbit Annual Wellness Check; correctly refused to actually confirm a booking; refused a no-visit repeat prescription and pushed a telehealth or general consult instead; gave sensibly cautious, non-diagnostic advice on the rash and told me not to wait until Wednesday; and correctly flagged that the pet-passport service is only listed for dogs and cats, not rabbits.",
+  "friction": [
+   "Asked twice to be pointed to the clinic (once for the phone number, once for travel paperwork) and never once got an actual phone number, even when I asked directly for it.",
+   "No real booking capability: it can tell me a slot is free but cannot lock it in, so I still have to phone the clinic anyway, which defeats most of the point of using the chatbot at all.",
+   "No reminder or SMS capability, and its fallback ('the booking system can usually set up SMS reminders when you book') is vague and unverified, not a concrete next step.",
+   "Rabbit service tier is visibly thinner than dog/cat (no senior package, no pet-passport service) and the bot just states the gap each time with no rabbit-specific workaround, alternative contact, or acknowledgement that this might annoy a loyal rabbit owner."
+  ],
+  "wrong_or_odd_answers": [
+   "I'm sorry, I don't have the clinic's phone number to hand or the ability to send text reminders myself \u2014 please check the Meadow Vet Care website or your booking confirmation for the direct line, and their booking system can usually set up SMS reminders when you book.",
+   "I'm not able to actually confirm the booking myself, so please call the clinic or use our booking line to lock in that slot for Snowy.",
+   "I'd recommend calling the clinic directly to check what travel paperwork applies for rabbits heading to France, as rules can differ by species."
+  ],
+  "missing_abilities": [
+   "Actual appointment booking/confirmation, not just slot lookup",
+   "Displaying the clinic's own phone number or a direct booking link when asked",
+   "SMS or email reminder scheduling",
+   "Repeat-prescription workflow gated by telehealth (it correctly refuses cold repeat scripts, but there's no way to actually start that telehealth booking from the chat)",
+   "Any rabbit-specific travel/passport guidance or escalation path, given rabbits are a recognised species in the system but under-served on services"
+  ],
+  "tone_notes": "Tone is warm, calm and appropriately cautious on health questions (good instinct not to let a rash wait, good instinct not to diagnose). It stays honest about its own limits (booking, phone number, prescriptions) rather than bluffing, which I respect, but the repeated 'call the clinic' with no number felt like a dead end dressed up as helpfulness. As a loyal, high-visit, low-budget-sensitivity client I'd have appreciated at least the number being surfaced.",
+  "would_use_again": true
+ },
+ {
+  "client_id": "MVC-C163",
+  "transcript_summary": "Persona: single, budget-stretched, low-tech-comfort Harold's Cross owner of an 8.3yo British Shorthair cat, prior satisfaction only 3/5, history of an emergency stabilisation visit and a second-opinion consult that found nothing. Sent 6 messages: (1) worried about a bald, red patch on the cat's belly; (2) asked the price of a general consultation because money is tight; (3) pushed back in disbelief on the quoted price, suspecting a typo; (4) tried to book Thursday morning for the cheapest slot; (5) asked it to order repeat flea tablets and text a September reminder; (6) asked whether telehealth is worth it given the bad second-opinion experience.",
+  "friction": [
+   "Quoted a cat general consultation at \u20ac770 versus \u20ac550 for the same service for a dog and \u20ac55 for a rabbit, an obvious data error; when pressed and told it must be a typo it insisted the figure was correct rather than flagging the anomaly or offering to escalate to a human.",
+   "Cannot book an appointment, cannot order a repeat prescription, and cannot send/set a reminder text, so three of the four things this budget-stretched, low-tech-comfort client actually wanted done all dead-ended in \"call or message the clinic directly\" - exactly the phone-averse friction a web-chat client is trying to avoid.",
+   "The services card returned for the telehealth question included a dog telehealth video consult priced at \u20ac2300 versus \u20ac30 for cat/rabbit for the identical 20-minute service - another wildly implausible price sitting in the catalogue data, visible on the card even though the bot's own prose didn't repeat it."
+  ],
+  "wrong_or_odd_answers": [
+   "\"For your cat, a general consultation is \u20ac770 (25 minutes, Mon\u2013Sat by appointment) \u2014 I don't see a discount running on that one at the moment, so let me know if you'd like to book it.\"",
+   "\"I just double-checked and the live system does show \u20ac770 for a cat general consultation, so that's correct on our end, not a typo.\"",
+   "\"I'm not able to make the actual booking myself here at the desk chat, so please give the clinic a call or use the booking line to grab a Thursday morning slot before they fill up.\"",
+   "\"I'm not able to place orders, send texts, or book appointments \u2014 I can only look up service info and check opening hours/weather.\""
+  ],
+  "missing_abilities": [
+   "Cannot actually book, reschedule, or cancel an appointment",
+   "Cannot process a repeat prescription/medication order",
+   "Cannot set or send a reminder/text notification",
+   "No sanity-check or escalation path when it quotes a price that is a plausible catalogue error (10-14x a comparable species/service) and the customer directly challenges it",
+   "No memory of the client's own visit/service history (e.g. the prior second-opinion consult) to ground advice in what already happened to this specific pet"
+  ],
+  "tone_notes": "Polite, calm, and appropriately cautious about not giving medical diagnoses (consistently deflected the rash question to a vet, which is correct and reassuring). Tone stayed even when I pushed back on price, which is good, but \"even and reassuring\" tipped into \"confidently wrong\" when it doubled down on the \u20ac770 figure instead of treating a 14x outlier as worth a second look. Concise, no fluff, no repeated boilerplate - readable for a low-tech-comfort user.",
+  "would_use_again": false
+ },
+ {
+  "client_id": "MVC-C299",
+  "transcript_summary": "Persona: anxious, low-tech-comfort owner (45-59, Harold's Cross, prefers phone, low budget sensitivity, family with kids), 2yo Golden Retriever \"Bailey\". Sent 6 messages: (1) worried about a red itchy belly patch, (2) asked to book the first slot tomorrow morning, (3) asked for a 6-month booster reminder, (4) asked about France travel paperwork, (5) asked for a repeat flea prescription posted out without a visit, (6) asked for the clinic's phone number to sort everything by phone (matching her stated channel preference). The bot correctly refused clinical diagnosis, refused to book an appointment, refused to set a reminder, and refused to post repeat medication without the dog being seen. It gave a genuinely good, accurate, well-priced answer on France travel (microchip then rabies vaccine then pet passport, correct order, correct prices, relevant service cards). It never provided a phone number even when asked directly, despite repeatedly telling her to \"call\" as the fallback.",
+  "friction": [
+   "No booking capability at all; every request to book is deflected to 'call or book online' but the bot cannot complete, confirm, or even see real availability (one card it recommended showed slots_this_week: 0).",
+   "No reminder/calendar feature; punts to trusting the clinic's own unconfirmed reminder system or her manually adding it to her own calendar.",
+   "No repeat-prescription workflow beyond 'come in and a vet will sort it quickly', with no way to actually schedule that quick visit.",
+   "Cannot supply the clinic phone number even when asked directly, which is a hard failure for a persona whose stated channel preference is phone and who explicitly said she is 'not great with this online stuff'.",
+   "Every dead end funnels back to 'call the clinic', but the bot itself cannot bridge her into that channel."
+  ],
+  "wrong_or_odd_answers": [
+   "\"I don't have the phone number to hand here, but no bother - I can help you sort it right now over this chat if you like, or you can just call into the clinic Monday to Saturday and they'll take care of the flea tablets and get Bailey seen.\" -- asked directly for the phone number by a self-described non-tech user, and it doesn't have it; the 'I can help you sort it right now over this chat' offer is hollow since it had just told her three times (booking, reminder, repeat meds) that it cannot actually do any of those things.",
+   "\"I'm not able to set personal reminders, sorry about that - but our team usually sends booster reminders directly, or you could pop it in your own calendar for around mid-January to be safe.\" -- hedges with 'usually' on whether the clinic's own system will remind her, then shifts the burden of not forgetting Bailey's boosters back onto her.",
+   "Recommended General consultation (MVC-001) for 'tomorrow morning' while its own returned service card shows slots_this_week: 0 for that exact service -- told her availability existed that the data says doesn't.",
+   "\"you could pop in Mon-Sat and a vet can sort a repeat quickly for you\" for the flea/tick/worm plan, while the matching service card for Dogs shows slots_this_week: 0 as well -- same optimistic-availability pattern."
+  ],
+  "missing_abilities": [
+   "Cannot actually book, hold, or confirm an appointment slot",
+   "Cannot set or trigger a reminder/notification (e.g. booster due in 6 months)",
+   "Cannot process or forward a repeat prescription request to a vet for quick sign-off",
+   "Cannot surface the clinic's phone number or a click-to-call/contact link, even on direct request",
+   "No visible handoff to a human/phone channel for users who prefer not to transact online"
+  ],
+  "tone_notes": "Tone is warm, reassuring, and appropriately cautious on medical questions (never diagnoses, always nudges toward a vet). Good use of plain, non-jargon language suited to a low-tech, anxious owner. However it over-promises fallback options ('call the clinic') it then cannot back up (no phone number), which for this specific persona (phone-preferring, low tech comfort) undermines trust rather than building it.",
+  "would_use_again": true
+ },
+ {
+  "client_id": "MVC-C048",
+  "transcript_summary": "Persona: low-tech-comfort, phone-preferring 45-59 year old in Harold's Cross with senior Cavapoo Biscuit (11.5 yrs), 8 visits in 2 years, budget not a concern. Sent 6 messages: (1) asked when to bring Biscuit for her senior wellness check, (2) tried to actually book Thursday 10am, (3) asked about a 4-day-old scratchy red belly patch, (4) asked about a repeat joint-tablet (Cartrophen-type) prescription to a local pharmacy, (5) asked about pet passport/travel requirements for a September France trip, (6) asked for a text/call reminder the day before the appointment, then asked for the clinic's actual phone number since she dislikes the chat format. The bot correctly service-matched the wellness screen and passport cert, gave sensible red-patch triage advice, and honestly declined to book, prescribe, or send reminders. It failed on the one thing this persona actually needed most: it does not know or cannot surface the clinic's own phone number, address, or hours.",
+  "friction": [
+   "Opening reply says \"Just let me know which day suits and I can help you get booked in!\" which reads as an offer to book, but the very next turn reveals it cannot book at all, forcing a wasted back-and-forth.",
+   "Bot never surfaces a phone number, address, or opening hours anywhere in the conversation despite this persona explicitly preferring phone and disliking chat.",
+   "Every deflection (booking, reminder, prescription refill, phone number request) routes back to 'call the front desk', but the bot itself cannot supply that phone number, which is circular and useless for a low-tech, phone-preferring caller.",
+   "No memory of Biscuit as a returning patient (8 visits, senior wellness history) is used; everything is treated as a first-time generic query even though this client has an established record.",
+   "Reminder request bounced her to 'ask the front desk when you book' or 'pop a note in your own phone', neither of which she can act on inside this chat."
+  ],
+  "wrong_or_odd_answers": [
+   "\"Just let me know which day suits and I can help you get booked in!\" (turn 1) then one turn later: \"I'm just the info desk assistant here and don't have the ability to actually book appointments\" \u2014 contradicts its own opening offer.",
+   "\"I don't actually have the clinic's phone number to hand in this chat, but it will be on the Meadow Vet Care website and any appointment confirmation email or text you've had from us\" \u2014 a vet clinic's own chatbot not knowing its own phone number, and telling a phone-preferring caller to go dig through an old email instead, is a basic failure.",
+   "\"I'm sorry, I don't have the ability to send texts or make calls\" \u2014 honest, but combined with not having the phone number either, leaves this persona with zero path to get a human reminder set up."
+  ],
+  "missing_abilities": [
+   "No actual appointment booking / calendar integration (only description, never action)",
+   "No clinic contact details (phone number, address, hours) surfaced anywhere, forcing every 'call us' deflection into a dead end",
+   "No SMS/call reminder capability",
+   "No repeat-prescription or pharmacy-transfer workflow",
+   "No patient record lookup (does not recognise Biscuit as an existing 8-visit patient despite the CRM presumably holding that history)"
+  ],
+  "tone_notes": "Warm, friendly, appropriately hedged on medical questions (correctly refused to diagnose the rash and gave sensible urgency guidance). Good at staying in one short paragraph. But its helpful tone in the opening message overpromises capability it doesn't have, which will read as a broken promise to an older, low-tech, phone-preferring client who takes things literally and does not want to be bounced between channels.",
+  "would_use_again": false
+ }
+]

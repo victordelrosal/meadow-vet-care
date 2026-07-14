@@ -1,0 +1,1757 @@
+[
+ {
+  "client_id": "MVC-C299",
+  "likes": [
+   "Being able to get a home visit when the dog was too worked up to travel",
+   "The vet took time to actually explain things instead of rushing me out"
+  ],
+  "dislikes": [
+   "Never sure who's answering the phone or if they remember us from last time",
+   "Had to repeat the dog's whole history over the phone before they'd even book me in",
+   "Waiting on hold when I'm already anxious about why I'm calling"
+  ],
+  "jobs_to_be_done": [
+   "Ringing the clinic directly for anything at all, including questions I could probably Google",
+   "Asking the Facebook mammy group locally what's normal before deciding if it's worth a vet visit",
+   "Writing reminders on the kitchen calendar for jabs and check-ups",
+   "Googling symptoms late at night when I'm worried, then usually ringing the clinic the next morning anyway"
+  ],
+  "feature_requests": [],
+  "picks": [
+   "Vaccine/worming due-date reminders",
+   "\"Is my symptom urgent?\" triage guidance"
+  ],
+  "rejections": [
+   "Pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "Pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I'm not great with apps, I'd honestly rather just ring and hear a real person tell me he's grand.",
+   "Last time I had to explain his whole history again on the phone, that's the bit that gets to me, not knowing if they remember us.",
+   "A pet horoscope, are you serious, I've enough going on without that."
+  ],
+  "churn_risk": 1,
+  "segment": "anxious_first_timer"
+ },
+ {
+  "client_id": "MVC-C235",
+  "likes": [
+   "The vets themselves seem to know what they're doing once you're actually in the room",
+   "They did a home visit once when my dog was too sore to move, that was decent of them"
+  ],
+  "dislikes": [
+   "Getting through on the phone takes forever, especially first thing Monday",
+   "The out-of-hours emergency consult hit me with a price I wasn't warned about beforehand",
+   "Nobody tells you the price until you're already sitting there with the dog on the table",
+   "Feels like every visit somehow turns into 'and we'd recommend this extra thing too', which adds up fast"
+  ],
+  "jobs_to_be_done": [
+   "Ringing around other Dublin vets to compare prices before booking anything non-urgent",
+   "Googling symptoms myself at 11pm before deciding if it's a real emergency or not",
+   "Asking in the local Donnybrook/Ranelagh Facebook group who's cheap and who's not",
+   "Keeping a note on my phone of when jabs and worming were last done because nobody reminds me"
+  ],
+  "feature_requests": [],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I'd say I ring the clinic more than I chat with anything online, I just don't trust an app to actually answer when the dog's in bother.",
+   "If it could tell me roughly what a visit's going to cost before I walk in the door, I'd actually open it. That out-of-hours bill still stings.",
+   "The horoscope and the NFT thing, would you ever, that's not what I'm paying a vet for."
+  ],
+  "churn_risk": 2,
+  "segment": "budget_stretched"
+ },
+ {
+  "client_id": "MVC-C315",
+  "likes": [
+   "The vet who did the puppy course was thorough and didn't rush me",
+   "They got the microchip and kennel cough vaccine sorted in one visit so I didn't have to come back twice"
+  ],
+  "dislikes": [
+   "Waiting on hold to book a slot, some days it just rings out",
+   "Not told the total cost upfront, the bill for the puppy course crept up each visit",
+   "Reception asking me to repeat details I'd already given them the visit before"
+  ],
+  "jobs_to_be_done": [
+   "Googling whether something is urgent before ringing the clinic",
+   "WhatsApp group with other dog owners nearby for 'is this normal' questions",
+   "Checking Met Eireann myself before walks, nobody at the clinic told me",
+   "Keeping a note on my phone of when the next jabs are due because nobody reminded me"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it just told me straight what a visit's going to cost before I go in, that'd save the phone calls back and forth",
+    "tag": "cost_estimator"
+   },
+   {
+    "verbatim": "Something to remind me when his next jab or worming is due, I keep forgetting",
+    "tag": "vaccine_reminders"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "I'd still ring for an actual appointment, I'm not booking my dog's health online, but if it pinged me when his jabs are due, that I'd actually use.",
+   "The prices crept up every time I went in and nobody told me what it'd cost before we started, that's what annoyed me, not the chatbot.",
+   "A horoscope for the dog, come on now, I'm trying to save money, not spend it on nonsense."
+  ],
+  "churn_risk": 1,
+  "segment": "new_pet"
+ },
+ {
+  "churn_risk": 1,
+  "client_id": "MVC-C287",
+  "dislikes": [
+   "Being kept waiting for callbacks when it's about her dog's heart, especially after an ultrasound",
+   "Having to re-explain the dog's full history every time a different vet picks up the phone",
+   "Getting a bill that wasn't flagged in advance after an unplanned emergency stabilisation"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "if it could just tell me straight away whether what I'm looking at is 'ring the emergency line now' or 'fine till Monday', that alone would be worth opening the app for",
+    "tag": "symptom_triage"
+   },
+   {
+    "verbatim": "some kind of running summary of Bisto's file, so I'm not repeating the same three paragraphs to whoever's on shift",
+    "tag": "pet_history_summary"
+   }
+  ],
+  "jobs_to_be_done": [
+   "Googling symptoms at 11pm before deciding whether it's an emergency",
+   "Keeping my own notes app with dates of scans, meds, and vet advice because the clinic doesn't hand me a running record",
+   "Ringing the clinic directly when I'm not sure who to ask, because I don't trust an app to tell me if it's serious"
+  ],
+  "likes": [
+   "The vets themselves are good, thorough, they don't rush you",
+   "Being able to get a second opinion when something didn't sit right with me",
+   "They've done right by Bisto through some scary moments, the emergency stabilisation in particular"
+  ],
+  "picks": [
+   "\"is my symptom urgent?\" triage guidance",
+   "cost estimator with payment-plan info"
+  ],
+  "quotes": [
+   "With a Cavalier this age, it's not routine checkups, it's heart stuff, it's real. I don't need a gimmick, I need to know whether tonight's the night I panic or not.",
+   "Twelve visits in two years, I'm not exaggerating when I say I know that waiting room better than my own kitchen.",
+   "Pet horoscope? For God's sake, no. I'm dealing with mitral valve disease, not star signs."
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "lost-pet microchip checklist (Bisto's never left my sight, not what I need)"
+  ],
+  "segment": "brachy_highrisk"
+ },
+ {
+  "client_id": "MVC-C317",
+  "likes": [
+   "The vets themselves are good with Purrl (the cat) even though she hates being handled, especially post-dental",
+   "Home visit option for routine stuff so we don't have to stress her out with the carrier every time",
+   "They fit us in as a walk-in when we've turned up worried, they don't turn you away"
+  ],
+  "dislikes": [
+   "The telehealth video consult was a bit of a waste of time, the vet basically said 'bring her in' anyway so we paid for two visits to get to the same place",
+   "After the dental extraction we got no clear aftercare timeline, had to ring back twice to ask when things would settle and what to watch for",
+   "Reception can be scattered when it's busy, I've stood there waiting to be noticed while someone's on the phone",
+   "Nobody proactively told us she's due more frequent senior checks now she's over 12, we've had to ask ourselves"
+  ],
+  "jobs_to_be_done": [
+   "Googling cat symptoms at 11pm before deciding if it's worth a vet trip",
+   "Keeping track of when her last dental clean/extraction was and what's next, on a note in my phone",
+   "Asking a WhatsApp group of other cat owners in Ranelagh if anyone's had a similar issue",
+   "Comparing prices in my head between Meadow and the other clinic near Portobello before booking anything non-urgent"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could actually tell me whether her limping today is 'ring the vet now' versus 'keep an eye on it', that'd save me a lot of Googling",
+    "tag": "triage_guidance"
+   },
+   {
+    "verbatim": "Something that reminds us she's due a senior bloods check or dental review, we're bad at remembering ourselves",
+    "tag": "reminders"
+   }
+  ],
+  "picks": [
+   "\"is my symptom urgent?\" triage guidance",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "The telehealth thing just meant we paid twice to be told 'bring her in', so I'm not exactly sold on more tech.",
+   "Nobody flagged that she needed more frequent senior checks now she's twelve, we had to figure that out ourselves.",
+   "If a chatbot could tell me whether the limping means 'ring them now' or 'wait and see', I'd actually open it. Prices and opening hours, I don't really need an app for that."
+  ],
+  "churn_risk": 1,
+  "segment": "senior_pet"
+ },
+ {
+  "client_id": "MVC-C079",
+  "likes": [
+   "The vets themselves seem competent - my cat's dental extraction went fine and she recovered well",
+   "Telehealth video consult saved me a trip once when I just needed reassurance about her eating less"
+  ],
+  "dislikes": [
+   "Getting through on the phone at busy times - I've been left on hold more than once trying to book",
+   "Follow-up after the dental extraction was patchy, I had to ring back myself to ask about the after-care instead of them checking in",
+   "Reception can feel a bit rushed, like they're processing you rather than really listening"
+  ],
+  "jobs_to_be_done": [
+   "I keep a note on my phone of when her vaccinations and check-ups are due, nobody reminds me",
+   "I've googled cat post-dental-extraction care myself because I wasn't fully clear on what to watch for",
+   "I ring around if I need something urgent outside their hours, there's no other way to know who's open"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight what a visit is going to cost before I commit, that would save a phone call",
+    "tag": "cost_estimator"
+   },
+   {
+    "verbatim": "Something that reminds me her jabs are due, because I forget until I'm already booking something else",
+    "tag": "vaccine_reminders"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope - that's not what I'd go to a vet's chat for, feels like a gimmick",
+   "NFT pet identity - no idea why a vet clinic would even offer that, sounds like nonsense",
+   "EU pet-travel requirements checker - she's a 9 year old house cat, she's not going anywhere",
+   "pollen and air-quality alerts for allergic pets - she's not allergic, not relevant to us"
+  ],
+  "quotes": [
+   "I'd stop using the triage thing after a week, if I think something's wrong with her I'm ringing the vet, not trusting a chat window to tell me it's urgent or not.",
+   "What annoyed me was after the dental extraction, nobody rang to check how she was, I had to chase them for after-care advice.",
+   "If it told me the price upfront and let me know when her jabs are due, I'd actually open it. Otherwise I'll just keep ringing like I always have."
+  ],
+  "churn_risk": 1,
+  "segment": "time_poor_professional"
+ },
+ {
+  "client_id": "MVC-C163",
+  "likes": [
+   "The vets themselves seem to know what they're doing when it counts, like the emergency stabilisation",
+   "It's local, I can walk over from Harold's Cross"
+  ],
+  "dislikes": [
+   "The bill after the emergency visit and the second opinion consult landed one after another and nobody warned me what it'd add up to",
+   "Waiting around at reception with no clear sense of how long it'll be or what things cost until you're handed the invoice",
+   "Feeling like every visit turns into another test or screen being added on"
+  ],
+  "jobs_to_be_done": [
+   "Googling cat symptoms myself before deciding if it's worth a visit",
+   "Asking on the local Harold's Cross Facebook group if anyone's cat had something similar",
+   "Keeping a note on my phone of what she's had done and when, because I don't trust myself to remember",
+   "Ringing around before I commit to anything pricier, to see if I'm being quoted fairly"
+  ],
+  "feature_requests": [],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "The emergency visit and then the second opinion on top of it, that was a lot of money in a short space of time and nobody sat me down and said here's roughly what this is going to cost you.",
+   "I don't need a horoscope for my cat, I need to know what the bill's going to look like before I say yes.",
+   "If it just told me straight what something costs and whether I can pay it over a few weeks, I'd actually open it again."
+  ],
+  "churn_risk": 2,
+  "segment": "budget_stretched"
+ },
+ {
+  "client_id": "MVC-C341",
+  "likes": [
+   "The home visit vet was good with the puppy when we needed the primary vaccine course",
+   "Being able to look things up on the web rather than phoning"
+  ],
+  "dislikes": [
+   "Never got a clear answer on price before the home visit, it just showed up on the invoice after",
+   "No reminder when the second round of the puppy course was due, I had to remember myself and nearly missed the window",
+   "Felt like every visit turned into an upsell for something extra",
+   "Havent had a reason to go back so no idea if anythings changed"
+  ],
+  "jobs_to_be_done": [
+   "I check Google or the Facebook Dartry/Ranelagh parents group when the dog does something odd, before ringing anyone",
+   "I keep the vaccine card in a kitchen drawer, that's the record, no app for it",
+   "I ask other dog owners at the park what they pay for stuff, that's how I know if a price is fair",
+   "If it's urgent I'd just ring around, not search"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it told me the price for a visit BEFORE I booked, not after, I'd trust it more",
+    "tag": "upfront_pricing"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "We havent been back since April last year, honestly, no big falling out, just no reason to.",
+   "Nobody told me the price of the home visit till it landed on the invoice, that annoyed me more than the amount itself.",
+   "A horoscope for the dog, come on, I wouldnt open that twice."
+  ],
+  "churn_risk": 2,
+  "segment": "lapsed"
+ },
+ {
+  "client_id": "MVC-C029",
+  "likes": [
+   "Vets know my dog's history without me repeating it every time (8 visits, they remember)",
+   "Weight & nutrition clinic actually helped keep an old dog's weight sane",
+   "Can just walk in, don't have to plan ahead"
+  ],
+  "dislikes": [
+   "Waiting room can drag on a busy Saturday when you've three kids in the car outside",
+   "Last time the front desk quoted one price on the phone and it was a bit different at checkout for the nutrition consult",
+   "No easy way to check if they're open on a bank holiday Monday before dragging a 12-year-old dog across town for nothing"
+  ],
+  "jobs_to_be_done": [
+   "Tracking Barney's weight and food portions myself in a notes app since he's older and prone to piling it on",
+   "Googling 'is it a public holiday Monday' before heading out",
+   "Asking the local Harold's Cross Facebook group if anyone's dog had similar joint stiffness before bothering the vet",
+   "Checking Met \u00c9ireann myself before a walk since he's older and the heat gets to him now"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "if it could just tell me are ye open before I load the dog into the car on a bank holiday, that'd actually get used",
+    "tag": "opening_hours_check"
+   },
+   {
+    "verbatim": "some way of knowing roughly what a visit will cost before I'm standing at the till with three kids",
+    "tag": "price_estimate"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "lost-pet microchip checklist"
+  ],
+  "quotes": [
+   "I'm a walk-in person, I don't really do apps for this kind of thing, I'd rather just ring or turn up.",
+   "The weight clinic was actually great for him, he was getting heavy and they sorted a proper food plan out.",
+   "A horoscope for the dog, come on, I've three kids and a job, I haven't time for that."
+  ],
+  "churn_risk": 0,
+  "segment": "senior_pet"
+ },
+ {
+  "client_id": "MVC-C245",
+  "likes": [
+   "The vets themselves seem competent when you actually get in front of them",
+   "They fitted the dog in for the emergency consult when I rang panicking"
+  ],
+  "dislikes": [
+   "The out-of-hours emergency consult cost a fortune and nobody warned me on the phone what the ballpark would be",
+   "Being put on hold for ages when I ring reception, especially last time",
+   "No follow-up after the emergency visit, I had to ring back myself to check on meds",
+   "Felt a bit rushed and money-focused during the annual wellness check, like they were upselling"
+  ],
+  "jobs_to_be_done": [
+   "Comparing prices between vets myself before booking anything non-urgent",
+   "Googling symptoms at 11pm to decide if it's actually an emergency before I ring anyone",
+   "Keeping track of when Rex is due his boosters on my phone calendar, not through the clinic",
+   "Asking a WhatsApp group of other dog owners in Ranelagh what they'd charge for something",
+   "Sourcing cheaper flea/worming treatment online rather than through the clinic"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight up what an out-of-hours visit is going to cost before I commit, that'd actually be useful, because I got stung last time.",
+    "tag": "upfront_pricing_transparency"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "is my symptom urgent triage guidance"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I got a bill after that emergency visit that near knocked me sideways, and nobody said a word about cost until it landed.",
+   "I'd say I'm not one for messing about with an app, I'd rather just ring the desk, but if it told me the price before I panicked and drove over, fair enough, I'd use it.",
+   "A pet horoscope, are you serious, I've a Labrador with a bad hip, not a star sign."
+  ],
+  "churn_risk": 2,
+  "segment": "budget_stretched"
+ },
+ {
+  "client_id": "MVC-C048",
+  "likes": [
+   "Vets know Bailey's history without me having to repeat it every time",
+   "They ring back same day when I leave a message about her bloods",
+   "Straightforward about costs on the phone, no messing"
+  ],
+  "dislikes": [
+   "Waiting on hold when I ring about test results",
+   "Had to ring twice last month to actually get the ultrasound results explained, first call just said 'the vet will call you back' and nobody did until I chased it",
+   "Reception sometimes doesn't know which vet saw her last so I have to explain the senior wellness screen results all over again"
+  ],
+  "jobs_to_be_done": [
+   "Tracking Bailey's blood panel and wellness screen history myself in a notebook since nobody sends a summary",
+   "Ringing the clinic directly for anything urgent rather than going online",
+   "Asking neighbours and the local Harold's Cross Facebook group what they think before trying anything new for her joints",
+   "Working out portion sizes for her weight clinic diet myself, bit of trial and error"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If someone could just ring me when her bloods are back instead of me having to ring in, that'd save me a lot of hassle.",
+    "tag": "results-callback"
+   },
+   {
+    "verbatim": "A weight chart or something so I know if she's actually improving since the nutrition clinic, on paper or a letter, I don't need it on a phone.",
+    "tag": "printed-weight-tracking"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I'm not one for typing away at a chatbot, I'd rather just ring the desk and talk to a person about Bailey.",
+   "The reminder for her worming and the boosters, that I'd actually use, because I do forget the exact month.",
+   "A horoscope for the dog, no thank you, that's not what I need from a vet."
+  ],
+  "churn_risk": 0,
+  "segment": "senior_pet"
+ },
+ {
+  "client_id": "MVC-C116",
+  "likes": [
+   "The vets there actually know rabbits, which is rarer than you'd think in Dublin",
+   "Telehealth video consult saved me a trip in for something minor last winter",
+   "Never had to chase them for the vaccine reminder, they got there before I did"
+  ],
+  "dislikes": [
+   "Booking anything still means ringing during the day, and I'm not always free to sit on hold",
+   "The reception line gets busy on Mondays and you're stuck waiting",
+   "Last time I had to explain twice on the phone that it was for the rabbit, not a cat, before they pulled the right notes"
+  ],
+  "jobs_to_be_done": [
+   "Checking her ears, appetite and droppings daily, that's the real early warning system for rabbits, not the clinic",
+   "Keeping my own note in the calendar of when the RVHD/myxo jab is due so I'm not caught out",
+   "Googling House Rabbit Society Ireland when something looks off before deciding if it's a vet job",
+   "Sourcing decent hay and rabbit-safe greens myself, the clinic doesn't stock or advise on that",
+   "Swapping notes with a couple of other rabbit owners I know when something's not textbook"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If the chat could actually tell me it's booked, not just what a slot costs, I'd use it every time instead of ringing",
+    "tag": "online_booking"
+   },
+   {
+    "verbatim": "A straight answer on whether something's rabbit-safe to eat or not would get used more than the weather check",
+    "tag": "species_specific_advice"
+   }
+  ],
+  "picks": [
+   "Booking an appointment slot",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "\"is my symptom urgent?\" triage guidance for an exotic like a rabbit, I don't trust a bot's judgment there over the vet's"
+  ],
+  "quotes": [
+   "If it could actually book the slot instead of just telling me the price, I'd stop ringing altogether.",
+   "I don't need a bot guessing whether her not eating is urgent, that's what the vet's for.",
+   "The vaccine reminder is the one thing I'd genuinely miss if they took it away."
+  ],
+  "churn_risk": 0,
+  "segment": "senior_pet"
+ },
+ {
+  "client_id": "MVC-C292",
+  "likes": [
+   "The telehealth video consult was handy given how few vets around Dublin actually know birds",
+   "Ranelagh is a short enough hop from Clonskeagh when I do need to go in person"
+  ],
+  "dislikes": [
+   "Waited weeks to get the avian health check booked, like they had to find the one person on staff who knows a cockatiel from a canary",
+   "Felt rushed once we were in the room, like Enzo was an inconvenience to the schedule",
+   "No follow-up after that visit, I was left guessing whether the weight loss they flagged needed watching or not"
+  ],
+  "jobs_to_be_done": [
+   "Googling avian vets and forums when something seems off with Enzo, because it's not obvious who locally actually treats birds",
+   "Keeping my own notes on his weight and moulting because nobody there is tracking it for me",
+   "Ringing around other clinics to check who even sees birds before bothering to book anywhere"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could tell me whether the vet on duty that day actually knows birds, that would save me a phone call",
+    "tag": "avian_specialist_availability"
+   },
+   {
+    "verbatim": "Some way to flag Enzo's ongoing weight thing so I'm not starting from scratch every time I ring",
+    "tag": "pet_health_notes_continuity"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "is my symptom urgent triage guidance"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen and air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "We only went in because the video call wasn't cutting it anymore, and even then it took weeks to get a slot with someone who actually knew what they were looking at with a cockatiel.",
+   "I'm not going to open a chat app to find out if it's raining, I can look out the window for that.",
+   "If it told me straight whether Enzo's weight loss was ring the vet now or keep an eye on it, I'd actually use it more than once."
+  ],
+  "churn_risk": 2,
+  "segment": "lapsed"
+ },
+ {
+  "client_id": "MVC-C039",
+  "likes": [
+   "The home visit they did once was handy, saved me the hassle of getting Barley into the car",
+   "Staff are polite enough when you actually get through to them"
+  ],
+  "dislikes": [
+   "Waiting around for ages even though I just walked in, nobody tells you how long it'll be",
+   "Prices never seem to be posted anywhere so you're guessing what you'll be charged until you're standing at the till",
+   "That telehealth video call was a bit of a faff for what it was, felt like I was paying for a phone call basically",
+   "Never got a reminder for the annual check last year, just sort of forgot until months had gone by"
+  ],
+  "jobs_to_be_done": [
+   "I look up flea and worm doses myself on Google half the time before I'd bother ringing anyone",
+   "I ask in the local pet shop in Milltown for recommendations on food",
+   "I keep a note on my phone of when he's due his jabs, when I remember to update it",
+   "I'd ring around a second clinic if I thought a quote sounded steep, just to check"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If they could just tell you straight up how much something costs before you go in, that'd save a lot of hassle",
+    "tag": "upfront_pricing"
+   },
+   {
+    "verbatim": "Some kind of reminder so I'm not the one trying to remember when his jabs are due",
+    "tag": "vaccine_reminders"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope, that's just silly, I wouldn't waste time on that",
+   "NFT pet identity, no idea what that even means for a dog and I don't want to know",
+   "EU pet-travel requirements checker, we're not travelling with him so that's no use to us",
+   "pollen and air-quality alerts, that sounds like something for a phone I don't really use, I'd stop opening it after the first go"
+  ],
+  "quotes": [
+   "If I'm honest, I'd probably still just walk in or ring, I'm not one for messing about on an app.",
+   "Nobody ever tells you the price till you're standing there with your card out, that's what annoys me most.",
+   "The reminder thing, that I'd actually use, because I forgot his check-up last year and felt bad about it."
+  ],
+  "churn_risk": 2,
+  "segment": "lapsed"
+ },
+ {
+  "client_id": "MVC-C055",
+  "likes": [
+   "The vets themselves seem to actually know Bruno's history when I get through to them",
+   "Being able to get bloods and a wellness check done in the same visit"
+  ],
+  "dislikes": [
+   "Being put on hold or having to ring back because reception is swamped",
+   "Having to re-explain that he's a brachycephalic senior pug every single time, like it's not on a file somewhere",
+   "Price of things creeping up without anyone warning me before I'm standing at the till"
+  ],
+  "jobs_to_be_done": [
+   "Watching him for breathing distress in the heat myself, nobody reminds me of that",
+   "Sorting his flea and worm doses between visits with a phone reminder I set myself",
+   "Ringing around before a dental or a follow-up to see who has an appointment sooner"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight out whether it's too warm to walk him without me having to ask three different ways, that'd actually get used, he's a pug, heat is the whole ballgame for him",
+    "tag": "weather_walk_safety_brachy"
+   },
+   {
+    "verbatim": "Something that flagged the price BEFORE I book, not after, so I'm not blindsided at reception",
+    "tag": "upfront_pricing"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pollen & air-quality alerts for allergic pets",
+   "EU pet-travel requirements checker",
+   "pet horoscope",
+   "NFT pet identity"
+  ],
+  "quotes": [
+   "I'd stop using the triage thing after a week, with a brachy pug I'm not trusting a chatbot to tell me it's fine, I'm ringing the vet or going in.",
+   "He's in there constantly, eleven times in two years, so don't ask me to type his whole story into a screen again, just have it there already.",
+   "If it can tell me straight the walk's not safe for him today because of the heat, I'll actually open it. That's real, that's not a gimmick."
+  ],
+  "churn_risk": 1,
+  "segment": "brachy_highrisk"
+ },
+ {
+  "client_id": "MVC-C373",
+  "likes": [
+   "Vets themselves seem competent, the dental extraction on my Cavapoo healed fine",
+   "They're local, Donnybrook to Ranelagh is a five minute spin"
+  ],
+  "dislikes": [
+   "Getting a straight answer on price before you're already in the chair",
+   "Being put on hold for ages when I ring to book",
+   "The dental work turned into a bigger bill than what I was quoted on the phone",
+   "No one rings back when they say they will"
+  ],
+  "jobs_to_be_done": [
+   "Ringing around other practices to compare prices before committing",
+   "Setting phone reminders myself for flea/tick/worm reorders",
+   "Googling whether a symptom is serious enough to bring her in",
+   "Texting a friend who has a dog for a second opinion before spending money"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight what a dental with extractions actually costs, all in, not the polish-only price, I might use it more.",
+    "tag": "transparent_full_cost_estimate"
+   },
+   {
+    "verbatim": "I don't need chat, I need someone to answer the phone.",
+    "tag": "phone_first_preference"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "pollen & air-quality alerts for allergic pets",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "The dental thing cost a lot more than I was told on the phone, and that stuck with me more than anything else.",
+   "I'm not going to be sitting there chatting to a bot, I want to ring up and get it sorted in two minutes.",
+   "If it told me straight what a full dental with extractions costs, all in, I might actually open it."
+  ],
+  "churn_risk": 2,
+  "segment": "time_poor_professional"
+ },
+ {
+  "client_id": "MVC-C319",
+  "likes": [
+   "Staff were fine on the phone when the rabbit got sick out of hours, they took it seriously",
+   "The rabbit vaccine appointment was quick, in and out"
+  ],
+  "dislikes": [
+   "The out-of-hours emergency bill was a shock, nobody told me the price before I said yes",
+   "Waiting on hold to book anything, especially when you're panicking about the pet",
+   "Feeling like every visit ends up costing more than what they quoted at the start"
+  ],
+  "jobs_to_be_done": [
+   "Googling rabbit symptoms myself before deciding if it's worth ringing the vet at all",
+   "Asking in a Facebook rabbit owners group whether something is normal or an emergency",
+   "Ringing around a couple of vets to compare prices before booking",
+   "Keeping a note on the phone of when the vaccines and worming are due so I don't forget"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it just told me straight what something's going to cost before I ring, that'd actually save me a phone call",
+    "tag": "upfront_pricing"
+   },
+   {
+    "verbatim": "Something that says can this wait til morning or do I need to panic and pay the emergency fee",
+    "tag": "urgency_triage"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "\"is my symptom urgent?\" triage guidance"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "The emergency visit, that's what annoyed me, not the care, the bill after. Nobody says the price til you're already sat there with the rabbit on the table.",
+   "I'm not downloading an app for a rabbit, I'll ring ye like I always do, but if the chat thing could tell me a price without me having to phone, fair enough, I'd use that.",
+   "A pet horoscope, are you serious, who's paying for that, not me."
+  ],
+  "churn_risk": 2,
+  "segment": "budget_stretched"
+ },
+ {
+  "client_id": "MVC-C052",
+  "likes": [
+   "Staff clearly know Bramble the rabbit isn't 'just a cat visit' - they don't treat exotics as an afterthought",
+   "Easy to get seen without a big song and dance, walk-in has worked for me most times",
+   "Nail clipping and de-shedding are quick in-and-out jobs, no messing"
+  ],
+  "dislikes": [
+   "Waiting room can be a free-for-all when I walk in without booking, sometimes 25-30 minutes with a stressed rabbit on my lap",
+   "Had to explain the flea/tick/worm plan pricing twice because whoever was on reception that day didn't have it in front of them",
+   "No one tells me in advance if a vet who actually knows rabbits is on that day, so I've occasionally been sent home to come back"
+  ],
+  "jobs_to_be_done": [
+   "I look up rabbit-specific health info myself on Google/rabbit forums, the clinic doesn't really do that",
+   "I track when the flea/tick/worm plan is due in my own phone calendar, nothing from the clinic reminds me",
+   "I ask a rabbit-owner WhatsApp group before I panic about something with Bramble",
+   "I compare grooming/de-shedding costs elsewhere sometimes since the Ragdoll sheds like mad"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could tell me whether the vet on duty actually deals with rabbits, that'd save me a wasted trip.",
+    "tag": "vet_specialty_lookup"
+   },
+   {
+    "verbatim": "Something that just pings me a few days before the flea/tick/worm plan is due so I'm not the one keeping track of it.",
+    "tag": "reminder_automation"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker (never travelling with them, waste of a feature for me)",
+   "\"is my symptom urgent?\" triage guidance - I wouldn't trust a chatbot to tell me that, I'd just walk in or ring"
+  ],
+  "quotes": [
+   "I don't book, I just walk in, so the chatbot telling me prices and opening hours is grand but it's not going to change how I actually show up.",
+   "What actually annoyed me was standing there with Bramble getting more stressed by the minute because reception couldn't tell me straight what the flea plan cost.",
+   "A pet horoscope, are you serious, I've a rabbit with a heart condition, I don't need his star sign."
+  ],
+  "churn_risk": 0,
+  "segment": "multi_pet"
+ },
+ {
+  "client_id": "MVC-C225",
+  "likes": [
+   "The vet who checked the hamster the first time was gentle and didn't rush us",
+   "Getting registered as a new patient was straightforward enough"
+  ],
+  "dislikes": [
+   "Felt like a lot of waiting around for something as small as a hamster check",
+   "Got the sense the front desk didn't quite know what to do with a small mammal, kept having to double check things",
+   "Nobody followed up after, and I wasn't that impressed with how it went so I didn't rush back"
+  ],
+  "jobs_to_be_done": [
+   "Googling symptoms myself before deciding if it's worth a visit at all",
+   "Asking on the local Ranelagh parents' WhatsApp group if anyone knows a vet good with small pets",
+   "Just watching the hamster myself for a day or two to see if it's actually sick or just old",
+   "Writing reminders on the kitchen calendar, not an app, for anything pet-related"
+  ],
+  "feature_requests": [],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "\"is my symptom urgent?\" triage guidance"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "Honestly it wasn't a great visit, we sat there ages with the kids for something that should've been quick, so I haven't been back since.",
+   "I'd probably Google it or ask on the WhatsApp group before I'd even think of a clinic's chatbot.",
+   "A price estimate before I go in would actually be useful, I don't like surprises on the bill with two kids to feed."
+  ],
+  "churn_risk": 3,
+  "segment": "lapsed"
+ },
+ {
+  "client_id": "MVC-C387",
+  "likes": [
+   "Booking online instead of phoning works with my life",
+   "They're good with the rabbits, not just a cat-and-dog practice",
+   "Nail clipping and dental checks are quick, in and out"
+  ],
+  "dislikes": [
+   "Had to ring twice last time because the online booking didn't show a slot that matched what the vet actually meant when they said 'come back in six weeks'",
+   "No easy way to see what my rabbits are actually due for versus the cat, I have three different animals and it's all in my head",
+   "The de-shedding treatment took longer than they quoted and nobody messaged to say they were running behind, I was sitting in Ranelagh village killing time"
+  ],
+  "jobs_to_be_done": [
+   "Tracking three separate vaccination/worming schedules for a cat and two rabbits on my phone notes app",
+   "Googling 'is X safe for rabbits' at 11pm when one of them isn't eating properly",
+   "Sourcing hay and rabbit-safe litter from separate pet shops because the vet doesn't sell it",
+   "Asking a rabbit Facebook group when something looks off before deciding it's vet-worthy"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it actually tracked each pet separately and pinged me before the worming plan runs out, I'd open it, but only if I don't have to set it up myself.",
+    "tag": "per-pet-reminders"
+   },
+   {
+    "verbatim": "Rabbits are prey animals, they hide being sick until it's serious, so anything that helps me judge urgent versus wait-and-see for a rabbit specifically would actually get used, most triage stuff online is dog and cat focused.",
+    "tag": "species-specific-triage"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "\"is my symptom urgent?\" triage guidance"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I've three animals to keep track of and right now that's a notes app on my phone, not the clinic.",
+   "The horoscope and the NFT thing, are you serious, that's not a vet feature, that's a joke someone put on the list to see if I was paying attention.",
+   "I'd try the cost estimator once out of curiosity but I'm not price-sensitive enough to keep going back to it, I'd stop using it after a week."
+  ],
+  "churn_risk": 1,
+  "segment": "multi_pet"
+ },
+ {
+  "client_id": "MVC-C087",
+  "likes": [
+   "The telehealth video consult saved me an actual trip when the dog had a dodgy tummy",
+   "Registration was sorted quickly when we first took him on",
+   "They don't waste my time when I ring, get straight to the point"
+  ],
+  "dislikes": [
+   "Getting through on the phone at 5.30pm after work when everyone else is also ringing",
+   "Never sure what something will cost until I'm already on the phone asking",
+   "Being put on hold and having to repeat the same details about the dog every time"
+  ],
+  "jobs_to_be_done": [
+   "Google 'is X safe for dogs' when he eats something dodgy",
+   "WhatsApp a group chat with other rescue-dog owners in the area for quick advice",
+   "Set my own phone reminders for flea/worm treatment because nobody else does it for me",
+   "Ring around competitors if Meadow can't fit me in that week"
+  ],
+  "feature_requests": [],
+  "picks": [
+   "Booking an appointment slot",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "pollen & air-quality alerts for allergic pets",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "Honestly if I ring at half five it's a lottery whether I get through before they close, that's the actual annoyance, not the vets themselves.",
+   "I don't need it to hold my hand, I just want to book a slot and know roughly what it's going to cost me before I turn up.",
+   "A pet horoscope, are you serious, I've a dog with a dicky stomach, not a star sign to worry about."
+  ],
+  "churn_risk": 1,
+  "segment": "time_poor_professional"
+ },
+ {
+  "client_id": "MVC-C140",
+  "likes": [
+   "The vets themselves are gentle with Bailey, never rushed even when he's a nervous wreck on the table",
+   "Being able to book and pay online without having to ring during work hours"
+  ],
+  "dislikes": [
+   "Every visit ends with a different price than what the receptionist quoted on the phone, and nobody explains why until you're at the till",
+   "The behaviour consult felt rushed, like they had a script and we were 20 minutes over their slot",
+   "No easy way to check what a follow-up or a specific test is actually going to cost before you commit to it"
+  ],
+  "jobs_to_be_done": [
+   "Googling Bailey's symptoms at midnight before deciding if it's an emergency-vet situation",
+   "Keeping a running note on my phone of his vaccine and worming dates because nothing reminds me",
+   "Asking a Cocker Spaniel Facebook group about behaviour techniques between paid consults",
+   "Comparing prices across two other Ranelagh/Rathmines clinics before booking anything non-urgent"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it actually told me a real total before I book, not a 'from' price, I'd trust it more.",
+    "tag": "transparent-total-cost-estimate"
+   },
+   {
+    "verbatim": "Something that reminds me when his boosters are due so I'm not the one keeping track on my phone.",
+    "tag": "vaccine-reminder"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "EU pet-travel requirements checker - we're not travelling with him, waste of a feature for us",
+   "pet horoscope - honestly who is this for, feels like it'd make me trust the clinic less",
+   "NFT pet identity - no, just no, that's a solution looking for a problem",
+   "pollen & air-quality alerts - nice idea but I'm not going to open an app for that, I'd just look out the window"
+  ],
+  "quotes": [
+   "I don't need the chat bot to be my friend, I need it to tell me the actual price before I say yes to anything.",
+   "We were quoted one thing on the phone for the behaviour consult and paid more on the day, that's the kind of thing that makes you not trust a place.",
+   "If it just pinged me before his boosters were due I'd genuinely use that every time, the rest of it I'd probably forget exists after week one."
+  ],
+  "churn_risk": 2,
+  "segment": "anxious_first_timer"
+ },
+ {
+  "client_id": "MVC-C100",
+  "likes": [
+   "Being able to just walk in without booking ahead of time",
+   "They were good with the greyhound when I got her, she's a nervous rescue and the nurses were patient",
+   "Straightforward about pricing, no upselling"
+  ],
+  "dislikes": [
+   "Waiting around in reception on a walk-in with no idea how long it'll actually be",
+   "Had to ring twice to get the home visit sorted, phone wasn't picked up first time",
+   "Got a bit lost in the paperwork when she was being neutered, wasn't clear what was included in the price upfront"
+  ],
+  "jobs_to_be_done": [
+   "Greyhound-specific advice (muzzling, thin skin, sighthound quirks) I mostly get from a greyhound rescue Facebook group, not the vet",
+   "Checking if it's safe to walk her in the heat or on hot pavement, I just use my own judgement or Google",
+   "Keeping track of when her boosters/worming are due, currently just a note in my phone calendar",
+   "Finding a dog-sitter or someone to check on her when I travel, that's all word of mouth and WhatsApp with neighbours"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could tell me roughly how long the walk-in queue is before I leave the house, that'd actually get used",
+    "tag": "wait_time_visibility"
+   },
+   {
+    "verbatim": "Something that just pings me before her boosters are due instead of me having to remember",
+    "tag": "reminders"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "\"is my symptom urgent?\" triage guidance",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I like being able to just walk in, that's why I go there, so don't build me something that makes me book slots instead.",
+   "A horoscope for the dog, no, absolutely not, who is that for.",
+   "If it pinged me two weeks out that her booster's due I'd actually open it, right now that's just a note in my phone I forget about."
+  ],
+  "churn_risk": 0,
+  "segment": "new_pet"
+ },
+ {
+  "client_id": "MVC-C196",
+  "likes": [
+   "Home visit for the routine check was handy, didn't have to fight the cat into the carrier",
+   "Telehealth video consult saved a trip once when I just needed a quick opinion"
+  ],
+  "dislikes": [
+   "Never know the price until I'm standing there paying it",
+   "Waiting on hold or for a callback when I ring to book",
+   "Felt a bit rushed through the kitten course visits, like a conveyor belt"
+  ],
+  "jobs_to_be_done": [
+   "Googling symptoms before deciding if a vet visit is even worth the money",
+   "Asking in the Ranelagh/Dublin 6 Facebook group what other cat owners pay for spay/neuter or checkups",
+   "Setting phone reminders myself for follow-up jabs because nothing came from the clinic",
+   "Comparing prices between a couple of local vets before booking anything non-urgent"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight up what a general consult or a follow-up jab costs before I ring, that'd save me a lot of hassle.",
+    "tag": "price_transparency"
+   },
+   {
+    "verbatim": "Something that pings me when the cat's actually due for something instead of me having to remember.",
+    "tag": "reminders"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "I'm not made of money, so half the time I just want to know the price before I even think about booking.",
+   "The home visit was grand, saved me wrestling her into the carrier, but I've no idea what half these services cost until I'm handed the bill.",
+   "A pet horoscope, are you serious, I'd close that app and never open it again."
+  ],
+  "churn_risk": 1,
+  "segment": "new_pet"
+ },
+ {
+  "client_id": "MVC-C282",
+  "likes": [
+   "The home visit option for the routine check saved me having to take time off work",
+   "Grooming and the vaccination visit have generally gone smoothly, staff are competent",
+   "Being on the flea/tick/worm plan means I don't have to think about it as much"
+  ],
+  "dislikes": [
+   "Booking anything means ringing during the day, and I'm usually in back-to-back meetings so it takes two or three tries to actually get through",
+   "No one ever confirms the appointment by text, so I'm never 100% sure it's actually booked until I show up",
+   "Groomer was running over an hour behind once and nobody rang to warn me, I just turned up and waited with the dog in the car"
+  ],
+  "jobs_to_be_done": [
+   "I keep the flea/tick/worm dosing dates on a reminder in my phone calendar myself",
+   "I check Boots or the pharmacy app for basic dog first-aid stuff before bothering the vet",
+   "I ask other parents at the school gate or in the local WhatsApp group which groomer or vet is fastest for a quick slot",
+   "I look up whether a food or plant is toxic on Google before ringing anyone"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could actually just book the slot instead of telling me prices, that would save me a phone call",
+    "tag": "booking"
+   },
+   {
+    "verbatim": "A text reminder before the jab is due so I'm not the one tracking it",
+    "tag": "vaccine_reminders"
+   }
+  ],
+  "picks": [
+   "Booking an appointment slot",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I don't have time to be on hold, if I open this thing it needs to actually book me a slot, not just tell me what it costs.",
+   "The toxic-plant thing, I just Google it, I'm not waiting on a chatbot to tell me that at ten at night.",
+   "A pet horoscope, are you serious, I've a Labrador not a star sign to worry about."
+  ],
+  "churn_risk": 0,
+  "segment": "time_poor_professional"
+ },
+ {
+  "client_id": "MVC-C198",
+  "likes": [
+   "Home visit option for the rabbit, saves the stress of a carrier and the car",
+   "They remember the rabbit needs the RVHD and myxomatosis combo without me having to explain it every time",
+   "Nail clipping is quick and they don't try to upsell me when I'm just in for that"
+  ],
+  "dislikes": [
+   "Prices aren't posted anywhere obvious, I have to ring or ask at the desk and that's annoying with three pets to keep track of",
+   "The flea/tick/worm plan renewal isn't flagged to me, I've gone weeks over before because nobody reminded me",
+   "Waiting room gets tight with two cat carriers and a rabbit box and a toddler in tow, not really their fault but it's a lot"
+  ],
+  "jobs_to_be_done": [
+   "I keep a note on the fridge with each pet's next vaccine/flea date so I don't double up or forget",
+   "I check the rabbit's weight myself at home with the kitchen scale between visits, nobody's ever shown me what's normal",
+   "I ring around before an unexpected visit to compare cost since we're stretched with three animals",
+   "I use Google to check if a symptom is urgent before deciding whether it's worth a visit at all"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me a price for the multi-pet flea plan without me having to type out three different animals, that'd actually save me a phone call.",
+    "tag": "price_lookup"
+   },
+   {
+    "verbatim": "Something that pings me before the flea/tick/worm plan runs out, that's the thing that actually bites us.",
+    "tag": "renewal_reminder"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "With three animals I don't need entertainment from a vet chatbot, I need it to stop me forgetting the flea plan runs out.",
+   "If it could just tell me a price for the multi-pet flea plan without me having to type out three different animals, that'd actually save me a phone call.",
+   "A pet horoscope, for a rescue rabbit that's nearly nine? No, we're stretched enough as it is, I want the practical stuff."
+  ],
+  "churn_risk": 1,
+  "segment": "multi_pet"
+ },
+ {
+  "client_id": "MVC-C305",
+  "likes": [
+   "The home visit option, since Bailey (my rescue, she's 15) hates the car and the carrier at this stage",
+   "Getting straight, no-nonsense answers on the quality-of-life consult rather than being pushed into more tests",
+   "Being able to look things up myself online instead of ringing and waiting on hold"
+  ],
+  "dislikes": [
+   "The ultrasound scan price wasn't clear until I was standing at the desk, no ballpark given when I booked it",
+   "Having to phone to arrange the home visit, no way to just request a slot online",
+   "Repeating Bailey's history every visit like they don't have the notes in front of them"
+  ],
+  "jobs_to_be_done": [
+   "Googling her symptoms at midnight before deciding if it's a ring-in-the-morning thing or an emergency",
+   "Keeping a running log of her weight, meds and appetite in my Notes app since the clinic doesn't send me anything to track between visits",
+   "Setting my own phone reminders for her flea/worm doses and painkillers",
+   "Comparing prices against a couple of other Dublin vets before booking anything non-urgent"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "Just tell me roughly what something's going to cost before I commit to it, I don't want a surprise at the till with an old dog racking up bills",
+    "tag": "upfront_pricing"
+   },
+   {
+    "verbatim": "Something that helps me judge if a bad day for her is wait-and-see or bring-her-in-now, I make that call myself off Google at the moment and I'd rather it be informed",
+    "tag": "symptom_triage"
+   }
+  ],
+  "picks": [
+   "\"is my symptom urgent?\" triage guidance",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I don't need it to book me a slot, I need it to tell me does this trip actually cost what I think it will",
+   "She's 15, at this point every visit I'm half-expecting bad news, so the last thing I want is a chatbot cheerleading me with a pollen forecast",
+   "I'd try a weight or worming reminder for a week and then just go back to my own phone alarms, it's not adding anything the clinic doesn't already text me about"
+  ],
+  "churn_risk": 1,
+  "segment": "senior_pet"
+ },
+ {
+  "client_id": "MVC-C166",
+  "likes": [
+   "Home visit option for routine stuff, saves him a trip",
+   "Staff know his dog and don't waste his time when he calls",
+   "Nail clipping and flea/tick/worm plan are quick, no-fuss add-ons he can just say yes to"
+  ],
+  "dislikes": [
+   "Being put on hold when he rings during his lunch break",
+   "Having to call back because nobody rang him back when they said they would",
+   "Repeating the same info about his dog every time he gets a different receptionist"
+  ],
+  "jobs_to_be_done": [
+   "Setting his own phone reminder for flea/worm plan renewal because he doesn't trust himself to remember otherwise",
+   "Googling 'is X safe for golden retrievers' when something seems off before deciding if it's a vet call",
+   "Texting a mate who has a lab about what's normal for a 5 year old dog"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just book me a slot without me having to ring and be on hold, I'd actually use that.",
+    "tag": "appointment_booking"
+   },
+   {
+    "verbatim": "Send me a text when the flea and worm stuff is due, don't make me remember it.",
+    "tag": "reminders"
+   }
+  ],
+  "picks": [
+   "Booking an appointment slot",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "\"is my symptom urgent?\" triage guidance"
+  ],
+  "quotes": [
+   "I'm not ringing at 9am to sit on hold when I've a 9:30 meeting, that's the actual problem.",
+   "Price isn't really my issue, my issue is time. If the chatbot could just book the slot I'd use it every time.",
+   "A pet horoscope, come on, I've a Golden Retriever not a star sign."
+  ],
+  "churn_risk": 0,
+  "segment": "time_poor_professional"
+ },
+ {
+  "client_id": "MVC-C107",
+  "likes": [
+   "Booking a home visit for Bailey rather than dragging a 10-year-old Golden into the car and up the clinic steps",
+   "Being able to look things up on the website instead of ringing and sitting on hold",
+   "The vets themselves know what they're doing with an older dog"
+  ],
+  "dislikes": [
+   "Every visit I have to re-explain Bailey's history: his joints, the last blood panel, what he's on. Nobody seems to have it pulled up already",
+   "Blood panel prices aren't clear until I'm standing there paying, and blood work for a senior dog isn't cheap",
+   "No follow-up after the blood panel unless I chase it. I got the results but no 'here's what changed since last time'"
+  ],
+  "jobs_to_be_done": [
+   "Tracking Bailey's bloodwork results over time myself in a spreadsheet, because the clinic doesn't show me the trend",
+   "Setting my own phone reminders for his joint supplements and worming, the clinic doesn't prompt me",
+   "Googling what a slightly-off kidney value on an older Golden actually means before I ring anyone",
+   "Swapping notes with a couple of other Golden owners in Rathmines on WhatsApp about vets and symptoms"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just show me Bailey's last few blood panel numbers side by side, that'd actually save me from my own spreadsheet",
+    "tag": "senior-pet-health-trends"
+   },
+   {
+    "verbatim": "Some kind of price clarity on the blood panel before I book it would stop the surprise at the till",
+    "tag": "cost-transparency"
+   }
+  ],
+  "picks": [
+   "booking_appointment_slot",
+   "vaccine_worming_due_date_reminders"
+  ],
+  "rejections": [
+   "pet_horoscope",
+   "nft_pet_identity",
+   "eu_pet_travel_requirements_checker",
+   "pollen_air_quality_alerts"
+  ],
+  "quotes": [
+   "I'm not against the chatbot, I use the website for most things anyway, but right now it just tells me prices and opening hours, which I could find in five seconds myself.",
+   "What actually matters for an old dog is: did this bloodwork number move since last time, and what's next. Nobody's built that yet.",
+   "The symptom checker thing, I'd try it once out of curiosity and then go straight back to just ringing the vet, because I'm not trusting an app with a ten-year-old dog's chest pain."
+  ],
+  "churn_risk": 1,
+  "segment": "senior_pet"
+ },
+ {
+  "client_id": "MVC-C102",
+  "likes": [
+   "The telehealth video consult saved me a trip once when I just needed reassurance about Bailey's ear",
+   "They did the paperwork for the rabies travel vaccine properly, no messing"
+  ],
+  "dislikes": [
+   "Prices never seem to be posted anywhere upfront, you only find out at the till",
+   "Booking normally means ringing during work hours which I can't always do with the kids",
+   "Felt a bit rushed the last time, in and out fast"
+  ],
+  "jobs_to_be_done": [
+   "Googling symptoms myself before deciding if it's worth a visit",
+   "Asking the parents WhatsApp group what other dog owners around Rathgar pay for things",
+   "Keeping a note on my phone of when jabs are due because nothing reminds me",
+   "Ringing around a couple of places to compare prices when it's something non-urgent"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "if it just told me straight what something costs without me having to type in a code, that'd be handy",
+    "tag": "price-lookup-friction"
+   },
+   {
+    "verbatim": "I don't want to be filling in forms on a phone, I'd rather it just tell me plain",
+    "tag": "low-tech-comfort-ui"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I'm not going to be checking a chatbot every day, I've enough apps as it is.",
+   "If it can tell me straight what something's going to cost before I book, I'd actually use that, money's tight enough as it is.",
+   "Nobody ever reminds you Bailey's jabs are due, I just have a note on my phone and half the time I forget to look at it."
+  ],
+  "churn_risk": 1,
+  "segment": "budget_stretched"
+ },
+ {
+  "client_id": "MVC-C308",
+  "likes": [
+   "Staff at the Ranelagh clinic are actually good with the rabbit, not every vet wants to touch an exotic and that matters more to me than anything else",
+   "Easy enough to get an appointment when I ring, they don't leave me hanging"
+  ],
+  "dislikes": [
+   "I never know what something's going to cost until I'm standing at the till with the golden retriever half out the door. For a bath and brush that's grand, but the last dental estimate for the dog jumped once they 'had a look', and I don't love surprises when I'm watching every euro",
+   "Everything for the rabbit still goes through a phone call because nobody's sure if the online system even lists rabbit stuff, so I end up ringing anyway even though I'd rather just do it on the site",
+   "Had to chase them twice for the vaccine cert paperwork after a visit, that's just admin they should have sent automatically"
+  ],
+  "jobs_to_be_done": [
+   "Tracking the rabbit's weight weekly in a notes app because rabbits can go downhill fast and the clinic doesn't prompt me to do that",
+   "Googling rabbit-specific symptoms and checking the Rabbit Welfare Association site because I don't fully trust a general dog-and-cat vet's read on exotic issues",
+   "Keeping a WhatsApp group with two other rabbit owners in Dublin to compare notes and vet recommendations",
+   "Setting my own phone reminders for worming and flea treatment for the dog because I don't trust myself to remember otherwise",
+   "Ringing around or checking Google reviews if I ever need a second opinion or a cheaper quote for something non-urgent"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me upfront, rough numbers, what a dental or a check-up is actually going to cost before I book, that alone would get me using it every time",
+    "tag": "upfront-pricing"
+   },
+   {
+    "verbatim": "Something that pings me when the rabbit's or the dog's boosters are actually due, instead of me keeping my own list",
+    "tag": "due-date-reminders"
+   },
+   {
+    "verbatim": "I'd want to know it actually understands rabbits aren't just small dogs, not another chatbot that assumes everything's a Labrador",
+    "tag": "exotic-pet-support"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "pollen & air-quality alerts for allergic pets",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "If it could just tell me upfront, rough numbers, what a dental or a check-up is actually going to cost before I book, that alone would get me using it every time.",
+   "I don't love surprises when I'm watching every euro, and the last dental estimate jumped once they 'had a look'.",
+   "A pet horoscope, are you serious. I've a senior rabbit and a dog with dodgy hips, I need reminders, not star signs."
+  ],
+  "churn_risk": 1,
+  "segment": "multi_pet"
+ },
+ {
+  "client_id": "MVC-C358",
+  "likes": [
+   "Being able to book an occasional home visit rather than dragging the dog in every time",
+   "Reception has always been decent on the phone when I do get through"
+  ],
+  "dislikes": [
+   "Being put on hold for ages when I ring to book, especially on a Monday",
+   "Getting hit with add-on costs on the day of a dental (they quote one price then the anaesthesia and bloods bump it up)",
+   "Having to explain the same history about her heart murmur every single time instead of them just having it on file"
+  ],
+  "jobs_to_be_done": [
+   "Googling whether a symptom (reverse sneezing, the odd cough) is something to worry about before ringing anyone",
+   "WhatsApp group with two other Cavalier owners in Rathgar comparing notes and vet prices",
+   "Ringing around two other clinics to compare a dental quote before committing",
+   "Keeping a note on my phone of her vaccination and worming dates because I don't trust myself to remember"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight what the dental is actually going to cost with the anaesthesia and everything, not the headline price, that'd save me a phone call.",
+    "tag": "transparent_all_in_pricing"
+   },
+   {
+    "verbatim": "Could it remember she's had a heart murmur flagged before, so I'm not repeating myself to whoever answers the phone?",
+    "tag": "pet_history_continuity"
+   }
+  ],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I'm not against a chatbot, I just don't fully trust it with anything that isn't a straight price or a straight yes-no on opening hours.",
+   "The dental was quoted one figure and came out dearer once the anaesthesia and bloods got added, that's the kind of thing that actually annoys me, not the wait.",
+   "I'd use it for the price and the reminders, I'd stop bothering with the symptom checker after a week because I'd still ring the vet if I was genuinely worried about her breathing."
+  ],
+  "churn_risk": 1,
+  "segment": "brachy_highrisk"
+ },
+ {
+  "client_id": "MVC-C127",
+  "likes": [
+   "The home visit for the rabbit vaccine, having a vet come to me was handy since I don't drive",
+   "Nobody rushed the blood panel discussion, the vet actually explained the results"
+  ],
+  "dislikes": [
+   "Nobody tells you what to expect with a rabbit, I felt a bit lost, had to ask a lot of questions I shouldn't have needed to ask",
+   "Booking the general consultation took two phone calls because the first time nobody picked up",
+   "Didn't get much aftercare guidance following the vaccine, just told 'she'll be grand'"
+  ],
+  "jobs_to_be_done": [
+   "Googling rabbit-specific care questions myself since the vet visits are short",
+   "Following a rabbit owners Facebook group for diet and behaviour advice",
+   "Keeping a note on my phone of vaccine dates so I don't forget",
+   "Ringing the clinic directly when I'm not sure if something's urgent"
+  ],
+  "feature_requests": [],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I don't need the thing to hold my hand, I just want to know when the next jab is due without having to remember it myself.",
+   "A horoscope for the rabbit, are you serious, I'm not paying for that sort of nonsense.",
+   "If I ring and nobody answers first go, that annoys me more than any app would fix."
+  ],
+  "churn_risk": 1,
+  "segment": "new_pet"
+ },
+ {
+  "client_id": "MVC-C357",
+  "likes": [
+   "Home visits when the dog is too wheezy to bring in",
+   "Being able to walk in without booking ahead, most of the time",
+   "Telehealth for the small stuff so I don't have to drag three kids into the waiting room"
+  ],
+  "dislikes": [
+   "Had to get a second opinion after a diagnosis I wasn't happy with, and that shouldn't have to happen",
+   "Walk-in means sitting there with a whingy toddler and a snorting dog for 40 minutes some days",
+   "Every visit I'm re-explaining that he's brachycephalic and what that means for anaesthetic risk, like it's not on file",
+   "New pet registration paperwork was a faff and felt like it duplicated stuff I'd already given them"
+  ],
+  "jobs_to_be_done": [
+   "Googling brachycephalic breathing symptoms at 11pm to figure out if it's an emergency",
+   "A Shih Tzu owners WhatsApp group where people share what worked for them",
+   "Sorting pet insurance claims myself, clinic doesn't touch that",
+   "Booking the dog walker and boarding through separate apps when we're away",
+   "Ringing around for a groomer who knows brachy coat and breathing needs"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight up whether the panting he's doing right now is normal-hot-day panting or get-in-the-car panting, that'd actually get used at midnight.",
+    "tag": "symptom_urgency_triage"
+   },
+   {
+    "verbatim": "Let me grab a slot without standing in the queue with the kids, that's the main thing.",
+    "tag": "appointment_booking"
+   }
+  ],
+  "picks": [
+   "\"is my symptom urgent?\" triage guidance",
+   "Booking an appointment slot"
+  ],
+  "rejections": [
+   "Pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "I had to get a second opinion last time because I wasn't sold on what the first vet said, and that's not exactly confidence-inspiring.",
+   "He's a Shih Tzu, he's brachycephalic, I feel like I say that every single visit and it should just be sitting on the file already.",
+   "If the chat thing could tell me at midnight whether his panting is a real problem or just a hot night, I'd actually open it. Prices and opening hours I can find on Google."
+  ],
+  "churn_risk": 2,
+  "segment": "brachy_highrisk"
+ },
+ {
+  "client_id": "MVC-C367",
+  "likes": [
+   "The telehealth video consult saved me a trip when I just needed a quick check on Baxter's ear infection",
+   "Home visit option once when I genuinely couldn't get away from work"
+  ],
+  "dislikes": [
+   "Booking always seems to mean ringing during the day when I'm in back-to-back meetings and can't step out",
+   "Had to chase them for a follow-up on a flea/tick plan renewal, nobody proactively told me it had lapsed",
+   "Reception can be slow to pick up, sometimes I'm on hold for a few minutes which I don't have time for"
+  ],
+  "jobs_to_be_done": [
+   "I keep a note on my phone of when Baxter's vaccines and flea treatment are due because nobody reminds me",
+   "I Google symptoms first before deciding if it's worth a call or if it can wait",
+   "I order his flea/worm stuff online sometimes if it's cheaper than through the clinic"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just text or ring me when something's actually due, that'd save me the phone note",
+    "tag": "vaccine/worming due-date reminders"
+   },
+   {
+    "verbatim": "Some way to book without having to catch someone live on the phone would help, even if I still prefer talking for anything serious",
+    "tag": "appointment_booking"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "Booking an appointment slot"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "pollen & air-quality alerts for allergic pets",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "I don't need a chatbot to be my friend, I need it to tell me his flea treatment is due before I forget again.",
+   "I'm not ringing around checking opening hours for a walk, I just want the important stuff sorted without me chasing them.",
+   "The horoscope thing, no, absolutely not, I'd never open that again."
+  ],
+  "churn_risk": 1,
+  "segment": "time_poor_professional"
+ },
+ {
+  "client_id": "MVC-C202",
+  "likes": [
+   "Vet actually knows the dog by name and remembers his history without me repeating it every time",
+   "Ranelagh location is handy, walkable, so no faffing with parking"
+  ],
+  "dislikes": [
+   "Getting a same-week appointment slot by phone has been hit and miss, one week I rang three times before someone picked up",
+   "Had to wait about 25 minutes past my slot for the nutrition clinic follow-up with nobody telling me it was running late",
+   "Got the passport and travel cert paperwork sorted but nobody flagged the follow-up cost until I was standing at the desk paying"
+  ],
+  "jobs_to_be_done": [
+   "Track vaccination and worming dates myself in my phone calendar since nothing reminds me",
+   "Google what's normal for a cocker spaniel diet and weight before trusting the clinic's line fully",
+   "Research pet travel documentation myself online before ringing to book the cert appointment",
+   "Ask other dog owners in the Ranelagh WhatsApp group for groomer and dog-walker recommendations"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could actually just book me a slot there and then instead of me ringing and getting a voicemail, I'd use that every time",
+    "tag": "booking"
+   },
+   {
+    "verbatim": "Tell me upfront roughly what something like a passport cert or a dental clean is going to cost before I'm standing at the till",
+    "tag": "pricing_transparency"
+   }
+  ],
+  "picks": [
+   "Booking an appointment slot",
+   "Cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "Pet horoscope",
+   "NFT pet identity",
+   "Pollen & air-quality alerts for allergic pets",
+   "EU pet-travel requirements checker"
+  ],
+  "quotes": [
+   "I don't need a chatbot to tell me if it's raining, I've got eyes and a window. What I need is to actually get a slot booked without ringing three times.",
+   "I'm not going to sit there checking pollen counts for a cocker spaniel, that's a bit much.",
+   "Just tell me the price before I'm standing at the till with the dog looking at me."
+  ],
+  "churn_risk": 1,
+  "segment": "new_pet"
+ },
+ {
+  "client_id": "MVC-C224",
+  "likes": [
+   "Telehealth video consult saved me a panicked dash into Ranelagh when the dog ate something dodgy off the street",
+   "The behaviour consult vet was patient with me, I ask a lot of questions and she didn't make me feel stupid",
+   "Puppy socialisation class was well run, small groups, I got to know other owners on the road"
+  ],
+  "dislikes": [
+   "Booking is still ring-and-hope, I've been on hold trying to get a behaviour follow-up slot before",
+   "No text or email confirmation half the time, I only find out I'm actually booked when I ring back a day later to check",
+   "Prices for the behaviour consults aren't posted anywhere so I've been surprised twice"
+  ],
+  "jobs_to_be_done": [
+   "Googling symptoms at midnight before deciding if it's an emergency",
+   "WhatsApp group with other Ranelagh dog owners for recommendations and 'is this normal' questions",
+   "Tracking worming/flea treatment dates myself in my phone calendar because nothing reminds me",
+   "Checking a dog-walking Facebook group for local trainers and behaviourists",
+   "Looking up pet insurance claim forms myself, clinic doesn't help with that part"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight, is this an emergency or can it wait till the morning, that's the thing I actually need at 11pm",
+    "tag": "triage_guidance"
+   },
+   {
+    "verbatim": "Let me book the actual appointment in the chat instead of ringing and being on hold",
+    "tag": "booking"
+   },
+   {
+    "verbatim": "Text me before the vaccines are due, I've forgotten before and felt like a bad owner",
+    "tag": "reminders"
+   }
+  ],
+  "picks": [
+   "\"is my symptom urgent?\" triage guidance",
+   "Booking an appointment slot"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "lost-pet microchip checklist"
+  ],
+  "quotes": [
+   "The telehealth call is great when he's eaten something off the road, but for anything else I'd still rather just talk to a person, I'm not ringing an app when I'm panicking.",
+   "Nobody ever texts me to confirm I actually have a slot booked, I've turned up unsure before.",
+   "I don't need a pet horoscope, I need to know if 2am vomiting means A&E or bed."
+  ],
+  "churn_risk": 0,
+  "segment": "anxious_first_timer"
+ },
+ {
+  "client_id": "MVC-C243",
+  "likes": [
+   "Vets seem to actually know the rabbit as well as the dog, not just a generic tick-box",
+   "Been going three times in two years and no major complaints, mostly straightforward",
+   "Reception staff are polite on the phone when I ring"
+  ],
+  "dislikes": [
+   "Waiting on hold when I ring to book, especially first thing Monday morning",
+   "Had to ring back twice last time because nobody rang me back with the results when they said they would",
+   "Parking near the practice in Ranelagh is a nightmare when you've a dog and a rabbit carrier to lug in"
+  ],
+  "jobs_to_be_done": [
+   "Googling whether something is urgent before deciding to ring the vet at all",
+   "Keeping worming and vaccine dates scribbled in a kitchen diary, not any app",
+   "Asking a neighbour or the local Facebook group about a rabbit-specific issue since not every vet is great with rabbits",
+   "Ringing around other Terenure/Ranelagh area vets when Meadow can't fit us in quickly"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If it could just tell me straight out whether I need to bring the dog in today or if it can wait, that'd actually save me a phone call",
+    "tag": "triage_guidance"
+   },
+   {
+    "verbatim": "Something that pings me when the rabbit's jabs are due, because I do forget with him more than the dog",
+    "tag": "vaccine_reminders"
+   }
+  ],
+  "picks": [
+   "\"is my symptom urgent?\" triage guidance",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I'd still ring for anything serious, I'm not trusting a chatbot with the rabbit's health, but if it told me whether I actually need to bring him in today that'd save me a phone call.",
+   "A reminder for the jabs would be handy, I forget the rabbit's more than the dog's, but I'd probably stop opening the thing after a week if it was just prices and opening hours.",
+   "The weather-for-a-walk bit is grand but I'm not opening an app to know if it's raining in Dublin, I can look out the window."
+  ],
+  "churn_risk": 1,
+  "segment": "multi_pet"
+ },
+ {
+  "client_id": "MVC-C114",
+  "likes": [
+   "Staff were patient with the puppy socialisation class",
+   "The vet who did the neutering explained the aftercare clearly, no waffle",
+   "Being able to just walk in without ringing ahead most of the time"
+  ],
+  "dislikes": [
+   "Waited nearly forty minutes past my slot for the wellness check with no one telling me why",
+   "The telehealth video call I tried once was more hassle than it was worth, the connection dropped and I ended up describing everything twice",
+   "Reception can be scattered when it's busy, I've had to repeat myself about the dog's name and breed more than once"
+  ],
+  "jobs_to_be_done": [
+   "I look up what's normal for a Border Collie puppy on Google when something seems off",
+   "I ask a neighbour who's had dogs for years before I panic about anything",
+   "I keep a page in a notebook of when jabs and the chip were done, I don't trust myself to remember",
+   "I ring the practice directly if I'm actually worried, I don't message anywhere"
+  ],
+  "feature_requests": [
+   {
+    "verbatim": "If the machine could just tell me straight what a jab or the neutering is going to cost before I walk in, that would save a conversation",
+    "tag": "cost_transparency"
+   },
+   {
+    "verbatim": "Something reminding me when she's due her next injections would be handy, I'm not great at remembering dates",
+    "tag": "vaccine_reminders"
+   }
+  ],
+  "picks": [
+   "vaccine/worming due-date reminders",
+   "cost estimator with payment-plan info"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "The video call was more bother than it was worth, the picture kept freezing and I was shouting at the phone.",
+   "I don't need it to book anything for me, I'd rather just walk in like I always do.",
+   "If it told me straight what something costs before I go down, that I'd actually use."
+  ],
+  "churn_risk": 1,
+  "segment": "new_pet"
+ },
+ {
+  "client_id": "MVC-C366",
+  "likes": [
+   "Staff know Rusty by name after all these years",
+   "They don't rush you off the phone when you're explaining a problem"
+  ],
+  "dislikes": [
+   "Prices seem to creep up every time without anyone mentioning it beforehand",
+   "Getting put on hold for ages when I ring, especially on a Monday",
+   "Last visit in July the vet ran 25 minutes late and nobody told me at the desk",
+   "Not always the same vet, so I end up repeating Rusty's history"
+  ],
+  "jobs_to_be_done": [
+   "I just ring the clinic directly for anything, I don't use apps for pet stuff",
+   "I keep an eye out myself for ticks and fleas after walks, nobody reminds me",
+   "I ask my sister who has two dogs what she thinks before I spend money on anything for Rusty",
+   "I write his next check-up date on the kitchen calendar so I don't forget"
+  ],
+  "feature_requests": [],
+  "picks": [
+   "cost estimator with payment-plan info",
+   "vaccine/worming due-date reminders"
+  ],
+  "rejections": [
+   "pet horoscope",
+   "NFT pet identity",
+   "EU pet-travel requirements checker",
+   "pollen & air-quality alerts for allergic pets"
+  ],
+  "quotes": [
+   "I don't need an app to tell me if it's raining, I can look out the window myself.",
+   "If it could tell me straight what something's going to cost before I say yes, that I'd actually use.",
+   "I'd say I'd try the reminder thing for the jabs, but if it starts pestering me with notifications I'll turn it off within the week."
+  ],
+  "churn_risk": 1,
+  "segment": "budget_stretched"
+ }
+]

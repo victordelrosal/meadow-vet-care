@@ -21,6 +21,7 @@ const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export
 
 const MODEL = "claude-sonnet-5";
 const CLINIC = "Meadow Vet Care";
+const SELF_URL = "https://meadow-vet-bot.victordelrosal.workers.dev";
 
 const ALLOW = [
   "https://victordelrosal.com",
@@ -306,6 +307,28 @@ const OPENING_TOOL = {
 };
 
 // ---------------------------------------------------------------------------
+// Data-quality guard (from the simulated client panel, 2026-07-14).
+//
+// In 12 live sessions the bot met corrupted prices in the sheet (a general consult listed at
+// EUR 5.50, 550 and 770; a dental extraction at EUR 27,087,422) and DEFENDED them under direct
+// challenge: "no typo, that's genuinely the live listed price". That was caused by a rule I had
+// written telling it not to hedge about surprising prices. Grounding a bot in live data is worth
+// nothing if it cannot say the data looks wrong. So we flag implausible prices in the tool result
+// itself, where the model cannot miss them.
+// ---------------------------------------------------------------------------
+const SANE_PRICE = { // eur, plausible band per category for an Irish clinic
+  Consultation: [25, 120], Vaccination: [25, 120], "Microchip & ID": [15, 90],
+  Preventive: [10, 250], Grooming: [15, 120], Dental: [40, 900], Diagnostics: [30, 700],
+  Surgery: [80, 2500], Emergency: [80, 900], Nutrition: [10, 150], Behaviour: [40, 250],
+  "End-of-life": [50, 400]
+};
+function priceLooksWrong(s) {
+  const band = SANE_PRICE[s.category];
+  if (!band || s.price_eur == null) return false;
+  return s.price_eur < band[0] || s.price_eur > band[1];
+}
+
+// ---------------------------------------------------------------------------
 // The services tool. Same logic backs both the /mcp server and the chat brain.
 // ---------------------------------------------------------------------------
 const SEARCH_TOOL = {
@@ -371,13 +394,20 @@ function runSearch(args) {
       category: s.category,
       species: s.species,
       price_eur: s.price_eur,
+      price_looks_wrong: priceLooksWrong(s) || undefined,
       duration_min: s.duration_min,
       availability: s.availability,
       by_appointment: /^y/i.test(s.requires_appointment),
       slots_this_week: s.slots_this_week,
       special_offer: s.special_offer || null
     }));
-    return { count: out.length, total_matches: total, services: out };
+    const suspect = out.filter(s => s.price_looks_wrong);
+    return {
+      count: out.length, total_matches: total, services: out,
+      data_quality_warning: suspect.length
+        ? `The listed price looks WRONG for ${suspect.map(s => s.service).join(", ")}. Tell the customer the listing appears to be a data error, do NOT insist it is correct, and offer to have the desk confirm the real price. Never defend an implausible price.`
+        : undefined
+    };
   });
 }
 
@@ -512,6 +542,10 @@ function assessWalk(w, dog) {
     },
     risk_band: BANDS[risk],
     risk_level: risk,
+    // Red-team guardrail: never hand a flat-faced dog's owner a clean all-clear.
+    never_all_clear: isFlat
+      ? "This is a flat-faced breed. Do NOT give a plain all-clear even at low risk: they overheat with little warning, so always add that they need watching and short, gentle exercise."
+      : undefined,
     verdict:
       risk >= 4 ? "Do not walk now. Wait for a cooler part of the day."
       : risk === 3 ? "Keep it short, shaded and gentle, or wait for a cooler hour. No running or fetch."
@@ -573,8 +607,179 @@ const WALK_TOOL = {
   }
 };
 
+// ---------------------------------------------------------------------------
+// Panel-driven tools (built 2026-07-14 from the simulated client research).
+// ---------------------------------------------------------------------------
+
+// P0.2 The panel found the bot could not give the clinic's own phone number.
+const CLINIC_INFO = {
+  name: CLINIC,
+  address: "12 Ranelagh Village, Dublin 6, D06 XY42",
+  phone: "+353 1 555 0142",
+  emergency_phone: "+353 1 555 0199",
+  emergency_note: "The emergency line is answered 24/7, including Sundays and public holidays.",
+  email: "hello@meadowvetcare.ie",
+  hours: { "Mon-Fri": HOURS.Monday, Sat: HOURS.Saturday, Sun: "closed" },
+  booking: "Appointments are booked by phone. The chat cannot hold or confirm a slot.",
+  parking: "Street parking on Ranelagh Road, free for 30 minutes.",
+  species_seen: "Dogs, cats, rabbits, small mammals and birds."
+};
+const INFO_TOOL = {
+  name: "clinic_info",
+  description: `Get ${CLINIC}'s own details: phone number, emergency number, address, email, opening hours, parking, how booking works. Call this whenever the customer asks how to contact, ring, find or book with the clinic. NEVER say you don't have the clinic's phone number.`,
+  input_schema: { type: "object", properties: {} }
+};
+async function runInfo() { return CLINIC_INFO; }
+
+// P1 Cost estimator: the single loudest demand (29/40). Built on the LIVE sheet, no new API.
+// It is an ESTIMATE, never a quote: the panel's lapsed clients left over bill shock, so the
+// honest thing is a clear range plus the reason the final figure can move.
+const BUNDLES = {
+  "new puppy first year": { species: "Dog", cats: ["Vaccination", "Microchip & ID", "Preventive", "Surgery"] },
+  "new kitten first year": { species: "Cat", cats: ["Vaccination", "Microchip & ID", "Preventive", "Surgery"] },
+  "annual check": { cats: ["Consultation", "Vaccination", "Preventive"] },
+  "dental": { cats: ["Dental"] },
+  "senior care": { cats: ["Consultation", "Diagnostics", "Dental"] }
+};
+async function runEstimate(args) {
+  args = args || {};
+  const all = await getServices();
+  const species = args.species;
+  let picked = [];
+
+  if (Array.isArray(args.service_ids) && args.service_ids.length) {
+    const want = args.service_ids.map(s => String(s).toUpperCase());
+    picked = all.filter(s => want.includes(s.service_id.toUpperCase()));
+  } else if (args.scenario) {
+    const key = Object.keys(BUNDLES).find(k => String(args.scenario).toLowerCase().includes(k.split(" ")[1] || k))
+      || Object.keys(BUNDLES).find(k => k.includes(String(args.scenario).toLowerCase()));
+    const b = BUNDLES[key] || BUNDLES["annual check"];
+    const sp = species || b.species;
+    for (const cat of b.cats) {
+      const cands = all.filter(s => s.category === cat && (!sp || s.species === sp) && s.price_eur != null && !priceLooksWrong(s));
+      if (cands.length) picked.push(cands.sort((a, b2) => a.price_eur - b2.price_eur)[0]);
+    }
+  }
+  if (!picked.length) return { error: "Name the services (service_ids) or a scenario like 'new puppy first year', 'annual check', 'dental', 'senior care'." };
+
+  const items = picked.map(s => ({
+    id: s.service_id, service: s.service_name, species: s.species,
+    price_eur: s.price_eur, special_offer: s.special_offer || null,
+    price_looks_wrong: priceLooksWrong(s) || undefined
+  }));
+  const clean = items.filter(i => !i.price_looks_wrong && i.price_eur != null);
+  const subtotal = clean.reduce((t, i) => t + i.price_eur, 0);
+
+  return {
+    items,
+    subtotal_eur: Math.round(subtotal * 100) / 100,
+    // A range, never a point quote. Real visits add or drop items after the vet examines the animal.
+    estimate_range_eur: [Math.round(subtotal * 0.9), Math.round(subtotal * 1.35)],
+    excluded_from_estimate: items.filter(i => i.price_looks_wrong).map(i => i.service),
+    payment: "Payment is due on the day. For larger treatment plans the clinic can split the cost across instalments: ask the desk before the appointment, not after.",
+    honesty_note: "This is an ESTIMATE from the clinic's live price list, not a quote and not a binding price. The final cost depends on what the vet finds on examination, and extra items (medication, tests, a longer procedure) can change it. Say this plainly to the customer, and never present the number as a guaranteed total.",
+    data_quality_warning: items.some(i => i.price_looks_wrong)
+      ? "One or more listed prices look like a data error and were LEFT OUT of the total. Tell the customer, and offer to have the desk confirm."
+      : undefined
+  };
+}
+const ESTIMATE_TOOL = {
+  name: "estimate_cost",
+  description:
+    "Build an itemised cost ESTIMATE from the clinic's live price list. Use whenever the customer asks what something will cost overall, what to budget, 'how much for the whole thing', a puppy/kitten's first year, an annual check, a dental, or senior care. Returns items, a subtotal, a realistic RANGE, and payment-plan info. It is an estimate, never a quote.",
+  input_schema: {
+    type: "object",
+    properties: {
+      scenario: { type: "string", description: "A bundle: 'new puppy first year', 'new kitten first year', 'annual check', 'dental', 'senior care'." },
+      service_ids: { type: "array", items: { type: "string" }, description: "Specific service ids to total up, e.g. ['MVC-001','MVC-014']." },
+      species: { type: "string", enum: ["Dog", "Cat", "Rabbit", "Bird", "Small mammal"] }
+    }
+  }
+};
+
+// P2 Reminders: 28/40 wanted them. The obvious build (store the pet, text the owner) makes the
+// clinic a data controller for pet health data and costs money to send. Instead we hand the
+// customer a calendar entry they own: a Google Calendar template link (public, no key, no account
+// needed on our side) plus an .ics file (RFC 5545) served from this Worker. We store NOTHING.
+function pad(n) { return String(n).padStart(2, "0"); }
+function icsStamp(iso, hour) { return `${iso.replace(/-/g, "")}T${pad(hour)}0000`; }
+async function runReminder(args) {
+  args = args || {};
+  const what = String(args.what || "Vet reminder").slice(0, 80);
+  const pet = String(args.pet_name || "").slice(0, 40);
+  const today = dublinToday();
+  let due = /^\d{4}-\d{2}-\d{2}$/.test(String(args.due_date || "")) ? args.due_date : null;
+  if (!due && args.in_months) due = addDays(today, Math.round(Number(args.in_months) * 30.44));
+  if (!due) return { error: "Give due_date (YYYY-MM-DD) or in_months (e.g. 12 for an annual booster)." };
+
+  const title = pet ? `${pet}: ${what}` : what;
+  const details = `Reminder from ${CLINIC}. Ring ${CLINIC_INFO.phone} to book.`;
+  const start = icsStamp(due, 9), end = icsStamp(due, 10);
+  const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+    `&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}` +
+    `&location=${encodeURIComponent(CLINIC_INFO.address)}`;
+  const ics = `${SELF_URL}/reminder.ics?t=${encodeURIComponent(title)}&d=${due}`;
+
+  return {
+    reminder: { title, due_date: due, due_date_human: human(due), weekday: weekdayOf(due) },
+    add_to_google_calendar: gcal,
+    download_ics: ics,
+    privacy_note: "The reminder is created in the CUSTOMER'S own calendar. The clinic stores nothing: no pet record, no phone number, no email. Say so, it is a feature, not a limitation.",
+    // Red-team guardrail: a vaccination interval is a CLINICAL schedule (it varies by product,
+    // by species and by the animal's history). The bot sets a reminder; it does not decide when
+    // a booster is due.
+    clinical_boundary: "You are NOT setting a clinical schedule. If the customer does not know the real due date, say the vet or their vaccination card decides it, offer to remind them to RING AND CHECK, and never state a vaccination interval as fact.",
+    instruction_for_you: "Give the customer the Google Calendar link as a plain clickable URL, and mention the .ics alternative. Do not promise the clinic will text or ring them."
+  };
+}
+const REMINDER_TOOL = {
+  name: "make_reminder",
+  description:
+    "Create a calendar reminder the customer can add in one tap (Google Calendar link or .ics file) for a vaccination booster, worming, flea treatment, a follow-up or a check-up. Use whenever they ask to be reminded, ask when something is next due, or worry about forgetting. The clinic stores NO personal data: the reminder lives in their own calendar.",
+  input_schema: {
+    type: "object",
+    properties: {
+      pet_name: { type: "string" },
+      what: { type: "string", description: "e.g. 'annual booster due', 'worming tablet', 'flea treatment', 'post-op check'." },
+      due_date: { type: "string", description: "YYYY-MM-DD if known." },
+      in_months: { type: "number", description: "Or how many months from today, e.g. 12 for an annual booster, 3 for worming." }
+    }
+  }
+};
+
+// P4 Emergency signposting. NOT triage: the bot must never judge how serious a symptom is.
+// It recognises red-flag words and pushes the customer to a human immediately.
+const RED_FLAGS = /collaps|unconscious|seizure|fitting|convuls|bloat|retching|not breathing|choking|blue gums|white gums|pale gums|poison|antifreeze|chocolate|xylitol|grape|raisin|hit by|road traffic|blood|bleeding|heatstroke|heat stroke|overheat|can'?t (pee|urinate)|straining to (pee|urinate)|blocked|labour|giving birth|stuck|swollen (abdomen|stomach|belly)|won'?t stop|hours? of vomiting/i;
+async function runEmergency(args) {
+  const t = String((args && args.symptom_text) || "");
+  const red = RED_FLAGS.test(t);
+  return {
+    red_flag_detected: red,
+    action: red
+      ? `RING THE EMERGENCY LINE NOW: ${CLINIC_INFO.emergency_phone}. Do not wait, do not book online, do not ask more questions.`
+      : `Ring the clinic on ${CLINIC_INFO.phone} and describe what you're seeing. If it worsens or you're worried, use the 24/7 emergency line: ${CLINIC_INFO.emergency_phone}.`,
+    emergency_phone: CLINIC_INFO.emergency_phone,
+    hard_rule: "You are NOT a vet and must NOT assess how serious this is. Do not say it sounds mild, fine, probably nothing, or that it can wait. Do not diagnose. Point them to a human, briefly and clearly, and stop.",
+    booking_note: "Never offer to book or hold an appointment: the clinic books by phone only."
+  };
+}
+const EMERGENCY_TOOL = {
+  name: "urgent_help",
+  description:
+    "Call this IMMEDIATELY whenever a customer describes a sick, injured or distressed animal, ANY symptom, or asks whether something is urgent. Returns the right emergency signposting. You must never assess severity or diagnose yourself: this tool tells you what to say.",
+  input_schema: {
+    type: "object",
+    properties: { symptom_text: { type: "string", description: "What the customer said, verbatim." } },
+    required: ["symptom_text"]
+  }
+};
+
 // Both surfaces (MCP + chat) dispatch through this one table.
-const TOOLS = { search_services: runSearch, check_opening: runOpening, check_walk_conditions: runWalk };
+const TOOLS = {
+  search_services: runSearch, check_opening: runOpening, check_walk_conditions: runWalk,
+  clinic_info: runInfo, estimate_cost: runEstimate, make_reminder: runReminder, urgent_help: runEmergency
+};
+const ALL_TOOLS = [SEARCH_TOOL, OPENING_TOOL, WALK_TOOL, INFO_TOOL, ESTIMATE_TOOL, REMINDER_TOOL, EMERGENCY_TOOL];
 
 // ---------------------------------------------------------------------------
 // MCP server (JSON-RPC 2.0 over HTTP POST at /mcp)
@@ -610,7 +815,7 @@ async function handleMcp(req) {
       });
     }
     if (method === "tools/list")
-      return mcpJson({ jsonrpc: "2.0", id, result: { tools: [SEARCH_TOOL, OPENING_TOOL, WALK_TOOL] } });
+      return mcpJson({ jsonrpc: "2.0", id, result: { tools: ALL_TOOLS } });
     if (method === "tools/call") {
       const { name, arguments: args } = params || {};
       if (!TOOLS[name])
@@ -659,7 +864,12 @@ Rules:
 - For ANY question about services, prices, offers, availability, a service id (e.g. "MVC-001"), or which animals a service is for, call search_services first. Never invent or guess a service, price or discount. If the tool returns nothing, say the clinic doesn't appear to list that and offer to help find a related service.
 - Query the tool TIGHTLY so it returns only what's needed: use specific filters and a small limit. For superlative questions ("most expensive", "cheapest", "priciest"), call it with sort=price_desc or price_asc and limit=1 so you get the single answer, not a big list.
 - Keep every reply VERY SHORT: 1 to 2 sentences, one warm paragraph (up to 4 for a walk-safety answer, where the detail keeps a dog safe). Do NOT list many services or reproduce a catalogue. When there are lots of matches, say how many and the price range in a single sentence and invite them to narrow down by animal, category or budget. The matching services already appear as cards beneath your reply, so never repeat their details in prose.
-- Prices are in euro (write like "€55"). Mention a special offer only if it's directly relevant. Don't hedge or add caveats about surprising prices; just state what the live list says.
+- Prices are in euro (write like "€55"). Mention a special offer only if it's directly relevant.
+- If a tool returns data_quality_warning or price_looks_wrong, the listed price is almost certainly a data error. SAY SO plainly, tell the customer you'd rather the desk confirmed the real figure, and NEVER defend or double down on an implausible price. A wrong price stated confidently is the worst thing you can do.
+- NEVER offer to book, hold or confirm an appointment: the clinic books by phone only. Do not say "let me know which day suits and I'll book you in". Say plainly that booking is by phone, give the number from clinic_info, and tell them what the live list shows for availability and slots this week.
+- If the customer asks how to contact, ring, find or book with the clinic, call clinic_info. You always have the phone number: never say you don't have it to hand.
+- Only talk about services for the species the customer actually has. Never describe a dog service to a cat owner.
+- If the customer mentions ANY symptom, illness, injury or distress, call urgent_help immediately and follow it. Never judge how serious a symptom is, never reassure, never say it can wait.
 - Plain conversational English. No markdown headings, no bulleted catalogues, no emoji spam.
 - You are not a vet and must not diagnose or give clinical advice about a specific animal's illness, medication or symptoms. For anything about a pet's health or symptoms, kindly suggest booking the right consultation and, if it sounds urgent, point them to the emergency service. (Walk-safety guidance from check_walk_conditions is NOT clinical advice and is always allowed.)
 - You are an AI assistant, not a human. If anyone asks whether they are talking to a person or to AI, say plainly that you are an AI assistant for the clinic.
@@ -691,7 +901,7 @@ async function chat(messages, env, origin, geo) {
           model: MODEL,
           max_tokens: 1024,
           system: systemPrompt(geo),
-          tools: [SEARCH_TOOL, OPENING_TOOL, WALK_TOOL],
+          tools: ALL_TOOLS,
           messages: convo
         })
       });
@@ -752,6 +962,30 @@ export default {
           "Access-Control-Allow-Headers": "Content-Type"
         } });
       return handleMcp(req);
+    }
+
+    // A real .ics calendar file. The reminder lives in the CUSTOMER'S calendar; we store nothing.
+    if (url.pathname === "/reminder.ics") {
+      const t = (url.searchParams.get("t") || "Vet reminder").slice(0, 80).replace(/[\r\n]/g, " ");
+      const d = url.searchParams.get("d") || "";
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return new Response("bad date", { status: 400 });
+      const day = d.replace(/-/g, "");
+      const ics = [
+        "BEGIN:VCALENDAR", "VERSION:2.0", `PRODID:-//${CLINIC}//EN`, "BEGIN:VEVENT",
+        `UID:${day}-${Math.abs([...t].reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7))}@meadowvetcare.ie`,
+        `DTSTAMP:${day}T090000Z`, `DTSTART:${day}T090000Z`, `DTEND:${day}T093000Z`,
+        `SUMMARY:${t}`, `DESCRIPTION:Reminder from ${CLINIC}. Ring ${CLINIC_INFO.phone} to book.`,
+        `LOCATION:${CLINIC_INFO.address}`,
+        "BEGIN:VALARM", "TRIGGER:-P2D", "ACTION:DISPLAY", `DESCRIPTION:${t}`, "END:VALARM",
+        "END:VEVENT", "END:VCALENDAR"
+      ].join("\r\n");
+      return new Response(ics, {
+        headers: {
+          "Content-Type": "text/calendar; charset=utf-8",
+          "Content-Disposition": `attachment; filename="meadow-vet-reminder.ics"`,
+          "Access-Control-Allow-Origin": "*"
+        }
+      });
     }
 
     const origin = req.headers.get("Origin") || "";
